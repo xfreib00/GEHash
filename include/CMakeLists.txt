@@ -1,0 +1,1 @@
+include(${GEHash_SOURCE_DIR}/cmake/gram.cmake)
