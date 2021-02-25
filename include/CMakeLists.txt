@@ -1,1 +1,1 @@
-include(${GEHash_SOURCE_DIR}/cmake/gram.cmake)
+include(${PROJECT_SOURCE_DIR}/cmake/gram.cmake)
