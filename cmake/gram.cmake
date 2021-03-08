@@ -9,6 +9,11 @@ FetchContent_Declare(
     GIT_CONFIG  advice.detachedHead=false
 )
 
-FetchContent_MakeAvailable(gram)
+if (NOT gram_POPULATED)
+    FetchContent_Populate(gram)
+    message(STATUS "Gram source dir: ${gram_SOURCE_DIR}")
+    message(STATUS "Gram binary dir: ${gram_BINARY_DIR}")
+    add_subdirectory(${gram_SOURCE_DIR} ${gram_BINARY_DIR}) 
+endif()
 
-set(gram_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include/gram/include/")
+message(STATUS "Gram include dir: ${gram_SOURCE_DIR}/include")
