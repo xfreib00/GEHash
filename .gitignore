@@ -52,3 +52,6 @@ CTestTestfile.cmake
 _deps
 
 [Bb][Uu][Ii][Ll][Dd]/
+
+# Auxilary scripts
+*.sh
