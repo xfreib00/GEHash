@@ -1,9 +1,11 @@
-cmake_minimum_required(VERSION 3.19.5)
+cmake_minimum_required(VERSION 3.14...3.19)
 
-project(GEHash)
+project(GEHash
+        DESCRIPTION "Producing hash functions using Grammatical evolution"
+        LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_subdirectory(include)
+include(cmake/gram.cmake)
 
 add_subdirectory(src)

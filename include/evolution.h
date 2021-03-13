@@ -6,7 +6,7 @@
 
 #include <chrono>
 #include <stdexcept>
-
+#include <gram/Evolution.h>
 
 class GEHash {
 

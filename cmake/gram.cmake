@@ -13,7 +13,9 @@ if (NOT gram_POPULATED)
     FetchContent_Populate(gram)
     message(STATUS "Gram source dir: ${gram_SOURCE_DIR}")
     message(STATUS "Gram binary dir: ${gram_BINARY_DIR}")
-    add_subdirectory(${gram_SOURCE_DIR} ${gram_BINARY_DIR}) 
+    add_subdirectory(${gram_SOURCE_DIR} ${gram_BINARY_DIR})
 endif()
 
-message(STATUS "Gram include dir: ${gram_SOURCE_DIR}/include")
+SET(gram_INCLUDE_DIR "${gram_SOURCE_DIR}/include/")
+
+message(STATUS "Gram include dir: ${gram_INCLUDE_DIR}")

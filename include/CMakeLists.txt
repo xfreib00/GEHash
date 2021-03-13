@@ -1,1 +1,2 @@
-include(${PROJECT_SOURCE_DIR}/cmake/gram.cmake)
+SET(HEADER_FILES 
+    evolution.h)

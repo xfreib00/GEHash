@@ -1,4 +1,4 @@
-include_directories(../include)
+include_directories(${PROJECT_SOURCE_DIR}/include)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -pg")
@@ -6,15 +6,16 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -pg")
 add_executable(${PROJECT_NAME}
     main.cpp
     evolution.cpp
+    ${HEADER_FILES}
 )
 
 target_include_directories(${PROJECT_NAME} 
-    PUBLIC ${gram_INCLUDE_DIR}    
-    PUBLIC ${PROJECT_SOURCE_DIR}/include
+    PUBLIC ${gram_INCLUDE_DIR}
+    PUBLIC ${gram_BINARY_DIR}
 )
 
 target_link_directories(${PROJECT_NAME}
-    PRIVATE ${PROJECT_SOURCE_DIR}/include
+    PRIVATE ${gram_BINARY_DIR}/src
 )
 
-target_link_libraries(${PROJECT_NAME} gram)
+target_link_libraries(${PROJECT_NAME} PRIVATE gram)
