@@ -32,12 +32,14 @@ int main(int argc, char **argv){
 	/* set options for getopt_long */
 	int c = 0;
 	struct option longopts[] = {
-		{"population",optional_argument, NULL, 'p'},
-		{"generations",optional_argument, NULL, 'g'},
+		{"population", optional_argument, NULL, 'p'},
+		{"generations", optional_argument, NULL, 'g'},
+		{"output", required_argument, NULL, 'o'},
 		{"help", no_argument, NULL, 'h'}
 	};	
-	unsigned long population = 0;
-	unsigned long generations = 0;
+	unsigned long population = 60;
+	unsigned long generations = 5;
+	std::string output;
 
 	if (argc < 2){
 		std::cout << "FAILURE" << std::endl;
@@ -46,7 +48,7 @@ int main(int argc, char **argv){
 
 	std::string bnf_grammar("");
 
-	while((c = getopt_long(argc, argv, ":p:g:h", longopts, NULL)) != -1){
+	while((c = getopt_long(argc, argv, ":p:g:o:h", longopts, NULL)) != -1){
 		switch(c){
 			case 'p':
 				try {
@@ -66,12 +68,15 @@ int main(int argc, char **argv){
 					" to display help." << std::endl;
 				}
 				break;
+			case 'o':
+				output = optarg;
+				break;
 			case 'h':
 				display_help();
 				break;
-			/*case ':':
-				
-				break;*/
+			case ':':
+				std::cout << "Something is missing: " << optarg << ", " << optind << std::endl;	
+				break;
 			case '?':
 				std::cerr << "Invalid argument. Use --help"
 				" to display help" << std::endl;
@@ -79,10 +84,18 @@ int main(int argc, char **argv){
 		}
 	}
 
-	//BnfRuleParser parser();
-	//auto parsed_grammar = parser.parse(bnf_grammar);
-	//
+	//Create and run evolution
+	try
+	{
+		std::cout << "Got thru params: " << output << std::endl;
+		GEHash hash(generations,population,output);
 
+		hash.Run();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 
 	return 0;
 }

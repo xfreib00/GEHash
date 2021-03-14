@@ -1,2 +1,3 @@
 SET(HEADER_FILES 
-    evolution.h)
+    evolution.h
+    logger.h)

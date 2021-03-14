@@ -6,6 +6,7 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -pg")
 add_executable(${PROJECT_NAME}
     main.cpp
     evolution.cpp
+    logger.cpp
     ${HEADER_FILES}
 )
 

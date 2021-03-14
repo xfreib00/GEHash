@@ -6,18 +6,20 @@
 
 #include "evolution.h"
 
-GEHash::GEHash(unsigned long generation, unsigned long population)
+GEHash::GEHash(unsigned long generation, unsigned long population, std::string &outpath)
 {
 	if (generation < 2  && population < 50){
 		throw std::invalid_argument("Invalid value of parameter.");
 	}
 		p = population;
 		g = generation;
+
+	log = std::make_unique<GELogger>(outpath);
 }
 
 void GEHash::Run(void)
 {
-
+	//gram::Evolution::Evolution();
 }
 
 

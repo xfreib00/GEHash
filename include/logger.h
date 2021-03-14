@@ -1,0 +1,57 @@
+/**
+ * @file logger.h
+ * @author Adam Freiberg
+ * @brief Header file for Logger class
+ */
+
+#ifndef GEHASH_LOGGER
+#define GEHASH_LOGGER
+
+#include <chrono>
+#include <stdexcept>
+#include <fstream>
+#include "gram/population/Population.h"
+
+using namespace gram;
+
+class GELogger {
+
+public:
+
+    /**
+	 * @brief Default constructor of Logger class.
+	 */
+    GELogger() = default;
+
+	/**
+	 * @brief Parameterized constructor of Logger class.
+     * @param [in] path Reference to path to output file.
+	 */
+	GELogger(const std::string& path);
+	
+	/**
+	 *	@brief Log progress of current evolution run.
+	 *	@param [in] population Reference population object.
+	 */
+	void logProgress(const Population& population);
+
+	/**
+	 * @brief Log result of evolution run.
+	 * @param [in] population Reference population object.
+	 */
+	void logResult(const Population& population);
+
+	/**
+	 * @brief Logger class destructor.
+	 */
+	~GELogger();
+
+private:
+
+	/**
+	 * @brief Fstream variable for Logger output file. 
+	 */
+	std::fstream out;
+
+};
+#endif
