@@ -10,11 +10,12 @@
 #include <chrono>
 #include <stdexcept>
 #include <fstream>
-#include "gram/population/Population.h"
+#include <gram/population/Population.h>
+#include <gram/util/logger/Logger.h>
 
 using namespace gram;
 
-class GELogger {
+class GELogger : public Logger{
 
 public:
 

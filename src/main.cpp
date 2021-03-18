@@ -89,6 +89,7 @@ int main(int argc, char **argv){
 	{
 		std::cout << "Got thru params: " << output << std::endl;
 		GEHash hash(generations,population,output);
+		hash.SetGrammar(bnf_grammar,3);
 
 		hash.Run();
 	}
