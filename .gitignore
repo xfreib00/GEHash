@@ -55,3 +55,7 @@ _deps
 
 # Auxiliary scripts
 *.sh
+
+# Generated doxygen documentation
+doc/html
+doc/latex
