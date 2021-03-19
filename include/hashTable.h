@@ -36,7 +36,7 @@ public:
     /**
      * @brief Insert element to table.
      * @param [in] key Key to be inserted to table. 
-     * @exception If key is already in table throw.
+     * @exception If key is already in table hashInsertError exception is thrown.
      */
     void Insert(string key)
     {
@@ -51,7 +51,7 @@ public:
     /**
      * @brief Remove element from table.
      * @param [in] key Key to be removed from table.
-     * @exception If key is not in table throw.
+     * @exception If key is not in table hashRemoveError exception is thrown.
      */
     void Remove(string key)
     {
@@ -66,7 +66,7 @@ public:
      * @brief Find key in table 
      * @param [in] key Key to be found in table.
      * @return Return index if search was successful. Throw exception otherwise.
-     * @exception If key is not in table throw.
+     * @exception If key is not in table hashSearchError exception is thrown.
      */
     uint32_t Search(string key)
     {

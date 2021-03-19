@@ -8,7 +8,7 @@
 
 GEDriver::GEDriver() : table(numeric_limits<uint32_t>::max())
 {
-
+    table = HTable(numeric_limits<uint32_t>::max());
 }
 
 Fitness GEDriver::calculateFitness(std::string program)
