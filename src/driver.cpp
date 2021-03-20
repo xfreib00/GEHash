@@ -6,14 +6,14 @@
 
 #include "driver.h"
 
-GEDriver::GEDriver() : table(numeric_limits<uint32_t>::max())
+GEDriver::GEDriver()
 {
-    table = HTable(numeric_limits<uint32_t>::max());
+    table = HTable<uint16_t>();
 }
 
 Fitness GEDriver::calculateFitness(std::string program)
 {
-
+    return program.length();
 }
 
 Fitness GEDriver::evaluate(const Phenotype& phenotype) noexcept

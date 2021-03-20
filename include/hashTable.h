@@ -10,28 +10,20 @@
 #include <string>
 #include <cstdlib>
 #include "error/hashError.h"
+#include <limits>
+#include <array>
 
 using namespace std;
 
+template <typename T>
 class HTable {
 
 public:
 
-    HTable() = delete;
-
     /**
      * @brief HTable constructor.
-     * @param [in] size Size of hash table.
      */
-    HTable(uint32_t size)
-    {
-        if (size <= 0){
-            throw hashInitError();
-        }
-
-        table_size = size;
-        table[table_size];
-    };
+    HTable() = default;
 
     /**
      * @brief Insert element to table.
@@ -40,7 +32,7 @@ public:
      */
     void Insert(string key)
     {
-        int hash = get_hash(key);
+        T hash = get_hash(key);
         if (!table[hash].empty()){
             throw hashInsertError();
         } 
@@ -55,7 +47,7 @@ public:
      */
     void Remove(string key)
     {
-        int hash = get_hash(key);
+        T hash = get_hash(key);
         if (table[hash].empty()){
             throw hashRemoveError();
         }
@@ -68,9 +60,9 @@ public:
      * @return Return index if search was successful. Throw exception otherwise.
      * @exception If key is not in table hashSearchError exception is thrown.
      */
-    uint32_t Search(string key)
+    T Search(string key)
     {
-        int hash = get_hash(key);
+        T hash = get_hash(key);
         if (table[hash].empty()){
             throw hashSearchError();
         }
@@ -89,17 +81,17 @@ private:
      * @param [in] key Key to be hashed.
      * @return Calculated hash value.
      */
-    uint32_t get_hash(string key);
+    T get_hash(string key);
 
     /**
      * @brief HTable index range. 
      */
-    uint32_t table_size;
+    T table_size;
 
     /**
-     * @brief C-like array of std::strings.
+     * @brief Table alocated using std::array
      */
-    string *table;
+    array<T,numeric_limits<T>::max()> table;
 };
 
 
