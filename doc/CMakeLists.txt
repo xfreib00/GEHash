@@ -10,7 +10,7 @@ if (DOXYGEN_FOUND)
     add_custom_target(docs ALL
         COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-        COMMENT "-- Generating documentation with Doxygen"
+        COMMENT "Generating documentation with Doxygen"
         VERBATIM
     )
 

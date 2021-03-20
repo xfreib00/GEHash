@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14...3.19)
 
-option(GEHASH_DOCS "Build GEHash documentation." ON)
+option(GEHASH_DOCS "Build GEHash documentation." OFF)
 
 project(GEHash
         DESCRIPTION "Producing hash functions using Grammatical evolution"
