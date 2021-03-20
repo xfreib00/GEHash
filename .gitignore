@@ -57,5 +57,4 @@ _deps
 *.sh
 
 # Generated doxygen documentation
-doc/html
-doc/latex
+doc/Doxyfile
