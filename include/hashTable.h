@@ -8,7 +8,6 @@
 #define GEHASH_HTABLE
 
 #include <string>
-#include <cstdlib>
 #include "error/hashError.h"
 #include <limits>
 #include <array>
