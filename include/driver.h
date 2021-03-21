@@ -16,6 +16,9 @@
 
 using namespace gram;
 
+/**
+ * @brief Class implemeting Evaluation driver. 
+ */
 class GEDriver : public Evaluator {
 
 public:
@@ -35,12 +38,20 @@ public:
      * @brief Evaluate given phenotype.
      * @param [in out] phenotype Reference to phenotype to be evaluated.
      * @return Return calculated fitness function. Otherwise set fitness to high number.
+     * @exception No exceptions guarantee.
      */
     Fitness evaluate(const Phenotype& phenotype) noexcept override;
 
+    /**
+     * @brief Default destructor. 
+     */
     ~GEDriver() = default;
+
 private:
 
+    /**
+     * @brief Instance of HTable used for evaluation of generated phenotype. 
+     */
     HTable<uint16_t> table;
 };
 

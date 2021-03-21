@@ -15,6 +15,9 @@
 
 using namespace gram;
 
+/**
+ * @brief Logger class for GEHash grammatical evolution.
+ */
 class GELogger : public Logger{
 
 public:

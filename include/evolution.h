@@ -25,6 +25,11 @@
 #include "logger.h"
 #include "driver.h"
 
+/**
+ * @brief Main class for creating new hash functions
+ * using grammatical evolution.
+ * @details Wrapper class utilizing gram library for grammatical evolution.
+ */
 class GEHash {
 
 public:
@@ -60,31 +65,44 @@ public:
 	void Run(void);
 	
 	/**
-	 * @brief Virutal destructor.
+	 * @brief Default destructor.
 	 */
 	virtual ~GEHash() = default;
 
 private:
 	/**
-	 * @brief Internal parameter for number of individuals in population. 
+	 * @brief Number of individuals in population.
 	 */
 	unsigned long p;
 	/**
-	 * @brief Internal parameter for maximum number of generations. 
+	 * @brief Maximum number of generations.
 	 */
 	unsigned long g;
 
 	/**
-	 * @brief Unique pointer to Logger object.
+	 * @brief Unique pointer to GELogger object.
 	 */
 	std::unique_ptr<GELogger> log;
 
+	/**
+	 * @brief Instance of gram::BnfRuleParser.
+	 */
 	BnfRuleParser parser;
 	
+	/**
+	 * @brief Unique pointer to gram::ContextFreeGramar object.
+	 */
 	std::unique_ptr<ContextFreeGrammar> gramm;
 	
+	/**
+	 * @brief Unique pointer to gram::ContextFreeMapper object.
+	 */
 	std::unique_ptr<ContextFreeMapper> cfm;
-
+	
+	/**
+	 * @brief Unique pointer to GEDriver object.
+	 */
 	std::unique_ptr<GEDriver> driver;
 };
+
 #endif
