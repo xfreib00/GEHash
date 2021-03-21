@@ -40,6 +40,7 @@ public:
 
     ~GEDriver() = default;
 private:
+
     HTable<uint16_t> table;
 };
 
