@@ -6,14 +6,6 @@
 
 #include <stdexcept>
 
-class hashInitError : public std::exception{
-    public:
-        const char *what() const throw()
-        {
-            return "Given size must be in int range.";
-        }
-};
-
 class hashInsertError : public std::exception {
     public:
         const char *what() const throw()
@@ -38,4 +30,12 @@ class hashSearchError : public std::exception {
             return "No such key is stored in given table";
         }
 
+};
+
+class hashLuaError : public std::exception {
+    public:
+        const char *what() const throw()
+        {
+            return "Could not execute given string";
+        }
 };
