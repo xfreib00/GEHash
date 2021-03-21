@@ -6,7 +6,21 @@
 
 #include <stdexcept>
 
-class hashInsertError : public std::exception {
+/**
+ * @brief Standard exception for HTable.
+ */
+class hashTableError : public std::exception{
+    public:
+        const char *what() const throw()
+        {
+            return "Error occured while using HTable class.";
+        }
+};
+
+/**
+ * @brief Exception for HTable::Insert operation.
+ */
+class hashInsertError : public hashTableError{
     public:
         const char *what() const throw()
         {
@@ -14,7 +28,10 @@ class hashInsertError : public std::exception {
         }
 };
 
-class hashRemoveError : public std::exception {
+/**
+ * @brief Exception for HTable::Remove operation.
+ */
+class hashRemoveError : public hashTableError{
     public:
         const char *what() const throw()
         {
@@ -23,7 +40,10 @@ class hashRemoveError : public std::exception {
 
 };
 
-class hashSearchError : public std::exception {
+/**
+ * @brief Exception for HTable::Search operation.
+ */
+class hashSearchError : public hashTableError {
     public:
         const char *what() const throw()
         {
@@ -32,10 +52,24 @@ class hashSearchError : public std::exception {
 
 };
 
-class hashLuaError : public std::exception {
+/**
+ * @brief Exception for Lua evaluation errors..
+ */
+class hashLuaError : public hashTableError {
     public:
         const char *what() const throw()
         {
             return "Could not execute given string";
+        }
+};
+
+/**
+ * @brief Exception for HTable.func member.
+ */
+class hashFuncError : public hashTableError {
+    public:
+        const char *what() const throw()
+        {
+            return "Function for Lua not specified";
         }
 };
