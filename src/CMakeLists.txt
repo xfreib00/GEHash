@@ -20,4 +20,5 @@ target_link_directories(${PROJECT_NAME}
     PRIVATE ${gram_BINARY_DIR}/src
 )
 
-target_link_libraries(${PROJECT_NAME} PRIVATE gram)
+target_link_libraries(${PROJECT_NAME} PRIVATE gram
+                        PRIVATE lua)

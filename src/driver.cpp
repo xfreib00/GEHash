@@ -8,7 +8,7 @@
 
 GEDriver::GEDriver()
 {
-    table = HTable<uint16_t>();
+    
 }
 
 Fitness GEDriver::calculateFitness(std::string program)
