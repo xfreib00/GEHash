@@ -13,7 +13,7 @@ GEDriver::GEDriver()
 
 Fitness GEDriver::calculateFitness(std::string program)
 {
-    return program.length();
+
 }
 
 Fitness GEDriver::evaluate(const Phenotype& phenotype) noexcept

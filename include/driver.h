@@ -52,7 +52,7 @@ private:
     /**
      * @brief Instance of HTable used for evaluation of generated phenotype. 
      */
-    HTable<uint16_t> table;
+    HTable<uint16_t,string> table;
 };
 
 #endif

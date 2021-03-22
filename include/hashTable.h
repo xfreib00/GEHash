@@ -11,6 +11,7 @@
 #include "error/hashError.h"
 #include <limits>
 #include <array>
+#include <vector>
 #include "lua.hpp"
 
 using namespace std;
@@ -18,8 +19,9 @@ using namespace std;
 /**
  * @brief Class implementing basic hash table.
  * @tparam T Data type specifying range of hash table indexes.
+ * @tparam V Data type of records.
  */
-template <typename T>
+template <typename T,typename V>
 class HTable {
 
 public:
@@ -36,12 +38,15 @@ public:
      */
     void Insert(string key)
     {
-        T hash = get_hash(key);
-        if (!table[hash].empty()){
+        try
+        {
+            Search(key);
             throw hashInsertError();
-        } 
-        
-        table[hash] = key;
+        }
+        catch(hashSearchError)
+        {
+            table[get_hash(key)].push_back(key);
+        }
     };
 
     /**
@@ -55,7 +60,21 @@ public:
         if (table[hash].empty()){
             throw hashRemoveError();
         }
-        table[hash].clear();
+
+        auto it = table[hash].begin();
+
+        for (; it != table[hash].end(); ) {
+            if (*it == key){
+                it = table[hash].erase(it);
+                break;
+            }
+            else{
+                it++;
+            }
+        }
+        if (it == table[hash].end()){
+            throw hashRemoveError();
+        }
     };
 
     /**
@@ -70,7 +89,20 @@ public:
         if (table[hash].empty()){
             throw hashSearchError();
         }
-        return hash;
+
+        auto it = table[hash].begin();
+
+        for (; it != table[hash].end(); ) {
+            if (*it == key){
+                return hash;
+            }
+            else{
+                it++;
+            }
+        }
+        if (it == table[hash].end()){
+            throw hashSearchError();
+        }
     };
 
     /**
@@ -89,6 +121,15 @@ public:
     void setMagic(unsigned long m)
     {
         magic_num = m;
+    };
+
+    /**
+     * @brief Function returns size of table.
+     * @return Size of table.
+     */
+    T getSize(void)
+    {
+        return table_size;
     };
 
     /**
@@ -147,14 +188,14 @@ private:
     };
 
     /**
-     * @brief HTable index range. 
+     * @brief HTable max index.
      */
-    T table_size;
+    T table_size = numeric_limits<T>::max();
 
     /**
      * @brief Table alocated using std::array
      */
-    array<T,numeric_limits<T>::max()> table;
+    array<vector<V>,numeric_limits<T>::max()> table;
 
     /**
      * @brief Pointer to lua_State instance.
