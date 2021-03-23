@@ -7,8 +7,7 @@
 #ifndef GEHASH_EVO
 #define GEHASH_EVO
 
-#include <chrono>
-#include <stdexcept>
+/* include gram headers */
 #include <gram/Evolution.h>
 #include <gram/language/parser/BnfRuleParser.h>
 #include <gram/operator/selector/TournamentSelector.h>
@@ -21,7 +20,13 @@
 #include <gram/language/mapper/ContextFreeMapper.h>
 #include <gram/population/initializer/RandomInitializer.h>
 #include <gram/random/number_generator/StdNumberGenerator.h>
+#include <gram/evaluation/driver/SingleThreadDriver.h>
+#include <gram/evaluation/EvaluatorCache.h>
+
+/* standard libraries and user defined dependencies */
+#include <stdexcept>
 #include <random>
+#include <functional>
 #include "logger.h"
 #include "driver.h"
 
@@ -56,8 +61,9 @@ public:
 
 	/**
 	 * @brief Setter for evaluation driver.
+	 * @param [in] magic Magic number used in grammar.
 	 */
-	void SetDriver();
+	void SetEvaluator(unsigned long magic);
 
 	/**
 	 * @brief Method for running evolution algorithm.
@@ -102,7 +108,17 @@ private:
 	/**
 	 * @brief Unique pointer to GEDriver object.
 	 */
-	std::unique_ptr<GEDriver> driver;
+	std::unique_ptr<GEDriver> eval;
+
+	/**
+	 * @brief Unique pointer to gram::EvaluatorCache object.
+	 */
+	std::unique_ptr<EvaluatorCache> cache;
+	
+	/**
+	 * @brief Unique pointer to gram::SingleThreadDriver object.
+	 */
+	std::unique_ptr<SingleThreadDriver> driver;
 };
 
 #endif

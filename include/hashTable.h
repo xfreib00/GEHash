@@ -43,7 +43,7 @@ public:
             Search(key);
             throw hashInsertError();
         }
-        catch(hashSearchError)
+        catch(hashSearchError &e)
         {
             table[get_hash(key)].push_back(key);
         }
@@ -100,9 +100,8 @@ public:
                 it++;
             }
         }
-        if (it == table[hash].end()){
-            throw hashSearchError();
-        }
+
+        throw hashSearchError();
     };
 
     /**
@@ -129,7 +128,21 @@ public:
      */
     T getSize(void)
     {
-        return table_size;
+        return table.size();
+    };
+
+    /**
+     * @brief Function fills given array with element count.
+     * at each index of hash table.
+     * @return Array filled with elemenent count for each index of HTable.
+     */
+    array<T,numeric_limits<T>::max()> getDimensions(void)
+    {
+        array <T,numeric_limits<T>::max()> arr;
+        for (T i = 0; i < table.size(); i++){
+            arr[i] = table[i].size();
+        }
+        return arr;
     };
 
     /**
@@ -186,11 +199,6 @@ private:
         /* use xor-folding to return hash value in specified range */
         return (hash>>(sizeof(T)*8)) ^ (hash & ((((T)1<<(sizeof(T)*8))-1)));
     };
-
-    /**
-     * @brief HTable max index.
-     */
-    T table_size = numeric_limits<T>::max();
 
     /**
      * @brief Table alocated using std::array

@@ -13,6 +13,10 @@
 #include <gram/language/mapper/ContextFreeMapper.h>
 #include "hashTable.h"
 #include <limits>
+#include <iostream>
+#include <fstream>
+#include <array>
+#include <math.h>
 
 using namespace gram;
 
@@ -23,14 +27,21 @@ class GEDriver : public Evaluator {
 
 public:
     /**
-     * @brief Constructor of GEDriver class. 
+     * @brief Default constructor. 
      */
-    GEDriver();
+    GEDriver() = default;
+
+    /**
+     * @brief Constructor of GEDriver class.
+     * @param [in] magic Magic number used in grammar.
+     */
+    GEDriver(unsigned long magic);
 
     /**
      * @brief Calculate fitness for given program.
      * @param [in] program Generated string containing program.
      * @return Return calculated fitness for given program.
+     * @exception If there is duplicity in training data throw hashInsertError exception.
      */
     Fitness calculateFitness(std::string program);
     
@@ -53,6 +64,7 @@ private:
      * @brief Instance of HTable used for evaluation of generated phenotype. 
      */
     HTable<uint16_t,string> table;
+
 };
 
 #endif
