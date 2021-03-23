@@ -7,7 +7,7 @@ add_executable(${PROJECT_NAME}
     main.cpp
     evolution.cpp
     logger.cpp
-    driver.cpp
+    evaluator.cpp
     ${HEADER_FILES}
 )
 

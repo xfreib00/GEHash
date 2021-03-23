@@ -28,7 +28,7 @@
 #include <random>
 #include <functional>
 #include "logger.h"
-#include "driver.h"
+#include "evaluator.h"
 
 /**
  * @brief Main class for creating new hash functions

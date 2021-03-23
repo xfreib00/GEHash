@@ -1,10 +1,10 @@
 /**
- * @file driver.cpp
+ * @file evaluator.cpp
  * @author Adam Freiberg
  * @brief Source file for Driver class methods
  */
 
-#include "driver.h"
+#include "evaluator.h"
 
 GEDriver::GEDriver(unsigned long magic)
 {

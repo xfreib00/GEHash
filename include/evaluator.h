@@ -1,5 +1,5 @@
 /**
- * @file driver.h
+ * @file evaluator.h
  * @author Adam Freiberg
  * @brief Header file for Driver class
  */
@@ -21,7 +21,7 @@
 using namespace gram;
 
 /**
- * @brief Class implemeting Evaluation driver. 
+ * @brief Class implemeting evaluation mechanism for GEHash. 
  */
 class GEDriver : public Evaluator {
 
