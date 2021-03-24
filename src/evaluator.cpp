@@ -39,7 +39,9 @@ Fitness GEDriver::calculateFitness(std::string program)
 
     /* calculate fitness as weighted  */
     for (auto a : arr){
-        fit += pow(a,2);
+        if (a > 1){
+            fit += pow(a,2);
+        }
     }
 
     return fit;
