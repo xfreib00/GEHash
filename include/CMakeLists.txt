@@ -1,4 +1,5 @@
-SET(HEADER_FILES 
+SET(HEADER_FILES
+    GEHash.h
     evolution.h
     logger.h
     evaluator.h

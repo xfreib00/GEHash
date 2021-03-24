@@ -9,7 +9,7 @@
 #include <getopt.h>
 #include <string>
 #include <cstdlib>
-#include "evolution.h"
+#include "GEHash.h"
 
 static void display_help(void)
 {

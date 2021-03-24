@@ -5,6 +5,7 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -pg")
 
 add_executable(${PROJECT_NAME}
     main.cpp
+    GEHash.cpp
     evolution.cpp
     logger.cpp
     evaluator.cpp
