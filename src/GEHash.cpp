@@ -6,7 +6,7 @@
 
 #include "GEHash.h"
 
-GEHash::GEHash(unsigned long generation, unsigned long population, std::string& outpath)
+GEHash::GEHash(unsigned long generation, unsigned long population)
 {
 	if (generation < 2  || population < 50){
 		throw std::invalid_argument("Invalid value of parameter.");
@@ -14,9 +14,11 @@ GEHash::GEHash(unsigned long generation, unsigned long population, std::string& 
 		p = population;
 		g = generation;
 
-	//logging
-	log = std::make_unique<GELogger>(outpath);
+}
 
+void GEHash::SetLogger(std::string& outpath)
+{
+	log = std::make_unique<GELogger>(outpath,move(cfmLogger));
 }
 
 void GEHash::SetGrammar(std::string& grammar,unsigned long limit)
@@ -26,7 +28,9 @@ void GEHash::SetGrammar(std::string& grammar,unsigned long limit)
 	}
 
 	gramm = std::make_unique<ContextFreeGrammar>(parser.parse(grammar));
+	auto gramLogger = std::make_unique<ContextFreeGrammar>(parser.parse(grammar));
 	cfm = std::make_unique<ContextFreeMapper>(std::move(gramm),limit);
+	cfmLogger = std::make_unique<ContextFreeMapper>(std::move(gramLogger),limit);
 }
 
 void GEHash::SetEvaluator(unsigned long magic)

@@ -87,15 +87,16 @@ int main(int argc, char **argv){
 	//Create and run evolution
 	try
 	{
-		std::cout << "Got thru params: " << output << std::endl;
-		GEHash hash(generations,population,output);
+		//std::cout << "Got thru params: " << output << std::endl;
+		GEHash hash(generations,population);
 		hash.SetGrammar(bnf_grammar,3);
-
+		hash.SetLogger(output);
+		hash.SetEvaluator(0xDEADBEEF);
 		hash.Run();
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cerr << e.what() << std::endl;
 	}
 
 	return 0;

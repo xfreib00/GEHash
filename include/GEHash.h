@@ -46,11 +46,15 @@ public:
 	 * @brief Constructor of GEHash class.
 	 * @param [in] generation Maximum number of generations. Must be more than 2.
 	 * @param [in] population Number of individuals in population. Must be more than 50.
-	 * @param [in out] outpath Path to output file used by Logger class.
 	 * @exception If any of function arguments are invalid, throw std::invalid_argument exception.
 	 */
-	GEHash(unsigned long generation, unsigned long population,
-	std::string& outpath);
+	GEHash(unsigned long generation, unsigned long population);
+
+	/**
+	 * @brief Setter for GELogger class.
+	 * @param [in out] outpath Path to output file used by Logger class.
+	 */
+	void SetLogger(std::string& outpath);
 	
 	/**
 	 * @brief Setter for grammar parser.
@@ -105,7 +109,12 @@ private:
 	 * @brief Unique pointer to gram::ContextFreeMapper object.
 	 */
 	std::unique_ptr<ContextFreeMapper> cfm;
-	
+
+	/**
+	 * @brief Unique pointer to gram::ContextFreeMapper object used in GELogger class.
+	 */
+	std::unique_ptr<ContextFreeMapper> cfmLogger;
+
 	/**
 	 * @brief Unique pointer to GEDriver object.
 	 */
