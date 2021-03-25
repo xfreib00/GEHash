@@ -7,11 +7,11 @@
 #ifndef GEHASH_LOGGER
 #define GEHASH_LOGGER
 
-#include <chrono>
 #include <stdexcept>
 #include <fstream>
 #include <gram/population/Population.h>
 #include <gram/util/logger/Logger.h>
+#include <nlohmann/json.hpp>
 
 using namespace gram;
 

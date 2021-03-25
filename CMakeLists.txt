@@ -10,6 +10,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 include(cmake/gram.cmake)
 include(cmake/lua.cmake)
+include(cmake/nlohmann_json.cmake)
 
 add_subdirectory(src)
 

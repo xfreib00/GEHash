@@ -16,7 +16,7 @@ GELogger::GELogger(const std::string& path)
 
 void GELogger::logProgress(const Population& population)
 {
-
+    
 }
 
 void GELogger::logResult(const Population& population)
