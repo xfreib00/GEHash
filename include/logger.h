@@ -15,6 +15,7 @@
 #include <gram/util/logger/Logger.h>
 #include <gram/language/mapper/ContextFreeMapper.h>
 #include <nlohmann/json.hpp>
+#include "error/loggerError.h"
 
 using namespace gram;
 using namespace std;

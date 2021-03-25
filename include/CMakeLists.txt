@@ -4,4 +4,5 @@ SET(HEADER_FILES
     logger.h
     evaluator.h
     hashTable.h
-    error/hashError.h)
+    error/hashError.h
+    error/loggerError.h)

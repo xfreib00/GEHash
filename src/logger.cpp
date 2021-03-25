@@ -10,7 +10,7 @@ GELogger::GELogger(const std::string& path, unique_ptr<ContextFreeMapper> logMap
 {
     /* check if path is not empty */
     if (path.empty()){
-        throw std::invalid_argument("Missing GElogger path");
+        throw loggerInputError();
     }
 
     /* try to open file at given path */
@@ -28,6 +28,7 @@ GELogger::GELogger(const std::string& path, unique_ptr<ContextFreeMapper> logMap
 void GELogger::logProgress(const Population& population)
 {
     json j;
+
     /* log best individual in current generation */
     j["status"] = "progress";
     j["gen"] = population.generationNumber();
@@ -35,7 +36,9 @@ void GELogger::logProgress(const Population& population)
     if (debug){
         j["phenotype"]["code"] = population.individualWithLowestFitness().serialize(*mapper);
     }
+
     j_out.push_back(j);
+
 }
 
 void GELogger::logResult(const Population& population)
