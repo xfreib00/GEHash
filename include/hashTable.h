@@ -36,7 +36,7 @@ public:
      * @param [in] key Key to be inserted to table. 
      * @exception If key is already in table hashInsertError exception is thrown.
      */
-    void Insert(string key)
+    void Insert(V key)
     {
         try
         {
@@ -54,7 +54,7 @@ public:
      * @param [in] key Key to be removed from table.
      * @exception If key is not in table hashRemoveError exception is thrown.
      */
-    void Remove(string key)
+    void Remove(V key)
     {
         T hash = get_hash(key);
         if (table[hash].empty()){
@@ -83,7 +83,7 @@ public:
      * @return Return index if search was successful. Throw exception otherwise.
      * @exception If key is not in table hashSearchError exception is thrown.
      */
-    T Search(string key)
+    T Search(V key)
     {
         T hash = get_hash(key);
         if (table[hash].empty()){
@@ -117,7 +117,7 @@ public:
      * @brief Set magic number used in calculating hash value.
      * @param [in] m Value to be assigned to magic number.
      */
-    void setMagic(unsigned long m)
+    void setMagic(uint64_t m)
     {
         magic_num = m;
     };
@@ -163,15 +163,16 @@ private:
      * or given string was empty, throw hashFuncError exception.
      * If Lua evaluation fails, throw hashLuaError exception.
      */
-    T get_hash(string key)
+    T get_hash(V key)
     {
         if (func.empty()){
             throw hashFuncError();
         }
 
-        unsigned long hash = 0;
+        /* initial value of hash */
+        uint64_t hash = 0;
 
-        for(size_t i = 0; i < key.length(); i++)
+        for(size_t i = 0; i < key.size(); i++)
         {
             /* Push current hash function */
             lua_pushinteger(L,hash);
@@ -193,7 +194,7 @@ private:
             
             /* Assign computed value to hash variable */
 		    lua_getglobal(L,"hash");
-		    hash = static_cast<unsigned long>(lua_tonumber(L,-1));
+		    hash = static_cast<uint64_t>(lua_tonumber(L,-1));
 
         }
         /* use xor-folding to return hash value in specified range */
@@ -213,7 +214,7 @@ private:
     /**
      * @brief Magic number used in calculating hash value.
      */
-    unsigned long magic_num = 0;
+    uint64_t magic_num = 0;
 
     /**
      * @brief String containing generated hash function.

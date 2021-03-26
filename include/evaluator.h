@@ -17,6 +17,7 @@
 #include <fstream>
 #include <array>
 #include <math.h>
+#include <vector>
 
 using namespace gram;
 
@@ -63,7 +64,17 @@ private:
     /**
      * @brief Instance of HTable used for evaluation of generated phenotype. 
      */
-    HTable<uint16_t,string> table;
+    HTable<uint16_t,std::array<uint32_t,9>> table;
+
+    /**
+     * @brief Private function for spliting strings.
+     * @details Because std::string has no standard function for splitting strings each project needs to implement its own version.
+     * Function used in this project is from answer found at <a href="https://stackoverflow.com/a/37454181">StackOverflow</a>.
+     * @param [in] str String to be parsed.
+     * @param [in] delim Delimiter used for splitting given string.
+     * @return Returns vector of strings.
+     */
+    std::vector<std::string> split(const std::string& str, const std::string& delim);
 
 };
 

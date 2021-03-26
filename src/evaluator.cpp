@@ -18,15 +18,30 @@ Fitness GEEvaluator::calculateFitness(std::string program)
     table.setFunc(program);
 
     std::array<uint16_t,numeric_limits<uint16_t>::max()> arr;
+    std::array<uint32_t,9> keys;
+    std::vector<std::string> chunks;
 
     /* open file containing train data */
     std::ifstream f("../data/train_set/train_set.data");
 
     /* insert training data to hash table */
     for (std::string line; getline(f,line);){
+
+        chunks = split(line,";");
+
+        for(auto it = 0ul; it < keys.size(); it++){
+            if (it > 6){
+                keys[it] = static_cast<uint32_t>(std::stoul(chunks[it]));
+                keys[it] = keys[it] << 16;
+                keys[it] |= static_cast<uint32_t>(std::stoul(chunks[it+1]));
+                break;
+            }
+            keys[it] = static_cast<uint32_t>(std::stoul(chunks[it]));
+        }
+
         try
         {
-            table.Insert(line);
+            table.Insert(keys);
         }
         catch (hashInsertError &e)
         {
@@ -64,4 +79,21 @@ Fitness GEEvaluator::evaluate(const Phenotype& phenotype) noexcept
         return 1000.0;
     }
     
+}
+
+std::vector<std::string> GEEvaluator::split(const std::string& str, const std::string& delim)
+{
+    std::vector<std::string> chunks;
+    size_t prev = 0, pos = 0;
+    do
+    {
+        pos = str.find(delim, prev);
+        if (pos == std::string::npos) pos = str.length();
+        std::string token = str.substr(prev, pos-prev);
+        if (!token.empty()) chunks.push_back(token);
+        prev = pos + delim.length();
+    }
+    while (pos < str.length() && prev < str.length());
+
+    return chunks;
 }
