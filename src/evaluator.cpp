@@ -6,7 +6,7 @@
 
 #include "evaluator.h"
 
-GEEvaluator::GEEvaluator(unsigned long magic)
+GEEvaluator::GEEvaluator(uint64_t magic)
 {
     table.setMagic(magic);
 }

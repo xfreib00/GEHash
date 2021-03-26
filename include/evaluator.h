@@ -36,7 +36,7 @@ public:
      * @brief Constructor of GEEvaluator class.
      * @param [in] magic Magic number used in grammar.
      */
-    GEEvaluator(unsigned long magic);
+    GEEvaluator(uint64_t magic);
 
     /**
      * @brief Calculate fitness for given program.
