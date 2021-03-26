@@ -11,7 +11,8 @@ Source codes for bachelor's thesis about *Evolutionary Design of Hash Functions 
 
 ## Dependecies
 
-Gram library avalible at [GitHub](https://github.com/jansvoboda11/gram)
-Lua library
-Nlohmann JSON lightweight version at [GitHub](https://github.com/ArthurSonzogni/nlohmann_json_cmake_fetchcontent)
+**Gram** library avalible at [GitHub](https://github.com/jansvoboda11/gram).
 
+**Lua** library avalible at [official website](https://www.lua.org/).
+
+**Nlohmann JSON** lightweight version avalible at [GitHub](https://github.com/ArthurSonzogni/nlohmann_json_cmake_fetchcontent).
