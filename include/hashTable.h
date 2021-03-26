@@ -33,7 +33,7 @@ public:
 
     /**
      * @brief Insert element to table.
-     * @param [in] key Key to be inserted to table. 
+     * @param [in] key Key to be inserted to table.
      * @exception If key is already in table hashInsertError exception is thrown.
      */
     void Insert(V key)
@@ -78,7 +78,7 @@ public:
     };
 
     /**
-     * @brief Find key in table 
+     * @brief Find key in table.
      * @param [in] key Key to be found in table.
      * @return Return index if search was successful. Throw exception otherwise.
      * @exception If key is not in table hashSearchError exception is thrown.
@@ -156,7 +156,7 @@ public:
 private:
 
     /**
-     * @brief HTable's function for calculating hash value. 
+     * @brief HTable's function for calculating hash value.
      * @param [in] key Key to be hashed.
      * @return Calculated hash value.
      * @exception If no function was not set by HTable::setFunc
@@ -191,7 +191,7 @@ private:
             if (r != LUA_OK){
 		        throw hashLuaError();
             }
-            
+
             /* Assign computed value to hash variable */
 		    lua_getglobal(L,"hash");
 		    hash = static_cast<uint64_t>(lua_tonumber(L,-1));

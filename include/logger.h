@@ -44,7 +44,7 @@ public:
 	 * object used for mapping genotype to phenotype inside GELogger class.
 	 */
 	GELogger(const string& path, unique_ptr<ContextFreeMapper> logMapper);
-	
+
 	/**
 	 *	@brief Log progress of current evolution run.
 	 *	@param [in] population Reference to population object.
@@ -77,7 +77,7 @@ public:
 private:
 
 	/**
-	 * @brief Fstream variable for Logger output file. 
+	 * @brief Fstream variable for Logger output file.
 	 */
 	fstream out;
 

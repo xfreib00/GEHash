@@ -22,13 +22,13 @@
 using namespace gram;
 
 /**
- * @brief Class implemeting evaluation mechanism for GEHash. 
+ * @brief Class implemeting evaluation mechanism for GEHash.
  */
 class GEEvaluator : public Evaluator {
 
 public:
     /**
-     * @brief Default constructor. 
+     * @brief Default constructor.
      */
     GEEvaluator() = default;
 
@@ -45,7 +45,7 @@ public:
      * @exception If there is duplicity in training data throw hashInsertError exception.
      */
     Fitness calculateFitness(std::string program);
-    
+
     /**
      * @brief Evaluate given phenotype.
      * @param [in out] phenotype Reference to phenotype to be evaluated.
@@ -55,14 +55,14 @@ public:
     Fitness evaluate(const Phenotype& phenotype) noexcept override;
 
     /**
-     * @brief Default destructor. 
+     * @brief Default destructor.
      */
     ~GEEvaluator() = default;
 
 private:
 
     /**
-     * @brief Instance of HTable used for evaluation of generated phenotype. 
+     * @brief Instance of HTable used for evaluation of generated phenotype.
      */
     HTable<uint16_t,std::array<uint32_t,9>> table;
 

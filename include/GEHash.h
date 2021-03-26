@@ -55,7 +55,7 @@ public:
 	 * @param [in out] outpath Path to output file used by Logger class.
 	 */
 	void SetLogger(std::string& outpath);
-	
+
 	/**
 	 * @brief Setter for grammar parser.
 	 * @param [in out] grammar Grammar in BNF form.
@@ -74,7 +74,7 @@ public:
 	 * @brief Method for running evolution algorithm.
 	 */
 	void Run(void);
-	
+
 	/**
 	 * @brief Default destructor.
 	 */
@@ -99,12 +99,12 @@ private:
 	 * @brief Instance of gram::BnfRuleParser.
 	 */
 	BnfRuleParser parser;
-	
+
 	/**
 	 * @brief Unique pointer to gram::ContextFreeGramar object.
 	 */
 	std::unique_ptr<ContextFreeGrammar> gramm;
-	
+
 	/**
 	 * @brief Unique pointer to gram::ContextFreeMapper object.
 	 */
@@ -124,7 +124,7 @@ private:
 	 * @brief Unique pointer to gram::EvaluatorCache object.
 	 */
 	std::unique_ptr<EvaluatorCache> cache;
-	
+
 	/**
 	 * @brief Unique pointer to gram::SingleThreadDriver object.
 	 */

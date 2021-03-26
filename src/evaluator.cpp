@@ -78,7 +78,7 @@ Fitness GEEvaluator::evaluate(const Phenotype& phenotype) noexcept
     {
         return 1000.0;
     }
-    
+
 }
 
 std::vector<std::string> GEEvaluator::split(const std::string& str, const std::string& delim)
