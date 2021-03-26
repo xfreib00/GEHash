@@ -1,7 +1,7 @@
 /**
  * @file evaluator.h
  * @author Adam Freiberg
- * @brief Header file for Driver class
+ * @brief Header file for GEDriver class
  */
 
 #ifndef GEHASH_DRIVER

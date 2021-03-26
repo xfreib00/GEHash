@@ -1,7 +1,7 @@
 /**
  * @file logger.h
  * @author Adam Freiberg
- * @brief Header file for Logger class
+ * @brief Header file for GELogger class
  */
 
 #ifndef GEHASH_LOGGER
@@ -19,7 +19,7 @@
 
 using namespace gram;
 using namespace std;
-using json = nlohmann::json;
+
 
 /**
  * @brief Logger class for GEHash grammatical evolution.
@@ -27,6 +27,10 @@ using json = nlohmann::json;
 class GELogger : public Logger{
 
 public:
+
+	/// Nlohmann::json type
+	using json = nlohmann::json;
+
 
     /**
 	 * @brief Default constructor of Logger class.

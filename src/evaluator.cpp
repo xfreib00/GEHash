@@ -1,7 +1,7 @@
 /**
  * @file evaluator.cpp
  * @author Adam Freiberg
- * @brief Source file for Driver class methods
+ * @brief Source file for GEDriver class methods
  */
 
 #include "evaluator.h"

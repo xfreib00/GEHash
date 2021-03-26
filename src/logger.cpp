@@ -1,12 +1,12 @@
 /**
  * @file logger.cpp
  * @author Adam Freiberg
- * @brief Source file for Logger class methods
+ * @brief Source file for GELogger class methods
  */
 
 #include "logger.h"
 
-GELogger::GELogger(const std::string& path, unique_ptr<ContextFreeMapper> logMapper)
+GELogger::GELogger(const string& path, unique_ptr<ContextFreeMapper> logMapper)
 {
     /* check if path is not empty */
     if (path.empty()){
@@ -19,30 +19,35 @@ GELogger::GELogger(const std::string& path, unique_ptr<ContextFreeMapper> logMap
         mapper = move(logMapper);
         out.open(path);
     }
-    catch (std::exception& e)
+    catch (exception& e)
     {
-        std::cerr << e.what() << std::endl;
+        cerr << e.what() << endl;
     }
 }
 
 void GELogger::logProgress(const Population& population)
 {
+    /* temporary object used for storing data about current population */
     json j;
 
     /* log best individual in current generation */
     j["status"] = "progress";
     j["gen"] = population.generationNumber();
     j["fitness"] = population.individualWithLowestFitness().fitness();
+
+    /* if debug option is on, map and store phenotype of individual with currently best fitness */
     if (debug){
         j["phenotype"]["code"] = population.individualWithLowestFitness().serialize(*mapper);
     }
 
+    /* store temporary object into ouput JSON object */
     j_out.push_back(j);
 
 }
 
 void GELogger::logResult(const Population& population)
 {
+    /* temporary object used for storing data about current population */
     json j;
 
     /* log best individual in final generation */
@@ -51,9 +56,10 @@ void GELogger::logResult(const Population& population)
     j["fitness"] = population.individualWithLowestFitness().fitness();
     j["phenotype"]["code"] = population.individualWithLowestFitness().serialize(*mapper);
 
+    /* store temporary object into ouput JSON object */
     j_out.push_back(j);
 
-    /* write logger output to file */
+    /* write logger output to JSON file */
     out << setw(4) << j_out << endl;
 }
 

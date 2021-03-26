@@ -6,8 +6,6 @@
 
 #include "evolution.h"
 
-using namespace std;
-
 Evolution::Evolution(unique_ptr<gram::EvaluationDriver> evaluationDriver, unique_ptr<gram::Logger> logger)
     : evaluationDriver(move(evaluationDriver)), logger(move(logger)) {
   //

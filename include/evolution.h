@@ -14,6 +14,7 @@
 #include <gram/util/logger/Logger.h>
 #include <gram/population/Population.h>
 
+using namespace std;
 
 /**
  * @brief Reimplemented gram::Evolution class.
@@ -27,7 +28,7 @@ public:
      * @param [in out] evaluationDriver Unique pointer to EvaluationDriver object used to evaluate given population.
      * @param [in out] logger Unique pointer to Logger object used to log evolution progress and result.
      */
-    Evolution(std::unique_ptr<gram::EvaluationDriver> evaluationDriver, std::unique_ptr<gram::Logger> logger);
+    Evolution(unique_ptr<gram::EvaluationDriver> evaluationDriver, unique_ptr<gram::Logger> logger);
 
     /**
      * @brief Function for executing evolution on given population.
@@ -35,7 +36,7 @@ public:
      * @param [in] terminatingCondition Std::function returning bool value, which specifies terminating condition.
      * @return Returns final population after terminating condition is met.
      */
-    gram::Population run(gram::Population population, std::function<bool(gram::Population&)> terminatingCondition) const;
+    gram::Population run(gram::Population population, function<bool(gram::Population&)> terminatingCondition) const;
 
     /**
      * @brief Function for executing evolution on given population.
@@ -44,7 +45,7 @@ public:
      * @param [in] terminatingCondition Std::function returning bool value, which specifies terminating condition.
      * @return Returns final population after terminating condition is met.
      */
-    gram::Population run(gram::Population population, unsigned long gen, std::function<bool(gram::Population&,unsigned long)> terminatingCondition) const;
+    gram::Population run(gram::Population population, unsigned long gen, function<bool(gram::Population&,unsigned long)> terminatingCondition) const;
 
 private:
     /**
