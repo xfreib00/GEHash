@@ -35,7 +35,7 @@ void GEHash::SetGrammar(std::string& grammar,unsigned long limit)
 
 void GEHash::SetEvaluator(unsigned long magic)
 {
-	eval = std::make_unique<GEDriver>(magic);
+	eval = std::make_unique<GEEvaluator>(magic);
 	cache = std::make_unique<EvaluatorCache>(move(eval));
 	driver = std::make_unique<SingleThreadDriver>(move(cfm),move(cache));
 

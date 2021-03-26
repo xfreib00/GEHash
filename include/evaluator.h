@@ -1,11 +1,11 @@
 /**
  * @file evaluator.h
  * @author Adam Freiberg
- * @brief Header file for GEDriver class
+ * @brief Header file for GEEvaluator class
  */
 
-#ifndef GEHASH_DRIVER
-#define GEHASH_DRIVER
+#ifndef GEHASH_EVALUATOR
+#define GEHASH_EVALUATOR
 
 #include <gram/evaluation/Evaluator.h>
 #include <gram/individual/Fitness.h>
@@ -23,19 +23,19 @@ using namespace gram;
 /**
  * @brief Class implemeting evaluation mechanism for GEHash. 
  */
-class GEDriver : public Evaluator {
+class GEEvaluator : public Evaluator {
 
 public:
     /**
      * @brief Default constructor. 
      */
-    GEDriver() = default;
+    GEEvaluator() = default;
 
     /**
-     * @brief Constructor of GEDriver class.
+     * @brief Constructor of GEEvaluator class.
      * @param [in] magic Magic number used in grammar.
      */
-    GEDriver(unsigned long magic);
+    GEEvaluator(unsigned long magic);
 
     /**
      * @brief Calculate fitness for given program.
@@ -56,7 +56,7 @@ public:
     /**
      * @brief Default destructor. 
      */
-    ~GEDriver() = default;
+    ~GEEvaluator() = default;
 
 private:
 

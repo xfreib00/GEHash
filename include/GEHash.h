@@ -116,9 +116,9 @@ private:
 	std::unique_ptr<ContextFreeMapper> cfmLogger;
 
 	/**
-	 * @brief Unique pointer to GEDriver object.
+	 * @brief Unique pointer to GEEvaluator object.
 	 */
-	std::unique_ptr<GEDriver> eval;
+	std::unique_ptr<GEEvaluator> eval;
 
 	/**
 	 * @brief Unique pointer to gram::EvaluatorCache object.

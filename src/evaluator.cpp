@@ -1,17 +1,17 @@
 /**
  * @file evaluator.cpp
  * @author Adam Freiberg
- * @brief Source file for GEDriver class methods
+ * @brief Source file for GEEvaluator class methods
  */
 
 #include "evaluator.h"
 
-GEDriver::GEDriver(unsigned long magic)
+GEEvaluator::GEEvaluator(unsigned long magic)
 {
     table.setMagic(magic);
 }
 
-Fitness GEDriver::calculateFitness(std::string program)
+Fitness GEEvaluator::calculateFitness(std::string program)
 {
     Fitness fit = 0.0;
     /* set up table for */
@@ -47,7 +47,7 @@ Fitness GEDriver::calculateFitness(std::string program)
     return fit;
 }
 
-Fitness GEDriver::evaluate(const Phenotype& phenotype) noexcept
+Fitness GEEvaluator::evaluate(const Phenotype& phenotype) noexcept
 {
     try
     {
