@@ -5,7 +5,7 @@ if (DOXYGEN_FOUND)
     SET(DOXYGEN_OUT ${PROJECT_SOURCE_DIR}/doc/Doxyfile)
 
     configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
-    message(STATUS "Doxygen build started.")
+    message(STATUS "Doxygen: Doxyfile generated")
 
     add_custom_target(docs ALL
         COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
