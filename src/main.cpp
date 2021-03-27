@@ -150,7 +150,7 @@ int main(int argc, char **argv){
 		GEHash hash(generations,population);
 		hash.SetGrammar(input,wrap);
 		hash.SetLogger(output);
-		hash.SetEvaluator(0xDEADBEEF);
+		hash.SetEvaluator(magic);
 		hash.Run();
 	}
 	catch(const std::exception& e)
