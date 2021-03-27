@@ -13,7 +13,7 @@
 
 static void display_help(void)
 {
-	std::cout << "Usage: GEHash [OPTIONS] ... FILE" << std::endl <<
+	std::cout << std::endl << "Usage: GEHash [OPTIONS] ... FILE" << std::endl <<
 		   "Read BNF grammar from FILE and generate hash "
 		   "function based on that grammar." << std::endl <<
 		   "Example: GEHash -i grammar.txt -p 200" << std::endl <<
@@ -23,9 +23,10 @@ static void display_help(void)
 		   "\t -o  --output\t\t output file for GELogger, defaults to ouput.json" << std::endl <<
 		   "\t -g, --generations\t max number of generations, defaults to 5" << std::endl <<
 		   "\t -p, --population\t number of individuals in population, defaults to 60" << std::endl <<
-		   "\t -m  --magic\t\t constant used in HTable hash function, defaults to 0"<< std::endl << std::endl <<
+		   "\t -m  --magic\t\t constant used in HTable hash function, defaults to 0"<< std::endl <<
+		   "\t -w  --wrap\t\t maximum number of wrapping operations on genotype to generate phenotype, defaluts to 3" << std::endl << std::endl <<
 		   "FILE must contain grammar in BNF form. Grammar "
-		   "will be parsed and used for GE of hash function." << std::endl;
+		   "will be parsed and used for GE of hash function." << std::endl << std::endl;
 }
 
 
