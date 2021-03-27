@@ -37,6 +37,7 @@ int main(int argc, char **argv){
 		{"population", required_argument, NULL, 'p'},
 		{"generations", required_argument, NULL, 'g'},
 		{"magic", required_argument, NULL, 'm'},
+		{"wrap",required_argument, NULL , 'w'},
 		{"input", required_argument, NULL, 'i'},
 		{"output", required_argument, NULL, 'o'},
 		{"help", no_argument, NULL, 'h'}
@@ -46,6 +47,7 @@ int main(int argc, char **argv){
 	unsigned long population = 60;
 	unsigned long generations = 5;
 	uint64_t magic = 0;
+	uint64_t wrap = 3;
 	std::string input;
 	std::string output = "output.json";
 	bool input_defined = false;
@@ -55,7 +57,7 @@ int main(int argc, char **argv){
 		std::exit(EXIT_FAILURE);
 	}
 
-	while((c = getopt_long(argc, argv, ":p:g:m:o:i:h", longopts, NULL)) != -1){
+	while((c = getopt_long(argc, argv, ":p:g:m:w:o:i:h", longopts, NULL)) != -1){
 		switch(c){
 			case 'p':
 				try {
@@ -80,6 +82,16 @@ int main(int argc, char **argv){
 			case 'm':
 				try {
 					magic = std::stoul(optarg,nullptr,0);
+				}
+				catch (...) {
+					std::cerr << "Invalid input, use --help option"
+					" to display help." << std::endl;
+					std::exit(EXIT_FAILURE);
+				}
+				break;
+			case 'w':
+				try {
+					wrap = std::stoul(optarg,nullptr,0);
 				}
 				catch (...) {
 					std::cerr << "Invalid input, use --help option"
@@ -131,12 +143,11 @@ int main(int argc, char **argv){
 		}
 	}
 
-
 	//Set up and run evolution
 	try
 	{
 		GEHash hash(generations,population);
-		hash.SetGrammar(input,3);
+		hash.SetGrammar(input,wrap);
 		hash.SetLogger(output);
 		hash.SetEvaluator(0xDEADBEEF);
 		hash.Run();
