@@ -5,10 +5,13 @@
  */
 
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <functional>
 #include <getopt.h>
 #include <string>
 #include <cstdlib>
+#include <stdexcept>
 #include "GEHash.h"
 
 static void display_help(void)
@@ -29,6 +32,25 @@ static void display_help(void)
 		   "will be parsed and used for GE of hash function." << std::endl << std::endl;
 }
 
+static std::string load_grammar(const std::string path){
+
+	if (path.empty()){
+		throw std::invalid_argument("Given input file is empty.");
+	}
+	/* open file and read content */
+	std::fstream f;
+	std::stringstream strS;
+
+	f.open(path);
+
+	/* read buffer to stringstream and then to string */
+	strS << f.rdbuf();
+	std::string str = strS.str();
+
+	f.close();
+
+	return str;
+}
 
 int main(int argc, char **argv){
 
@@ -147,6 +169,9 @@ int main(int argc, char **argv){
 	//Set up and run evolution
 	try
 	{
+		/* load data from input file to input string */
+		input = load_grammar(input);
+
 		GEHash hash(generations,population);
 		hash.SetGrammar(input,wrap);
 		hash.SetLogger(output);
