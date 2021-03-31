@@ -79,7 +79,7 @@ private:
 	/**
 	 * @brief Fstream variable for Logger output file.
 	 */
-	fstream out;
+	ofstream out;
 
 	/**
 	 * @brief Nlohmann::json object.

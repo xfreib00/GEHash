@@ -22,7 +22,7 @@ Fitness GEEvaluator::calculateFitness(std::string program)
     std::vector<std::string> chunks;
 
     /* open file containing train data */
-    std::ifstream f("../data/train_set/train_set.data");
+    std::ifstream f("data/train_set/train_set.data");
 
     /* insert training data to hash table */
     for (std::string line; getline(f,line);){
