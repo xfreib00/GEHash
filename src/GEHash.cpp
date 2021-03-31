@@ -67,7 +67,7 @@ void GEHash::Run(void)
 	unsigned long len = 100;
 	RandomInitializer in(move(num5),len);
 	Population initial = in.initialize(p,move(repr));
-	Evolution evol(move(driver),move(log));
+	GEEvolution evol(move(driver),move(log));
 
 	Population last_gen = evol.run(move(initial),g,[](Population& current_population,unsigned long gen)->bool{
 		return current_population.lowestFitness() == 0.0 || current_population.generationNumber() == gen;

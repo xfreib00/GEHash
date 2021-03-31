@@ -6,12 +6,12 @@
 
 #include "evolution.h"
 
-Evolution::Evolution(unique_ptr<gram::EvaluationDriver> evaluationDriver, unique_ptr<gram::Logger> logger)
+GEEvolution::GEEvolution(unique_ptr<gram::EvaluationDriver> evaluationDriver, unique_ptr<gram::Logger> logger)
     : evaluationDriver(move(evaluationDriver)), logger(move(logger)) {
   //
 }
 
-gram::Population Evolution::run(gram::Population population, function<bool(gram::Population&)> terminatingCondition) const {
+gram::Population GEEvolution::run(gram::Population population, function<bool(gram::Population&)> terminatingCondition) const {
   evaluationDriver->evaluate(population.allIndividuals());
 
   while (!terminatingCondition(population)) {
@@ -27,7 +27,7 @@ gram::Population Evolution::run(gram::Population population, function<bool(gram:
   return population;
 }
 
-gram::Population Evolution::run(gram::Population population, unsigned long gen, function<bool(gram::Population&, unsigned long)> terminatingCondition) const {
+gram::Population GEEvolution::run(gram::Population population, unsigned long gen, function<bool(gram::Population&, unsigned long)> terminatingCondition) const {
   evaluationDriver->evaluate(population.allIndividuals());
 
   while (!terminatingCondition(population,gen)) {

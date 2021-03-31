@@ -21,14 +21,14 @@ using namespace std;
  * @details This class is reimplementation of gram's Evolution class, because its current implementation
  * does not support another argument in terminating condition.
  */
-class Evolution {
+class GEEvolution {
 public:
     /**
      * @brief Constructor of evaluator class.
      * @param [in out] evaluationDriver Unique pointer to EvaluationDriver object used to evaluate given population.
      * @param [in out] logger Unique pointer to Logger object used to log evolution progress and result.
      */
-    Evolution(unique_ptr<gram::EvaluationDriver> evaluationDriver, unique_ptr<gram::Logger> logger);
+    GEEvolution(unique_ptr<gram::EvaluationDriver> evaluationDriver, unique_ptr<gram::Logger> logger);
 
     /**
      * @brief Function for executing evolution on given population.
