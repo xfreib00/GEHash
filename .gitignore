@@ -58,3 +58,6 @@ _deps
 
 # Generated doxygen documentation
 doc/Doxyfile
+
+# VSCode config files
+.vscode
