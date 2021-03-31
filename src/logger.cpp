@@ -37,7 +37,14 @@ void GELogger::logProgress(const Population& population)
 
     /* if debug option is on, map and store phenotype of individual with currently best fitness */
     if (debug){
-        j["phenotype"]["code"] = population.individualWithLowestFitness().serialize(*mapper);
+        try
+        {
+            j["phenotype"]["code"] = population.individualWithLowestFitness().serialize(*mapper);
+        }
+        catch (std::exception& e)
+        {
+            j["phenotype"]["code"] = e.what();
+        }
     }
 
     /* store temporary object into ouput JSON object */
@@ -54,13 +61,20 @@ void GELogger::logResult(const Population& population)
     j["status"] = "result";
     j["gen"] = population.generationNumber();
     j["fitness"] = population.individualWithLowestFitness().fitness();
-    j["phenotype"]["code"] = population.individualWithLowestFitness().serialize(*mapper);
+    try
+    {
+        j["phenotype"]["code"] = population.individualWithLowestFitness().serialize(*mapper);
+    }
+    catch(const std::exception& e)
+    {
+        j["phenotype"]["code"] = e.what();
+    }
 
     /* store temporary object into ouput JSON object */
     j_out.push_back(j);
 
     /* write logger output to JSON file */
-    out << setw(4) << j_out << endl;
+    out << setw(4) << j_out.dump() << endl;
 }
 
 bool GELogger::getDebug(void)
