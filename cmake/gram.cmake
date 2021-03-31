@@ -4,8 +4,8 @@ set(GRAM_BUILD_TESTS ON CACHE INTERNAL "Build tests for Gram lib")
 
 FetchContent_Declare(
     gram
-    GIT_REPOSITORY https://github.com/jansvoboda11/gram.git
-    GIT_TAG     origin/main
+    GIT_REPOSITORY https://github.com/xfreib00/gram.git
+    GIT_TAG     origin/wrapper_fix
     GIT_CONFIG  advice.detachedHead=false
 )
 
