@@ -178,10 +178,14 @@ private:
             lua_pushinteger(L,hash);
             lua_setglobal(L,"hash");
 
+            /* Push current index of key */
+            lua_pushinteger(L,key[i]);
+            lua_setglobal(L,"key");
+
             /* If magic_number is used, push current value */
             if (magic_num > 0){
                 lua_pushinteger(L,magic_num);
-                lua_setglobal(L,"magic_num");
+                lua_setglobal(L,"magic");
             }
 
             /* Use function from string to compute new hash value */
