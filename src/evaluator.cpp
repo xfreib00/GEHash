@@ -74,8 +74,9 @@ Fitness GEEvaluator::evaluate(const Phenotype& phenotype) noexcept
         << std::endl;
         return 2000.0;
     }
-    catch(...)
+    catch(std::exception& e)
     {
+        std::cerr << e.what() << ": " << phenotype << std::endl;
         return 1000.0;
     }
 
