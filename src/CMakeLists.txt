@@ -14,7 +14,7 @@ add_executable(${PROJECT_NAME}
 
 target_include_directories(${PROJECT_NAME}
     PUBLIC ${json_INCLUDE_DIR}
-    PUBLIC ${json_BINARY_DIR}
+    PUBLIC ${chaiscript_INCLUDE_DIR}
     PUBLIC ${gram_INCLUDE_DIR}
     PUBLIC ${gram_BINARY_DIR}
 )
@@ -22,8 +22,9 @@ target_include_directories(${PROJECT_NAME}
 target_link_directories(${PROJECT_NAME}
     PRIVATE ${gram_BINARY_DIR}/src
     PRIVATE ${json_BINARY_DIR}/src
+    PRIVATE ${chaiscript_BINARY_DIR}/src
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE gram
-                        PRIVATE lua
+                        PRIVATE chaiscript
                         PRIVATE nlohmann_json::nlohmann_json)
