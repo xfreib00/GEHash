@@ -1,5 +1,8 @@
 include(FetchContent)
 
+set(BUILD_MODULES OFF CACHE INTERNAL "chaiScript modules")
+set(BUILD_TESTING OFF CACHE INTERNAL "chaiScript tests")
+
 FetchContent_Declare(
     chaiscript
     GIT_REPOSITORY https://github.com/ChaiScript/ChaiScript.git

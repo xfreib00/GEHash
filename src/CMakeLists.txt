@@ -26,5 +26,6 @@ target_link_directories(${PROJECT_NAME}
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE gram
-                        PRIVATE chaiscript
-                        PRIVATE nlohmann_json::nlohmann_json)
+                        PRIVATE nlohmann_json::nlohmann_json
+                        ${CMAKE_DL_LIBS}
+                        ${CMAKE_THREAD_LIBS_INIT})

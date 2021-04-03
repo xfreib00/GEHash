@@ -15,6 +15,7 @@
 #include <chaiscript/chaiscript.hpp>
 
 using namespace std;
+using namespace chaiscript;
 
 /**
  * @brief Class implementing basic hash table.
@@ -29,7 +30,7 @@ public:
     /**
      * @brief HTable constructor.
      */
-    HTable() : chai(chaiscript::ChaiScript){};
+    HTable() = default;
 
     /**
      * @brief Insert element to table.
@@ -175,10 +176,21 @@ private:
         /* initial value of hash */
         uint64_t hash = 0;
 
+        /* push magic_num as constant to chaiScript engine */
+        chai.add(const_var(magic_num),"magic");
+
+        /* push initial hash value to engine to be used in iterations */
+        chai.add(var(hash),"hash");
+
         for(auto& k : key)
         {
+            /* push current value of key to engine */
+            chai.add(const_var(k),"key");
 
+            /* return new hash value for each loop */
+            hash = chai.eval<uint64_t>(func);
         }
+
         /* use xor-folding to return hash value in specified range */
         return (hash>>(sizeof(T)*8)) ^ (hash & ((((T)1<<(sizeof(T)*8))-1)));
     };
@@ -189,9 +201,9 @@ private:
     array<vector<V>,numeric_limits<T>::max()> table;
 
     /**
-     * @brief Reference to chaiScript instance.
+     * @brief ChaiScript class object.
      */
-    chaiscript::ChaiScript &chai;
+    ChaiScript chai;
 
     /**
      * @brief Magic number used in calculating hash value.
