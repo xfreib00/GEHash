@@ -1,7 +1,7 @@
 /**
- * @file hashTable.h
+ * @file HTable.h
  * @author Adam Freiberg
- * @brief Header file for HTable class
+ * @brief Header only hash table implementation
  */
 
 #ifndef GEHASH_HTABLE

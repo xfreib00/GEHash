@@ -1,5 +1,5 @@
 /**
- * @file logger.h
+ * @file GELogger.h
  * @author Adam Freiberg
  * @brief Header file for GELogger class
  */

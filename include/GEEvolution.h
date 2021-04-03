@@ -1,7 +1,7 @@
 /**
- * @file evolution.h
+ * @file GEEvolution.h
  * @author Adam Freiberg
- * @brief Header file for Evolution class
+ * @brief Header file for GEEvolution class
  */
 
 #ifndef GEHASH_EVO

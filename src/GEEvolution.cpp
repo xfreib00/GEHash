@@ -1,10 +1,10 @@
 /**
- * @file evolution.cpp
+ * @file GEEvolution.cpp
  * @author Adam Freiberg
- * @brief Source file for GEHash class methods
+ * @brief Source file for GEEvolution class methods
  */
 
-#include "evolution.h"
+#include "GEEvolution.h"
 
 GEEvolution::GEEvolution(unique_ptr<gram::EvaluationDriver> evaluationDriver, unique_ptr<gram::Logger> logger)
     : evaluationDriver(move(evaluationDriver)), logger(move(logger)) {

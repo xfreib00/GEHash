@@ -1,8 +1,8 @@
 SET(HEADER_FILES
     GEHash.h
-    evolution.h
-    logger.h
-    evaluator.h
-    hashTable.h
+    GEEvolution.h
+    GELogger.h
+    GEEvaluator.h
+    HTable.h
     error/hashError.h
     error/loggerError.h)

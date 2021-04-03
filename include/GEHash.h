@@ -27,9 +27,9 @@
 #include <stdexcept>
 #include <random>
 #include <functional>
-#include "logger.h"
-#include "evaluator.h"
-#include "evolution.h"
+#include "GELogger.h"
+#include "GEEvaluator.h"
+#include "GEEvolution.h"
 
 /**
  * @brief Main class for creating new hash functions

@@ -1,10 +1,10 @@
 /**
- * @file evaluator.cpp
+ * @file GEEvaluator.cpp
  * @author Adam Freiberg
  * @brief Source file for GEEvaluator class methods
  */
 
-#include "evaluator.h"
+#include "GEEvaluator.h"
 
 GEEvaluator::GEEvaluator(uint64_t magic)
 {

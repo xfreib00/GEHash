@@ -1,5 +1,5 @@
 /**
- * @file evaluator.h
+ * @file GEEvaluator.h
  * @author Adam Freiberg
  * @brief Header file for GEEvaluator class
  */
@@ -11,7 +11,7 @@
 #include <gram/individual/Fitness.h>
 #include <gram/individual/Phenotype.h>
 #include <gram/language/mapper/ContextFreeMapper.h>
-#include "hashTable.h"
+#include "HTable.h"
 #include <limits>
 #include <iostream>
 #include <fstream>
