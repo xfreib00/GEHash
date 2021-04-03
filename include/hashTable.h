@@ -38,14 +38,20 @@ public:
      */
     void Insert(V key)
     {
-        try
-        {
-            Search(key);
-            throw hashInsertError();
+        if (T hash = get_hash(key); table[hash].empty()){
+            table[hash].push_back(key);
         }
-        catch(hashSearchError &e)
-        {
-            table[get_hash(key)].push_back(key);
+        else{
+             auto it = table[hash].begin();
+
+            for (; it != table[hash].end(); ) {
+                if (*it == key){
+                    throw hashInsertError();
+                }
+                else{
+                    it++;
+                }
+            }
         }
     };
 
@@ -172,14 +178,14 @@ private:
         /* initial value of hash */
         uint64_t hash = 0;
 
-        for(size_t i = 0; i < key.size(); i++)
+        for(auto& k : key)
         {
             /* Push current hash function */
             lua_pushinteger(L,hash);
             lua_setglobal(L,"hash");
 
             /* Push current index of key */
-            lua_pushinteger(L,key[i]);
+            lua_pushinteger(L,k);
             lua_setglobal(L,"key");
 
             /* If magic_number is used, push current value */

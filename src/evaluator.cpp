@@ -30,7 +30,7 @@ Fitness GEEvaluator::calculateFitness(std::string program)
         chunks = split(line,";");
 
         for(auto it = 0ul; it < keys.size(); it++){
-            if (it > 6){
+            if (it > 7){
                 keys[it] = static_cast<uint32_t>(std::stoul(chunks[it]));
                 keys[it] = keys[it] << 16;
                 keys[it] |= static_cast<uint32_t>(std::stoul(chunks[it+1]));
