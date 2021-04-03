@@ -61,3 +61,7 @@ doc/Doxyfile
 
 # VSCode config files
 .vscode
+
+# JSON output
+output.*
+*.json
