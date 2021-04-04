@@ -6,7 +6,9 @@ project(GEHash
         DESCRIPTION "Producing hash functions using Grammatical evolution"
         LANGUAGES CXX)
 
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_EXTENSIONS ON)
 
 include(cmake/gram.cmake)
 include(cmake/lua.cmake)
