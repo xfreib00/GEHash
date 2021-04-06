@@ -5,4 +5,8 @@ SET(HEADER_FILES
     GEEvaluator.h
     HTable.h
     error/hashError.h
-    error/loggerError.h)
+    error/loggerError.h
+    evaluator/eval.h
+    evaluator/parser.h
+    evaluator/auxiliary.h
+    evaluator/math_func.h)

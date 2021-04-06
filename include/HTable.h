@@ -12,7 +12,7 @@
 #include <limits>
 #include <array>
 #include <vector>
-#include "lua.hpp"
+#include "evaluator/eval.h"
 
 using namespace std;
 
@@ -29,7 +29,7 @@ public:
     /**
      * @brief HTable constructor.
      */
-    HTable() : L(luaL_newstate()){};
+    HTable() = default;
 
     /**
      * @brief Insert element to table.
@@ -154,10 +154,7 @@ public:
     /**
      * @brief HTable destructor.
      */
-    ~HTable()
-    {
-        lua_close(L);
-    };
+    ~HTable() = default;
 
 private:
 
@@ -180,32 +177,7 @@ private:
 
         for(auto& k : key)
         {
-            /* Push current hash function */
-            lua_pushinteger(L,hash);
-            lua_setglobal(L,"hash");
-
-            /* Push current index of key */
-            lua_pushinteger(L,k);
-            lua_setglobal(L,"key");
-
-            /* If magic_number is used, push current value */
-            if (magic_num > 0){
-                lua_pushinteger(L,magic_num);
-                lua_setglobal(L,"magic");
-            }
-
-            /* Use function from string to compute new hash value */
-            int r = luaL_dostring(L,func.c_str());
-
-            /* If expression evaluation was not succesful throw error */
-            if (r != LUA_OK){
-		        throw hashLuaError();
-            }
-
-            /* Assign computed value to hash variable */
-		    lua_getglobal(L,"hash");
-		    hash = static_cast<uint64_t>(lua_tonumber(L,-1));
-
+            hash = k;
         }
         /* use xor-folding to return hash value in specified range */
         return (hash>>(sizeof(T)*8)) ^ (hash & ((((T)1<<(sizeof(T)*8))-1)));
@@ -219,7 +191,6 @@ private:
     /**
      * @brief Pointer to lua_State instance.
      */
-    lua_State *L;
 
     /**
      * @brief Magic number used in calculating hash value.

@@ -9,6 +9,9 @@ add_executable(${PROJECT_NAME}
     GEEvolution.cpp
     GELogger.cpp
     GEEvaluator.cpp
+    evaluator/eval.cpp
+    evaluator/parser.cpp
+    evaluator/math_func.cpp
     ${HEADER_FILES}
 )
 
