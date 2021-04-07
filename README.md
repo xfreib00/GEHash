@@ -13,6 +13,6 @@ Source codes for bachelor's thesis about *Evolutionary Design of Hash Functions 
 
 **Gram** library avalible at [GitHub](https://github.com/jansvoboda11/gram).
 
-**Lua** library avalible at [official website](https://www.lua.org/).
+**ChaiScript** library avalible at [GitHub](https://github.com/ChaiScript/ChaiScript).
 
-**Nlohmann JSON** lightweight version avalible at [GitHub](https://github.com/ArthurSonzogni/nlohmann_json_cmake_fetchcontent).
+**Nlohmann JSON** used lightweight version avalible at [GitHub](https://github.com/ArthurSonzogni/nlohmann_json_cmake_fetchcontent) due to  extensive size of original repository. Full version available [here](https://github.com/nlohmann/json)

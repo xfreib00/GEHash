@@ -12,12 +12,14 @@ GELogger::GELogger(const string& path, unique_ptr<ContextFreeMapper> logMapper)
     if (path.empty()){
         throw loggerInputError();
     }
-
     /* try to open file at given path */
     try
     {
         mapper = move(logMapper);
-        out.open(path);
+        out.open(path,ios::out);
+        if (!out){
+            throw loggerOpenError();
+        }
     }
     catch (exception& e)
     {

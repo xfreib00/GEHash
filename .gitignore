@@ -63,4 +63,4 @@ doc/Doxyfile
 *.json
 
 # Output files/folder
-[Oo][Uu][Tt][Pp][Uu][Tt]*
+[Oo][Uu][Tt][Pp][Uu][Tt]/*

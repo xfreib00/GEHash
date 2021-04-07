@@ -29,3 +29,14 @@ class loggerInputError : public std::exception{
             return "GELogger: given file is empty.";
         }
 };
+
+/**
+ * @brief GELogger open file exception.
+ */
+class loggerOpenError : public std::exception{
+    public:
+        const char *what() const throw()
+        {
+            return "GELogger: Could not open/create given file.";
+        }
+};

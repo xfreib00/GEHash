@@ -60,6 +60,24 @@ static std::string load_grammar(const std::string& path){
 	return str;
 }
 
+static std::string& ltrim(std::string& str, const std::string& chars = "\t\n\v\f\r ")
+{
+    str.erase(0, str.find_first_not_of(chars));
+    return str;
+}
+
+static std::string& rtrim(std::string& str, const std::string& chars = "\t\n\v\f\r ")
+{
+    str.erase(str.find_last_not_of(chars) + 1);
+    return str;
+}
+
+static std::string& trim(std::string& str, const std::string& chars = "\t\n\v\f\r ")
+{
+    return ltrim(rtrim(str, chars), chars);
+}
+
+
 int main(int argc, char **argv){
 
 	/* set options for getopt_long */
@@ -133,9 +151,11 @@ int main(int argc, char **argv){
 				break;
 			case 'o':
 				output = optarg;
+				output = trim(output);
 				break;
 			case 'i':
 				input = optarg;
+				input = trim(input);
 				input_defined = true;
 				break;
 			case 'd':
