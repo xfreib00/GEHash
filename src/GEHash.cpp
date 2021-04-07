@@ -16,9 +16,12 @@ GEHash::GEHash(unsigned long generation, unsigned long population)
 
 }
 
-void GEHash::SetLogger(std::string& outpath)
+void GEHash::SetLogger(std::string& outpath, bool debug)
 {
 	log = std::make_unique<GELogger>(outpath,move(cfmLogger));
+	if (debug){
+		log->setDebug(debug);
+	}
 }
 
 void GEHash::SetGrammar(std::string& grammar,unsigned long limit)

@@ -60,7 +60,7 @@ public:
 	 * @brief Getter of debug flag.
 	 * @return Current value of debug flag.
 	 */
-	bool getDebug(void);
+	bool getDebug(void) const;
 
 	/**
 	 * @brief Setter of debug flag.

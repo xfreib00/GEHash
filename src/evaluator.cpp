@@ -14,6 +14,7 @@ GEEvaluator::GEEvaluator(uint64_t magic)
 Fitness GEEvaluator::calculateFitness(std::string program)
 {
     Fitness fit = 0.0;
+
     /* set up table for */
     table.setFunc(program);
 
@@ -45,6 +46,7 @@ Fitness GEEvaluator::calculateFitness(std::string program)
         }
         catch (hashInsertError &e)
         {
+            table.clearTab();
             throw;
         }
     }
@@ -53,11 +55,13 @@ Fitness GEEvaluator::calculateFitness(std::string program)
     arr = table.getDimensions();
 
     /* calculate fitness as weighted  */
-    for (auto a : arr){
+    for (auto& a : arr){
         if (a > 1){
             fit += pow(a,2);
         }
     }
+
+    table.clearTab();
 
     return fit;
 }
@@ -72,12 +76,12 @@ Fitness GEEvaluator::evaluate(const Phenotype& phenotype) noexcept
     {
         std::cerr << "Duplicity in training data: " << e.what()
         << std::endl;
-        return 2000.0;
+        return numeric_limits<Fitness>::max();
     }
     catch(std::exception& e)
     {
         std::cerr << e.what() << ": " << phenotype << std::endl;
-        return 1000.0;
+        return numeric_limits<Fitness>::max();
     }
 
 }

@@ -52,8 +52,9 @@ public:
 	/**
 	 * @brief Setter for GELogger class.
 	 * @param [in out] outpath Path to output file used by Logger class.
+	 * @param [in] debug Use debugging in logger, that additionaly outputs phenotype. Defaluts to false.
 	 */
-	void SetLogger(std::string& outpath);
+	void SetLogger(std::string& outpath, bool debug = false);
 
 	/**
 	 * @brief Setter for grammar parser.

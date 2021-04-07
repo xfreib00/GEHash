@@ -52,6 +52,7 @@ public:
                     it++;
                 }
             }
+            table[hash].push_back(key);
         }
     };
 
@@ -129,26 +130,38 @@ public:
     };
 
     /**
-     * @brief Function returns size of table.
-     * @return Size of table.
+     * @brief Get the size of table
+     *
+     * @return constexpr T Size of table
      */
-    T getSize(void)
+    constexpr size_t getSize(void) const
     {
         return table.size();
     };
 
     /**
-     * @brief Function fills given array with element count.
+     * @brief Function fills given array with element count
      * at each index of hash table.
      * @return Array filled with elemenent count for each index of HTable.
      */
     array<T,numeric_limits<T>::max()> getDimensions(void)
     {
         array <T,numeric_limits<T>::max()> arr;
-        for (T i = 0; i < table.size(); i++){
+        for (size_t i = 0; i < table.size(); i++){
             arr[i] = table[i].size();
         }
         return arr;
+    };
+
+    /**
+     * @brief Clear table indexes.
+     * @throw Noexcept is quaranteed.
+     */
+    void clearTab(void) noexcept
+    {
+        for (auto& i : table){
+            i.clear();
+        }
     };
 
     /**
