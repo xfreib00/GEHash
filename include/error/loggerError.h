@@ -4,6 +4,8 @@
  * @brief Header file for GELogger exceptions
  */
 
+#pragma once
+
 #include <stdexcept>
 
 /**

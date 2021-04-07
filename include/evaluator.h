@@ -4,8 +4,7 @@
  * @brief Header file for GEEvaluator class
  */
 
-#ifndef GEHASH_EVALUATOR
-#define GEHASH_EVALUATOR
+#pragma once
 
 #include <gram/evaluation/Evaluator.h>
 #include <gram/individual/Fitness.h>
@@ -77,5 +76,3 @@ private:
     std::vector<std::string> split(const std::string& str, const std::string& delim);
 
 };
-
-#endif

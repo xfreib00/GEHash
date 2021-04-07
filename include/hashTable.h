@@ -4,8 +4,7 @@
  * @brief Header file for HTable class
  */
 
-#ifndef GEHASH_HTABLE
-#define GEHASH_HTABLE
+#pragma once
 
 #include <string>
 #include "error/hashError.h"
@@ -215,5 +214,3 @@ private:
      */
     string func;
 };
-
-#endif

@@ -4,8 +4,7 @@
  * @brief Header file for GELogger class
  */
 
-#ifndef GEHASH_LOGGER
-#define GEHASH_LOGGER
+#pragma once
 
 #include <stdexcept>
 #include <fstream>
@@ -99,4 +98,3 @@ private:
 	bool debug = false;
 
 };
-#endif

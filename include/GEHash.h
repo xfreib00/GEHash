@@ -4,8 +4,7 @@
  * @brief Header file for GEHash class
  */
 
-#ifndef GEHASH
-#define GEHASH
+#pragma once
 
 /* include gram headers */
 
@@ -130,5 +129,3 @@ private:
 	 */
 	std::unique_ptr<SingleThreadDriver> driver;
 };
-
-#endif
