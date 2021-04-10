@@ -52,6 +52,8 @@ _deps
 
 # Auxiliary scripts
 *.sh
+# Not eval script
+!eval.sh
 
 # Generated doxygen documentation
 doc/Doxyfile

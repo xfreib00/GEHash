@@ -76,7 +76,7 @@ Fitness GEEvaluator::evaluate(const Phenotype& phenotype) noexcept
     {
         std::cerr << "Duplicity in training data: " << e.what()
         << std::endl;
-        return numeric_limits<Fitness>::max();
+        return 100000.0;
     }
     catch(std::exception& e)
     {

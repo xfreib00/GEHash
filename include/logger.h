@@ -97,4 +97,9 @@ private:
 	 */
 	bool debug = false;
 
+	/**
+	 * @brief Path to ouput file.
+	 */
+	string outpath;
+
 };
