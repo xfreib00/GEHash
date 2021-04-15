@@ -71,6 +71,13 @@ public:
 	void SetEvaluator(unsigned long magic);
 
 	/**
+	 * @brief Set the tournament size
+	 *
+	 * @param size Number of individuals in tournament.
+	 */
+	void SetTournament(unsigned long size);
+
+	/**
 	 * @brief Method for running evolution algorithm.
 	 */
 	void Run(void);
@@ -89,6 +96,12 @@ private:
 	 * @brief Maximum number of generations.
 	 */
 	unsigned long g;
+
+	/**
+	 * @brief Tournament size.
+	 *
+	 */
+	unsigned long t_size;
 
 	/**
 	 * @brief Unique pointer to GELogger object.

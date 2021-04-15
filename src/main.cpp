@@ -31,6 +31,7 @@ static void display_help(void)
 		   "\t -p, --population\t Number of individuals in population. Defaults to 60.\n" <<
 		   "\t -m  --magic\t\t Constant used in HTable hash function. Defaults to 0.\n" <<
 		   "\t -w  --wrap\t\t Maximum number of wrapping operations on genotype to generate phenotype. Defaluts to 3.\n" <<
+		   "\t -t  --tournament\t Number of individuals in tournament. Defaults to 5.\n" <<
 		   "\t -d  --debug\t\t Use debugging mode in logger class, which prints additional information. Not used by default.\n\n" <<
 		   "FILE must contain grammar in BNF form. Grammar "
 		   "will be parsed and used for GE of hash function.\n\n";
@@ -89,6 +90,7 @@ int main(int argc, char **argv){
 		{"wrap",	required_argument, 	NULL, 'w'},
 		{"input", 	required_argument, 	NULL, 'i'},
 		{"output", 	required_argument, 	NULL, 'o'},
+		{"tournament",	required_argument, NULL, 't'},
 		{"debug", 	no_argument, 		NULL, 'd'},
 		{"help", 	no_argument, 		NULL, 'h'}
 	};
@@ -98,6 +100,7 @@ int main(int argc, char **argv){
 	unsigned long generations = 5;
 	uint64_t magic = 0;
 	uint64_t wrap = 3;
+	uint64_t t_size = 5;
 	std::string input;
 	std::string output = "output.json";
 	bool input_defined = false, debug = false;
@@ -107,7 +110,7 @@ int main(int argc, char **argv){
 		std::exit(EXIT_FAILURE);
 	}
 
-	while((c = getopt_long(argc, argv, ":p:g:m:w:o:i:dh", longopts, NULL)) != -1){
+	while((c = getopt_long(argc, argv, ":p:g:m:w:o:i:t:dh", longopts, NULL)) != -1){
 		switch(c){
 			case 'p':
 				try {
@@ -142,6 +145,16 @@ int main(int argc, char **argv){
 			case 'w':
 				try {
 					wrap = std::stoul(optarg,nullptr,0);
+				}
+				catch (...) {
+					std::cerr << "Invalid input, use --help option"
+					" to display help." << std::endl;
+					std::exit(EXIT_FAILURE);
+				}
+				break;
+			case 't':
+				try {
+					t_size = std::stoul(optarg,nullptr,0);
 				}
 				catch (...) {
 					std::cerr << "Invalid input, use --help option"
@@ -209,6 +222,7 @@ int main(int argc, char **argv){
 		hash.SetGrammar(input,wrap);
 		hash.SetLogger(output,debug);
 		hash.SetEvaluator(magic);
+		hash.SetTournament(t_size);
 
 		/* Run evolution */
 		hash.Run();

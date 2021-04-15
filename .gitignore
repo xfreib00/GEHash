@@ -66,3 +66,6 @@ doc/Doxyfile
 
 # Output files/folder
 [Oo][Uu][Tt][Pp][Uu][Tt]/*
+
+# Jupyter notebook
+*.ipynb
