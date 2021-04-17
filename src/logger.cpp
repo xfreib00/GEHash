@@ -12,12 +12,11 @@ GELogger::GELogger(const string& path, unique_ptr<ContextFreeMapper> logMapper)
     if (path.empty()){
         throw loggerInputError();
     }
-
     /* try to open file at given path */
     try
     {
         mapper = move(logMapper);
-        out.open(path);
+        outpath = path;
     }
     catch (exception& e)
     {
@@ -46,7 +45,6 @@ void GELogger::logProgress(const Population& population)
             j["phenotype"]["code"] = e.what();
         }
     }
-
     /* store temporary object into ouput JSON object */
     j_out.push_back(j);
 
@@ -73,11 +71,22 @@ void GELogger::logResult(const Population& population)
     /* store temporary object into ouput JSON object */
     j_out.push_back(j);
 
-    /* write logger output to JSON file */
-    out << setw(4) << j_out.dump() << endl;
+    try
+    {
+        out.open(outpath,ios::out);
+        if (!out){
+            throw loggerOpenError();
+        }
+        /* write logger output to JSON file */
+        out << j_out.dump(4) << endl;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 }
 
-bool GELogger::getDebug(void)
+bool GELogger::getDebug(void) const
 {
     return debug;
 }

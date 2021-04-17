@@ -4,6 +4,8 @@
  * @brief Header file for hash table exceptions
  */
 
+#pragma once
+
 #include <stdexcept>
 
 /**

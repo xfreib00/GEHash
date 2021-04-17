@@ -1,6 +1,6 @@
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native -mtune=native -Wall -Wextra -pedantic")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -pg")
 
 add_executable(${PROJECT_NAME}
@@ -14,7 +14,7 @@ add_executable(${PROJECT_NAME}
 
 target_include_directories(${PROJECT_NAME}
     PUBLIC ${json_INCLUDE_DIR}
-    PUBLIC ${json_BINARY_DIR}
+    PUBLIC ${chaiscript_INCLUDE_DIR}
     PUBLIC ${gram_INCLUDE_DIR}
     PUBLIC ${gram_BINARY_DIR}
 )
@@ -22,8 +22,10 @@ target_include_directories(${PROJECT_NAME}
 target_link_directories(${PROJECT_NAME}
     PRIVATE ${gram_BINARY_DIR}/src
     PRIVATE ${json_BINARY_DIR}/src
+    PRIVATE ${chaiscript_BINARY_DIR}/src
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE gram
-                        PRIVATE lua
-                        PRIVATE nlohmann_json::nlohmann_json)
+                        PRIVATE nlohmann_json::nlohmann_json
+                        ${CMAKE_DL_LIBS}
+                        ${CMAKE_THREAD_LIBS_INIT})

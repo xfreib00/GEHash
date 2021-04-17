@@ -1,6 +1,3 @@
-# Docs and images
-Podklady/
-
 # Large data files
 data/
 
@@ -55,6 +52,8 @@ _deps
 
 # Auxiliary scripts
 *.sh
+# Not eval script
+!eval.sh
 
 # Generated doxygen documentation
 doc/Doxyfile
@@ -62,6 +61,11 @@ doc/Doxyfile
 # VSCode config files
 .vscode
 
-# JSON output
-output.*
+# JSON ouput files
 *.json
+
+# Output files/folder
+[Oo][Uu][Tt][Pp][Uu][Tt]/*
+
+# Jupyter notebook
+*.ipynb

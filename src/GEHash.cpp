@@ -16,9 +16,12 @@ GEHash::GEHash(unsigned long generation, unsigned long population)
 
 }
 
-void GEHash::SetLogger(std::string& outpath)
+void GEHash::SetLogger(const std::string& outpath, bool debug)
 {
 	log = std::make_unique<GELogger>(outpath,move(cfmLogger));
+	if (debug){
+		log->setDebug(debug);
+	}
 }
 
 void GEHash::SetGrammar(std::string& grammar,unsigned long limit)
@@ -41,13 +44,17 @@ void GEHash::SetEvaluator(unsigned long magic)
 
 }
 
+void GEHash::SetTournament(unsigned long size)
+{
+	t_size = size;
+}
+
 void GEHash::Run(void)
 {
 	//selection
-	unsigned long size = 5;
 	auto numGen1 = std::make_unique<StdNumberGenerator<std::mt19937>>();
 	auto comparer = std::make_unique <LowFitnessComparer>();
-	auto selector = std::make_unique <TournamentSelector>(size, move(numGen1), move(comparer));
+	auto selector = std::make_unique <TournamentSelector>(t_size, move(numGen1), move(comparer));
 
 	//crossover
 	auto num2 = std::make_unique<StdNumberGenerator<std::mt19937>>();

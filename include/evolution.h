@@ -4,8 +4,7 @@
  * @brief Header file for Evolution class
  */
 
-#ifndef GEHASH_EVO
-#define GEHASH_EVO
+#pragma once
 
 #include <functional>
 #include <memory>
@@ -58,5 +57,3 @@ private:
      */
     std::unique_ptr<gram::Logger> logger;
 };
-
-#endif

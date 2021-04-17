@@ -4,8 +4,7 @@
  * @brief Header file for GEHash class
  */
 
-#ifndef GEHASH
-#define GEHASH
+#pragma once
 
 /* include gram headers */
 
@@ -53,8 +52,9 @@ public:
 	/**
 	 * @brief Setter for GELogger class.
 	 * @param [in out] outpath Path to output file used by Logger class.
+	 * @param [in] debug Use debugging in logger, that additionaly outputs phenotype. Defaluts to false.
 	 */
-	void SetLogger(std::string& outpath);
+	void SetLogger(const std::string& outpath, bool debug = false);
 
 	/**
 	 * @brief Setter for grammar parser.
@@ -69,6 +69,13 @@ public:
 	 * @param [in] magic Magic number used in grammar.
 	 */
 	void SetEvaluator(unsigned long magic);
+
+	/**
+	 * @brief Set the tournament size
+	 *
+	 * @param size Number of individuals in tournament.
+	 */
+	void SetTournament(unsigned long size);
 
 	/**
 	 * @brief Method for running evolution algorithm.
@@ -89,6 +96,12 @@ private:
 	 * @brief Maximum number of generations.
 	 */
 	unsigned long g;
+
+	/**
+	 * @brief Tournament size.
+	 *
+	 */
+	unsigned long t_size;
 
 	/**
 	 * @brief Unique pointer to GELogger object.
@@ -130,5 +143,3 @@ private:
 	 */
 	std::unique_ptr<SingleThreadDriver> driver;
 };
-
-#endif

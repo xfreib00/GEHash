@@ -4,17 +4,17 @@
  * @brief Header file for HTable class
  */
 
-#ifndef GEHASH_HTABLE
-#define GEHASH_HTABLE
+#pragma once
 
 #include <string>
 #include "error/hashError.h"
 #include <limits>
 #include <array>
 #include <vector>
-#include "lua.hpp"
+#include <chaiscript/chaiscript.hpp>
 
 using namespace std;
+using namespace chaiscript;
 
 /**
  * @brief Class implementing basic hash table.
@@ -29,7 +29,7 @@ public:
     /**
      * @brief HTable constructor.
      */
-    HTable() : L(luaL_newstate()){};
+    HTable() = default;
 
     /**
      * @brief Insert element to table.
@@ -52,6 +52,7 @@ public:
                     it++;
                 }
             }
+            table[hash].push_back(key);
         }
     };
 
@@ -129,35 +130,44 @@ public:
     };
 
     /**
-     * @brief Function returns size of table.
-     * @return Size of table.
+     * @brief Get the size of table
+     *
+     * @return constexpr T Size of table
      */
-    T getSize(void)
+    constexpr size_t getSize(void) const
     {
         return table.size();
     };
 
     /**
-     * @brief Function fills given array with element count.
+     * @brief Function fills given array with element count
      * at each index of hash table.
      * @return Array filled with elemenent count for each index of HTable.
      */
     array<T,numeric_limits<T>::max()> getDimensions(void)
     {
         array <T,numeric_limits<T>::max()> arr;
-        for (T i = 0; i < table.size(); i++){
+        for (size_t i = 0; i < table.size(); i++){
             arr[i] = table[i].size();
         }
         return arr;
     };
 
     /**
+     * @brief Clear table indexes.
+     * @throw Noexcept is quaranteed.
+     */
+    void clearTab(void) noexcept
+    {
+        for (auto& i : table){
+            i.clear();
+        }
+    };
+
+    /**
      * @brief HTable destructor.
      */
-    ~HTable()
-    {
-        lua_close(L);
-    };
+    ~HTable() = default;
 
 private:
 
@@ -178,35 +188,21 @@ private:
         /* initial value of hash */
         uint64_t hash = 0;
 
+        /* push magic_num as constant to chaiScript engine */
+        chai.add(const_var(magic_num),"magic");
+
+        /* push initial hash value to engine to be used in iterations */
+        chai.add(var(hash),"hash");
+
         for(auto& k : key)
         {
-            /* Push current hash function */
-            lua_pushinteger(L,hash);
-            lua_setglobal(L,"hash");
+            /* push current value of key to engine */
+            chai.add(const_var(k),"key");
 
-            /* Push current index of key */
-            lua_pushinteger(L,k);
-            lua_setglobal(L,"key");
-
-            /* If magic_number is used, push current value */
-            if (magic_num > 0){
-                lua_pushinteger(L,magic_num);
-                lua_setglobal(L,"magic");
-            }
-
-            /* Use function from string to compute new hash value */
-            int r = luaL_dostring(L,func.c_str());
-
-            /* If expression evaluation was not succesful throw error */
-            if (r != LUA_OK){
-		        throw hashLuaError();
-            }
-
-            /* Assign computed value to hash variable */
-		    lua_getglobal(L,"hash");
-		    hash = static_cast<uint64_t>(lua_tonumber(L,-1));
-
+            /* return new hash value for each loop */
+            hash = chai.eval<uint64_t>(func);
         }
+
         /* use xor-folding to return hash value in specified range */
         return (hash>>(sizeof(T)*8)) ^ (hash & ((((T)1<<(sizeof(T)*8))-1)));
     };
@@ -217,9 +213,9 @@ private:
     array<vector<V>,numeric_limits<T>::max()> table;
 
     /**
-     * @brief Pointer to lua_State instance.
+     * @brief ChaiScript class object.
      */
-    lua_State *L;
+    ChaiScript chai;
 
     /**
      * @brief Magic number used in calculating hash value.
@@ -231,5 +227,3 @@ private:
      */
     string func;
 };
-
-#endif
