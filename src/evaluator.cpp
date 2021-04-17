@@ -6,9 +6,10 @@
 
 #include "evaluator.h"
 
-GEEvaluator::GEEvaluator(uint64_t magic)
+GEEvaluator::GEEvaluator(uint64_t magic, const std::string& data_path)
 {
     table.setMagic(magic);
+    d_path = data_path;
 }
 
 Fitness GEEvaluator::calculateFitness(std::string program)
@@ -23,7 +24,7 @@ Fitness GEEvaluator::calculateFitness(std::string program)
     std::vector<std::string> chunks;
 
     /* open file containing train data */
-    std::ifstream f("data/train_set/train_set.data");
+    std::ifstream f(d_path);
 
     /* insert training data to hash table */
     for (std::string line; getline(f,line);){

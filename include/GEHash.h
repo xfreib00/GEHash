@@ -67,8 +67,9 @@ public:
 	/**
 	 * @brief Setter for evaluation driver.
 	 * @param [in] magic Magic number used in grammar.
+	 * @param [in] data_path Path to training data file.
 	 */
-	void SetEvaluator(unsigned long magic);
+	void SetEvaluator(unsigned long magic, const std::string& data_path);
 
 	/**
 	 * @brief Set the tournament size

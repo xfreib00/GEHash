@@ -36,9 +36,9 @@ void GEHash::SetGrammar(std::string& grammar,unsigned long limit)
 	cfmLogger = std::make_unique<ContextFreeMapper>(std::move(gramLogger),limit);
 }
 
-void GEHash::SetEvaluator(unsigned long magic)
+void GEHash::SetEvaluator(unsigned long magic, const std::string& data_path)
 {
-	eval = std::make_unique<GEEvaluator>(magic);
+	eval = std::make_unique<GEEvaluator>(magic, data_path);
 	cache = std::make_unique<EvaluatorCache>(move(eval));
 	driver = std::make_unique<SingleThreadDriver>(move(cfm),move(cache),true);
 
