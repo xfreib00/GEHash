@@ -34,8 +34,9 @@ public:
     /**
      * @brief Constructor of GEEvaluator class.
      * @param [in] magic Magic number used in grammar.
+     * @param [in] data_path Path to training data file.
      */
-    GEEvaluator(uint64_t magic);
+    GEEvaluator(uint64_t magic, const std::string& data_path);
 
     /**
      * @brief Calculate fitness for given program.
@@ -64,6 +65,11 @@ private:
      * @brief Instance of HTable used for evaluation of generated phenotype.
      */
     HTable<uint16_t,std::array<uint32_t,9>> table;
+
+    /**
+     * @brief Path to training data file.
+     */
+    std::string d_path;
 
     /**
      * @brief Private function for spliting strings.

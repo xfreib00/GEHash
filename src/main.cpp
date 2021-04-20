@@ -27,6 +27,7 @@ static void display_help(void)
 		   "\t -h, --help\t\t Display help.\n" <<
 		   "\t -i  --input\t\t Input file containing grammar. If not specified FILE is used.\n" <<
 		   "\t -o  --output\t\t Output file for GELogger. Defaults to \"ouput.json\".\n" <<
+	           "\t -s  --set\t\t Training data file\\path. Defaults to \"data/train_set/train_set.data\".\n" <<
 		   "\t -g, --generations\t Max number of generations. Defaults to 5.\n" <<
 		   "\t -p, --population\t Number of individuals in population. Defaults to 60.\n" <<
 		   "\t -m  --magic\t\t Constant used in HTable hash function. Defaults to 0.\n" <<
@@ -103,6 +104,7 @@ int main(int argc, char **argv){
 	uint64_t t_size = 5;
 	std::string input;
 	std::string output = "output.json";
+	std::string train_data = "data/train_set/train_set.data";
 	bool input_defined = false, debug = false;
 
 	if (argc < 2){
@@ -110,7 +112,7 @@ int main(int argc, char **argv){
 		std::exit(EXIT_FAILURE);
 	}
 
-	while((c = getopt_long(argc, argv, ":p:g:m:w:o:i:t:dh", longopts, NULL)) != -1){
+	while((c = getopt_long(argc, argv, ":p:g:m:w:o:i:t:s:dh", longopts, NULL)) != -1){
 		switch(c){
 			case 'p':
 				try {
@@ -171,6 +173,10 @@ int main(int argc, char **argv){
 				input = trim(input);
 				input_defined = true;
 				break;
+            		case 's':
+                		train_data = optarg;
+				train_data = trim(output);
+				break;
 			case 'd':
 				debug = true;
 				break;
@@ -218,10 +224,10 @@ int main(int argc, char **argv){
 		input = load_grammar(input);
 
 		/* configure run based on given and default parameters */
-		GEHash hash(generations,population);
-		hash.SetGrammar(input,wrap);
-		hash.SetLogger(output,debug);
-		hash.SetEvaluator(magic);
+		GEHash hash(generations, population);
+		hash.SetGrammar(input, wrap);
+		hash.SetLogger(output, debug);
+		hash.SetEvaluator(magic, train_data);
 		hash.SetTournament(t_size);
 
 		/* Run evolution */
