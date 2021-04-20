@@ -7,6 +7,7 @@ import seaborn as sns
 from matplotlib import pyplot as plt
 import argparse
 
+
 def load_data(folder: str = None) -> pd.DataFrame:
     """Load data from folder to Pandas.DataFrame.
        Read all JSON files in given folder and create DataFrame from them.
@@ -23,7 +24,7 @@ def load_data(folder: str = None) -> pd.DataFrame:
     try:
         for f in os.listdir(folder):
             if f.endswith(".json"):
-                path = os.path.join(folder,f)
+                path = os.path.join(folder, f)
                 df = pd.read_json(path)
                 dfs.append(df)
     except:
@@ -31,8 +32,9 @@ def load_data(folder: str = None) -> pd.DataFrame:
     temp = pd.concat(dfs, ignore_index=True)
     return temp
 
+
 def plot_gen_fitness(df: pd.DataFrame, fig_location: str = None,
-                    show_plot: bool = False, show_swarm: bool = False):
+                     show_plot: bool = False, show_swarm: bool = False):
     """Generate boxplot from provided DataFrame displaying distribution of fitness value
        for each generation.
 
@@ -60,6 +62,7 @@ def plot_gen_fitness(df: pd.DataFrame, fig_location: str = None,
     if show_plot:
         plt.show()
 
+
 def store_data(df: pd.DataFrame, path: str):
     """Store DataFrame to pickle compressed with gzip.
 
@@ -69,15 +72,20 @@ def store_data(df: pd.DataFrame, path: str):
     """
     df.to_pickle(path="{}.pkl.gz".format(path), compression="gzip")
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--fig_location", "-f", type=str, help="Path to filename")
-    parser.add_argument("--show_plot", "-d", action="store_true", help="Display plot on screen")
-    parser.add_argument("--show_swarm", "-s", action="store_true", help="Display swarmplot over boxplot")
+    parser.add_argument("--fig_location", "-f", type=str,
+                        help="Path to filename")
+    parser.add_argument("--show_plot", "-d",
+                        action="store_true", help="Display plot on screen")
+    parser.add_argument("--show_swarm", "-s", action="store_true",
+                        help="Display swarmplot over boxplot")
     parser.add_argument("--input_folder", "-i", type=str, help="Input folder")
-    parser.add_argument("--output_file", "-o", type=str, help="Output file path and name")
+    parser.add_argument("--output_file", "-o", type=str,
+                        help="Output file path and name")
     args = parser.parse_args()
     data = load_data(args.input_folder)
     plot_gen_fitness(data, args.fig_location, args.show_plot, args.show_swarm)
     if (args.output_file):
-        store_data(data,args.output_file)
+        store_data(data, args.output_file)
