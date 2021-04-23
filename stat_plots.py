@@ -63,6 +63,21 @@ def plot_gen_fitness(df: pd.DataFrame, fig_location: str = None,
         plt.show()
 
 
+def get_best_code(df: pd.DataFrame) -> str:
+    """Return string containing code of best individual.
+
+    Args:
+        df (pd.DataFrame): Dataframe of evolution run
+
+    Returns:
+        str: Return code of best individual.
+    """
+    indi = df[(df["fitness"] == df["fitness"].min())
+              & (df["status"] == "result")]
+    indi = indi.phenotype.apply(pd.Series)
+    return indi["code"]
+
+
 def store_data(df: pd.DataFrame, path: str):
     """Store DataFrame to pickle compressed with gzip.
 
@@ -84,6 +99,8 @@ if __name__ == "__main__":
     parser.add_argument("--input_folder", "-i", type=str, help="Input folder")
     parser.add_argument("--output_file", "-o", type=str,
                         help="Output file path and name")
+    parser.add_argument("--code", "-c", action='store_true',
+                        help="Display code of best individual")
     args = parser.parse_args()
     data = load_data(args.input_folder)
     plot_gen_fitness(data, args.fig_location, args.show_plot, args.show_swarm)
