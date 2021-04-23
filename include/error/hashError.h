@@ -55,23 +55,12 @@ class hashSearchError : public hashTableError {
 };
 
 /**
- * @brief Exception for Lua evaluation errors..
- */
-class hashLuaError : public hashTableError {
-    public:
-        const char *what() const throw()
-        {
-            return "Could not execute given string";
-        }
-};
-
-/**
  * @brief Exception for HTable.func member.
  */
 class hashFuncError : public hashTableError {
     public:
         const char *what() const throw()
         {
-            return "Function for Lua not specified";
+            return "Hash function not specified";
         }
 };
