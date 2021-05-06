@@ -33,6 +33,7 @@ static void display_help(void)
 		   "\t -m  --magic\t\t Constant used in HTable hash function. Defaults to 0.\n" <<
 		   "\t -w  --wrap\t\t Maximum number of wrapping operations on genotype to generate phenotype. Defaluts to 3.\n" <<
 		   "\t -t  --tournament\t Number of individuals in tournament. Defaults to 5.\n" <<
+		   "\t -a  --probability\t Mutation probability between 0 and 1. Defaults to 0.1.\n" <<
 		   "\t -d  --debug\t\t Use debugging mode in logger class, which prints additional information. Not used by default.\n\n" <<
 		   "FILE must contain grammar in BNF form. Grammar "
 		   "will be parsed and used for GE of hash function.\n\n";
@@ -92,6 +93,7 @@ int main(int argc, char **argv){
 		{"input", 	required_argument, 	NULL, 'i'},
 		{"output", 	required_argument, 	NULL, 'o'},
 		{"tournament",	required_argument, NULL, 't'},
+		{"probability", required_argument, NULL, 'a'},
 		{"debug", 	no_argument, 		NULL, 'd'},
 		{"help", 	no_argument, 		NULL, 'h'}
 	};
@@ -106,13 +108,14 @@ int main(int argc, char **argv){
 	std::string output = "output.json";
 	std::string train_data = "data/train_set/train_set.data";
 	bool input_defined = false, debug = false;
+	double prob = 0.1;
 
 	if (argc < 2){
 		std::cerr << "Not enough arguments. Use -h or --help to display help." << std::endl;
 		std::exit(EXIT_FAILURE);
 	}
 
-	while((c = getopt_long(argc, argv, ":p:g:m:w:o:i:t:s:dh", longopts, NULL)) != -1){
+	while((c = getopt_long(argc, argv, ":p:g:m:w:o:i:t:s:a:dh", longopts, NULL)) != -1){
 		switch(c){
 			case 'p':
 				try {
@@ -177,6 +180,16 @@ int main(int argc, char **argv){
                 		train_data = optarg;
 				train_data = trim(output);
 				break;
+			case 'a':
+				try {
+					prob = std::stod(optarg,nullptr);
+				}
+				catch (...) {
+					std::cerr << "Invalid input, use --help option"
+					" to display help." << std::endl;
+					std::exit(EXIT_FAILURE);
+				}
+				break;
 			case 'd':
 				debug = true;
 				break;
@@ -229,6 +242,7 @@ int main(int argc, char **argv){
 		hash.SetLogger(output, debug);
 		hash.SetEvaluator(magic, train_data);
 		hash.SetTournament(t_size);
+		hash.SetProbability(prob);
 
 		/* Run evolution */
 		hash.Run();

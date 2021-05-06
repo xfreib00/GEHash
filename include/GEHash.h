@@ -79,6 +79,14 @@ public:
 	void SetTournament(unsigned long size);
 
 	/**
+	 * @brief Set mutation probability.
+	 *
+	 * @param probability Mutation probability.
+	 * @exception geMutationError Probability is not in range.
+	 */
+	void SetProbability(double probability);
+
+	/**
 	 * @brief Method for running evolution algorithm.
 	 */
 	void Run(void);
@@ -103,6 +111,11 @@ private:
 	 *
 	 */
 	unsigned long t_size;
+
+	/**
+	 * @brief Mutation probability.
+	 */
+	double m_prob;
 
 	/**
 	 * @brief Unique pointer to GELogger object.

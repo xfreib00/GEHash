@@ -49,6 +49,14 @@ void GEHash::SetTournament(unsigned long size)
 	t_size = size;
 }
 
+void GEHash::SetProbability(double probability)
+{
+	if (probability < 0.0 && probability > 1.0){
+		throw geMutationError();
+	}
+	m_prob = probability;
+}
+
 void GEHash::Run(void)
 {
 	//selection
@@ -61,7 +69,7 @@ void GEHash::Run(void)
 	auto crossover = std::make_unique<OnePointCrossover>(move(num2));
 
 	//mutation
-	Probability prob(0.1);
+	Probability prob(m_prob);
 	auto numGen3 = std::make_unique<StdNumberGenerator<std::mt19937>>();
 	auto stepGen = std::make_unique<BernoulliStepGenerator>(prob, move(numGen3));
 	auto numGen4 = std::make_unique<StdNumberGenerator<std::mt19937>>();
