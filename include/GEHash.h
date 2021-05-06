@@ -97,7 +97,7 @@ public:
 	/**
 	 * @brief Default destructor.
 	 */
-	virtual ~GEHash() = default;
+	~GEHash() = default;
 
 private:
 	/**
