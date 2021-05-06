@@ -8,8 +8,11 @@
 
 GEHash::GEHash(unsigned long generation, unsigned long population)
 {
-	if (generation < 2  || population < 50){
-		throw std::invalid_argument("Invalid value of parameter.");
+	if (generation < 2 ){
+		throw geGenerationError();
+	}
+	if (population < 10){
+		throw gePopulationError();
 	}
 		p = population;
 		g = generation;
@@ -27,7 +30,7 @@ void GEHash::SetLogger(const std::string& outpath, bool debug)
 void GEHash::SetGrammar(std::string& grammar,unsigned long limit)
 {
 	if (grammar.empty()){
-		throw std::invalid_argument("Grammar is empty string");
+		throw geGrammarError();
 	}
 
 	gramm = std::make_unique<ContextFreeGrammar>(parser.parse(grammar));
@@ -46,6 +49,9 @@ void GEHash::SetEvaluator(unsigned long magic, const std::string& data_path)
 
 void GEHash::SetTournament(unsigned long size)
 {
+	if (size < 2) {
+		throw geTournamentError();
+	}
 	t_size = size;
 }
 

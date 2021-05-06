@@ -29,6 +29,7 @@
 #include "logger.h"
 #include "evaluator.h"
 #include "evolution.h"
+#include "error/geError.h"
 
 /**
  * @brief Main class for creating new hash functions
@@ -44,8 +45,9 @@ public:
 	/**
 	 * @brief Constructor of GEHash class.
 	 * @param [in] generation Maximum number of generations. Must be more than 2.
-	 * @param [in] population Number of individuals in population. Must be more than 50.
-	 * @exception If any of function arguments are invalid, throw std::invalid_argument exception.
+	 * @param [in] population Number of individuals in population. Must be more than 10.
+	 * @exception geGenerationError Generation number is out of range.
+	 * @exception gePopulationError Population number is out of range.
 	 */
 	GEHash(unsigned long generation, unsigned long population);
 
@@ -60,7 +62,7 @@ public:
 	 * @brief Setter for grammar parser.
 	 * @param [in out] grammar Grammar in BNF form.
 	 * @param [in] limit Max number of wrapping operations.
-	 * @throw If grammar is empty string throw std::invalid_argument exception.
+	 * @exception geGrammarError Given grammar string is empty.
 	 */
 	void SetGrammar(std::string& grammar, unsigned long limit);
 
@@ -75,6 +77,7 @@ public:
 	 * @brief Set the tournament size
 	 *
 	 * @param size Number of individuals in tournament.
+	 * @exception geTournamentError Number of individuals is out of range.
 	 */
 	void SetTournament(unsigned long size);
 
