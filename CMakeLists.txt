@@ -15,6 +15,7 @@ find_package(Threads REQUIRED)
 include(cmake/gram.cmake)
 include(cmake/chaiScript.cmake)
 include(cmake/nlohmann_json.cmake)
+include(cmake/StaticAnalyzers.cmake)
 
 add_subdirectory(src)
 
