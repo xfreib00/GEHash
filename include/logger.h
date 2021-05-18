@@ -6,100 +6,95 @@
 
 #pragma once
 
-#include <stdexcept>
+#include "error/loggerError.h"
 #include <fstream>
-#include <iostream>
-#include <iomanip>
+#include <gram/language/mapper/ContextFreeMapper.h>
 #include <gram/population/Population.h>
 #include <gram/util/logger/Logger.h>
-#include <gram/language/mapper/ContextFreeMapper.h>
+#include <iomanip>
+#include <iostream>
 #include <nlohmann/json.hpp>
-#include "error/loggerError.h"
+#include <stdexcept>
 
 using namespace gram;
 using namespace std;
 
-
 /**
  * @brief Logger class for GEHash grammatical evolution.
  */
-class GELogger : public Logger{
+class GELogger : public Logger {
 
-public:
-
-	/// Nlohmann::json type
-	using json = nlohmann::json;
-
+  public:
+    /// Nlohmann::json type
+    using json = nlohmann::json;
 
     /**
-	 * @brief Default constructor of Logger class.
-	 */
+     * @brief Default constructor of Logger class.
+     */
     GELogger() = default;
 
-	/**
-	 * @brief Parameterized constructor of Logger class.
+    /**
+     * @brief Parameterized constructor of Logger class.
      * @param [in] path Reference to path to output file.
-	 * @param [in] logMapper Unique pointer to initilized ContextFreeMapper
-	 * object used for mapping genotype to phenotype inside GELogger class.
-	 */
-	GELogger(const string& path, unique_ptr<ContextFreeMapper> logMapper);
+     * @param [in] logMapper Unique pointer to initilized ContextFreeMapper
+     * object used for mapping genotype to phenotype inside GELogger class.
+     */
+    GELogger(const string &path, unique_ptr<ContextFreeMapper> logMapper);
 
-	/**
-	 *	@brief Log progress of current evolution run.
-	 *	@param [in] population Reference to population object.
-	 */
-	void logProgress(const Population& population);
+    /**
+     *	@brief Log progress of current evolution run.
+     *	@param [in] population Reference to population object.
+     */
+    void logProgress(const Population &population);
 
-	/**
-	 * @brief Log result of evolution run.
-	 * @param [in] population Reference to population object.
-	 */
-	void logResult(const Population& population);
+    /**
+     * @brief Log result of evolution run.
+     * @param [in] population Reference to population object.
+     */
+    void logResult(const Population &population);
 
-	/**
-	 * @brief Getter of debug flag.
-	 * @return Current value of debug flag.
-	 */
-	bool getDebug(void) const;
+    /**
+     * @brief Getter of debug flag.
+     * @return Current value of debug flag.
+     */
+    bool getDebug(void) const;
 
-	/**
-	 * @brief Setter of debug flag.
-	 * @param [in] val New value of debug flag.
-	 */
-	void setDebug(bool val);
+    /**
+     * @brief Setter of debug flag.
+     * @param [in] val New value of debug flag.
+     */
+    void setDebug(bool val);
 
-	/**
-	 * @brief Logger class destructor.
-	 */
-	~GELogger();
+    /**
+     * @brief Logger class destructor.
+     */
+    ~GELogger();
 
-private:
+  private:
+    /**
+     * @brief Fstream variable for Logger output file.
+     */
+    ofstream out;
 
-	/**
-	 * @brief Fstream variable for Logger output file.
-	 */
-	ofstream out;
+    /**
+     * @brief Nlohmann::json object.
+     */
+    json j_out;
 
-	/**
-	 * @brief Nlohmann::json object.
-	 */
-	json j_out;
+    /**
+     * @brief Unique poiter to ContextFreeMapper used to generate phenotype.
+     */
+    unique_ptr<ContextFreeMapper> mapper;
 
-	/**
-	 * @brief Unique poiter to ContextFreeMapper used to generate phenotype.
-	 */
-	unique_ptr<ContextFreeMapper> mapper;
+    /**
+     * @brief Debug flag.
+     * @details This flag is used to enable mapping genotype to phenotype in
+     * GELogger::logProgress function that results in longer execution time.
+     */
+    bool debug = false;
 
-	/**
-	 * @brief Debug flag.
-	 * @details This flag is used to enable mapping genotype to phenotype in
-	 * GELogger::logProgress function that results in longer execution time.
-	 */
-	bool debug = false;
-
-	/**
-	 * @brief Path to ouput file.
-	 */
-	string outpath;
-
+    /**
+     * @brief Path to ouput file.
+     */
+    string outpath;
 };

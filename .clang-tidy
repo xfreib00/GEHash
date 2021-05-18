@@ -1,0 +1,7 @@
+---
+Checks:            '*, -google-*, -llvm*, -fuchsia-*, -zircon-*, -abseil-*, -modernize-use-trailing-return-type'
+WarningsAsErrors:  '*'
+HeaderFilterRegex: ''
+# exclude main because magic numbers as default init values and getopts structures
+LineFilter:        '[{"name":"main.cpp"}]'
+FormatStyle:       none

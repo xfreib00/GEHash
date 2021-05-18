@@ -68,4 +68,4 @@ doc/Doxyfile
 [Oo][Uu][Tt][Pp][Uu][Tt]/*
 
 # Jupyter notebook
-*.ipynb
+*.ipynb*
