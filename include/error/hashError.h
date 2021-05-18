@@ -11,56 +11,45 @@
 /**
  * @brief Standard exception for HTable.
  */
-class hashTableError : public std::exception{
-    public:
-        const char *what() const throw()
-        {
-            return "Error occured while using HTable class.";
-        }
+class hashTableError : public std::exception {
+  public:
+    const char *what() const throw() {
+        return "Error occured while using HTable class.";
+    }
 };
 
 /**
  * @brief Exception for HTable::Insert operation.
  */
-class hashInsertError : public hashTableError{
-    public:
-        const char *what() const throw()
-        {
-            return "Given index already used.";
-        }
+class hashInsertError : public hashTableError {
+  public:
+    const char *what() const throw() { return "Given index already used."; }
 };
 
 /**
  * @brief Exception for HTable::Remove operation.
  */
-class hashRemoveError : public hashTableError{
-    public:
-        const char *what() const throw()
-        {
-            return "No such key is stored in given table";
-        }
-
+class hashRemoveError : public hashTableError {
+  public:
+    const char *what() const throw() {
+        return "No such key is stored in given table";
+    }
 };
 
 /**
  * @brief Exception for HTable::Search operation.
  */
 class hashSearchError : public hashTableError {
-    public:
-        const char *what() const throw()
-        {
-            return "No such key is stored in given table";
-        }
-
+  public:
+    const char *what() const throw() {
+        return "No such key is stored in given table";
+    }
 };
 
 /**
  * @brief Exception for HTable.func member.
  */
 class hashFuncError : public hashTableError {
-    public:
-        const char *what() const throw()
-        {
-            return "Hash function not specified";
-        }
+  public:
+    const char *what() const throw() { return "Hash function not specified"; }
 };

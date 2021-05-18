@@ -6,12 +6,12 @@
 
 #pragma once
 
-#include <string>
 #include "error/hashError.h"
-#include <limits>
 #include <array>
-#include <vector>
 #include <chaiscript/chaiscript.hpp>
+#include <limits>
+#include <string>
+#include <vector>
 
 using namespace std;
 using namespace chaiscript;
@@ -21,11 +21,9 @@ using namespace chaiscript;
  * @tparam T Data type specifying range of hash table indexes.
  * @tparam V Data type of records.
  */
-template <typename T,typename V>
-class HTable {
+template <typename T, typename V> class HTable {
 
-public:
-
+  public:
     /**
      * @brief HTable constructor.
      */
@@ -34,21 +32,19 @@ public:
     /**
      * @brief Insert element to table.
      * @param [in] key Key to be inserted to table.
-     * @exception If key is already in table hashInsertError exception is thrown.
+     * @exception If key is already in table hashInsertError exception is
+     * thrown.
      */
-    void Insert(V key)
-    {
-        if (T hash = get_hash(key); table[hash].empty()){
+    void Insert(V key) {
+        if (T hash = get_hash(key); table[hash].empty()) {
             table[hash].push_back(key);
-        }
-        else{
-             auto it = table[hash].begin();
+        } else {
+            auto it = table[hash].begin();
 
-            for (; it != table[hash].end(); ) {
-                if (*it == key){
+            for (; it != table[hash].end();) {
+                if (*it == key) {
                     throw hashInsertError();
-                }
-                else{
+                } else {
                     it++;
                 }
             }
@@ -61,25 +57,23 @@ public:
      * @param [in] key Key to be removed from table.
      * @exception If key is not in table hashRemoveError exception is thrown.
      */
-    void Remove(V key)
-    {
+    void Remove(V key) {
         T hash = get_hash(key);
-        if (table[hash].empty()){
+        if (table[hash].empty()) {
             throw hashRemoveError();
         }
 
         auto it = table[hash].begin();
 
-        for (; it != table[hash].end(); ) {
-            if (*it == key){
+        for (; it != table[hash].end();) {
+            if (*it == key) {
                 it = table[hash].erase(it);
                 break;
-            }
-            else{
+            } else {
                 it++;
             }
         }
-        if (it == table[hash].end()){
+        if (it == table[hash].end()) {
             throw hashRemoveError();
         }
     };
@@ -90,20 +84,18 @@ public:
      * @return Return index if search was successful. Throw exception otherwise.
      * @exception If key is not in table hashSearchError exception is thrown.
      */
-    T Search(V key)
-    {
+    T Search(V key) {
         T hash = get_hash(key);
-        if (table[hash].empty()){
+        if (table[hash].empty()) {
             throw hashSearchError();
         }
 
         auto it = table[hash].begin();
 
-        for (; it != table[hash].end(); ) {
-            if (*it == key){
+        for (; it != table[hash].end();) {
+            if (*it == key) {
                 return hash;
-            }
-            else{
+            } else {
                 it++;
             }
         }
@@ -115,39 +107,29 @@ public:
      * @brief Set function to be evaluated and used in calculating hash value.
      * @param [in] f String representation of generated function.
      */
-    void setFunc(string f)
-    {
-        func = f;
-    };
+    void setFunc(string f) { func = f; };
 
     /**
      * @brief Set magic number used in calculating hash value.
      * @param [in] m Value to be assigned to magic number.
      */
-    void setMagic(uint64_t m)
-    {
-        magic_num = m;
-    };
+    void setMagic(uint64_t m) { magic_num = m; };
 
     /**
      * @brief Get the size of table
      *
      * @return constexpr T Size of table
      */
-    constexpr size_t getSize(void) const
-    {
-        return table.size();
-    };
+    constexpr size_t getSize(void) const { return table.size(); };
 
     /**
      * @brief Function fills given array with element count
      * at each index of hash table.
      * @return Array filled with elemenent count for each index of HTable.
      */
-    array<T,numeric_limits<T>::max()> getDimensions(void)
-    {
-        array <T,numeric_limits<T>::max()> arr;
-        for (size_t i = 0; i < table.size(); i++){
+    array<T, numeric_limits<T>::max()> getDimensions(void) {
+        array<T, numeric_limits<T>::max()> arr;
+        for (size_t i = 0; i < table.size(); i++) {
             arr[i] = table[i].size();
         }
         return arr;
@@ -157,9 +139,8 @@ public:
      * @brief Clear table indexes.
      * @throw Noexcept is quaranteed.
      */
-    void clearTab(void) noexcept
-    {
-        for (auto& i : table){
+    void clearTab(void) noexcept {
+        for (auto &i : table) {
             i.clear();
         }
     };
@@ -169,8 +150,7 @@ public:
      */
     ~HTable() = default;
 
-private:
-
+  private:
     /**
      * @brief HTable's function for calculating hash value.
      * @param [in] key Key to be hashed.
@@ -179,9 +159,8 @@ private:
      * or given string was empty, throw hashFuncError exception.
      * If Lua evaluation fails, throw hashLuaError exception.
      */
-    T get_hash(V key)
-    {
-        if (func.empty()){
+    T get_hash(V key) {
+        if (func.empty()) {
             throw hashFuncError();
         }
 
@@ -189,28 +168,28 @@ private:
         uint64_t hash = 0;
 
         /* push magic_num as constant to chaiScript engine */
-        chai.add(const_var(magic_num),"magic");
+        chai.add(const_var(magic_num), "magic");
 
         /* push initial hash value to engine to be used in iterations */
-        chai.add(var(hash),"hash");
+        chai.add(var(hash), "hash");
 
-        for(auto& k : key)
-        {
+        for (auto &k : key) {
             /* push current value of key to engine */
-            chai.add(const_var(k),"key");
+            chai.add(const_var(k), "key");
 
             /* return new hash value for each loop */
             hash = chai.eval<uint64_t>(func);
         }
 
         /* use xor-folding to return hash value in specified range */
-        return (hash>>(sizeof(T)*8)) ^ (hash & ((((T)1<<(sizeof(T)*8))-1)));
+        return (hash >> (sizeof(T) * 8)) ^
+               (hash & ((((T)1 << (sizeof(T) * 8)) - 1)));
     };
 
     /**
      * @brief Table alocated using std::array
      */
-    array<vector<V>,numeric_limits<T>::max()> table;
+    array<vector<V>, numeric_limits<T>::max()> table;
 
     /**
      * @brief ChaiScript class object.
