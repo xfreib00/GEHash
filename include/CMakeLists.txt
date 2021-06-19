@@ -11,4 +11,6 @@ SET(HEADER_FILES
     evaluator.h
     hashTable.h
     error/hashError.h
-    error/loggerError.h)
+    error/loggerError.h
+    error/geError.h
+    error/GEHashError.h)

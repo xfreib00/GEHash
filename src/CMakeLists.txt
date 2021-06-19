@@ -9,8 +9,6 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 # set C++ flags for standard build and debug
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native -mtune=native -Wall -Wextra -pedantic")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -pg")
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
 
 # create executable
 add_executable(${PROJECT_NAME}
@@ -38,7 +36,10 @@ target_link_directories(${PROJECT_NAME}
 )
 
 # link dependecies to executable
-target_link_libraries(${PROJECT_NAME} PRIVATE gram
-                        PRIVATE nlohmann_json::nlohmann_json
-                        ${CMAKE_DL_LIBS}
-                        ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(${PROJECT_NAME}
+    PRIVATE gram
+    PRIVATE nlohmann_json::nlohmann_json
+    PRIVATE project_options
+    ${CMAKE_DL_LIBS}
+    ${CMAKE_THREAD_LIBS_INIT}
+)

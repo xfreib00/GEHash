@@ -5,7 +5,6 @@
  */
 
 #include "GEHash.h"
-#include <chrono>
 #include <cstdlib>
 #include <fstream>
 #include <functional>
@@ -14,8 +13,6 @@
 #include <sstream>
 #include <stdexcept>
 #include <string>
-
-using namespace chrono;
 
 static void display_help() {
     std::cout
@@ -94,16 +91,17 @@ int main(int argc, char **argv) {
 
     /* set options for getopt_long */
     int c = 0;
-    struct option longopts[] = {{"population", required_argument, nullptr, 'p'},
-                                {"generations", required_argument, nullptr, 'g'},
-                                {"magic", required_argument, nullptr, 'm'},
-                                {"wrap", required_argument, nullptr, 'w'},
-                                {"input", required_argument, nullptr, 'i'},
-                                {"output", required_argument, nullptr, 'o'},
-                                {"tournament", required_argument, nullptr, 't'},
-                                {"probability", required_argument, nullptr, 'a'},
-                                {"debug", no_argument, nullptr, 'd'},
-                                {"help", no_argument, nullptr, 'h'}};
+    struct option longopts[] = {
+        {"population", required_argument, nullptr, 'p'},
+        {"generations", required_argument, nullptr, 'g'},
+        {"magic", required_argument, nullptr, 'm'},
+        {"wrap", required_argument, nullptr, 'w'},
+        {"input", required_argument, nullptr, 'i'},
+        {"output", required_argument, nullptr, 'o'},
+        {"tournament", required_argument, nullptr, 't'},
+        {"probability", required_argument, nullptr, 'a'},
+        {"debug", no_argument, nullptr, 'd'},
+        {"help", no_argument, nullptr, 'h'}};
 
     /* set default values of args */
     unsigned long population = 60;

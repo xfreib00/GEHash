@@ -1,17 +1,21 @@
-# set option for using static analyzers
-option(ENABLE_CLANG_TIDY "Use clang-tidy for static analysis" OFF)
+function(generate_static_analysis)
 
-if(ENABLE_CLANG_TIDY)
+    # set option for using static analyzers
+    option(ENABLE_CLANG_TIDY "Use clang-tidy for static analysis" OFF)
 
-    # find clang tidy executable
-    find_program(CLANGTIDY clang-tidy)
+    if(ENABLE_CLANG_TIDY)
 
-    if(CLANGTIDY)
-        # if found set clang tidy for project
-        set(CMAKE_CXX_CLANG_TIDY ${CLANGTIDY} -extra-arg=-Wno-unknown-warning-option)
-    else()
-        # otherwise print out error message
-        message(SEND_ERROR "Clang-tidy requested but executable not found")
-    endif()
+        # find clang tidy executable
+        find_program(CLANGTIDY clang-tidy)
 
-endif()
+        if(CLANGTIDY)
+            # if found set clang tidy for project
+            set(CMAKE_CXX_CLANG_TIDY ${CLANGTIDY} -extra-arg=-Wno-unknown-warning-option)
+        else()
+            # otherwise print out error message
+            message(SEND_ERROR "Clang-tidy requested but executable not found")
+        endif(CLANGTIDY)
+
+    endif(ENABLE_CLANG_TIDY)
+
+endfunction(generate_static_analysis)

@@ -6,12 +6,12 @@
 
 #pragma once
 
-#include <stdexcept>
+#include "GEHashError.h"
 
 /**
  * @brief Standard exception for GELogger.
  */
-class loggerError : public std::exception {
+class loggerError : public GEHashError {
   public:
     const char *what() const throw() {
         return "Error occured while using GELogger class.";
@@ -21,7 +21,7 @@ class loggerError : public std::exception {
 /**
  * @brief GELogger input file exception.
  */
-class loggerInputError : public std::exception {
+class loggerInputError : public loggerError {
   public:
     const char *what() const throw() {
         return "GELogger: given file is empty.";
@@ -31,7 +31,7 @@ class loggerInputError : public std::exception {
 /**
  * @brief GELogger open file exception.
  */
-class loggerOpenError : public std::exception {
+class loggerOpenError : public loggerError {
   public:
     const char *what() const throw() {
         return "GELogger: Could not open/create given file.";

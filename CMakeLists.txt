@@ -6,12 +6,9 @@
 # set minimum version to 3.14 to support FetchContent
 cmake_minimum_required(VERSION 3.14...3.20)
 
-# set option to build Doxygen documentation
-option(GEHASH_DOCS "Build GEHash documentation." OFF)
-
 # project info
 project(GEHash
-        DESCRIPTION "Producing hash functions using Grammatical evolution"
+        DESCRIPTION "Generating hash functions for IPv6 hashing with Grammatical evolution"
         LANGUAGES CXX)
 
 # if this is the main app set compilation options and testing
@@ -20,8 +17,11 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
         # forbid to build in folder with source files
         file(TO_CMAKE_PATH "${PROJECT_BINARY_DIR}/CMakeLists.txt" LOC_PATH)
         if(EXISTS "${LOC_PATH}")
-        message(FATAL_ERROR "You cannot build in a source directory (or any directory with a CMakeLists.txt file). Please make a build subdirectory. Feel free to remove CMakeCache.txt and CMakeFiles.")
+                message(FATAL_ERROR "You cannot build in a source directory (or any directory with a CMakeLists.txt file). Please make a build subdirectory. Feel free to remove CMakeCache.txt and CMakeFiles.")
         endif()
+
+        # use folders for IDE's
+        set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
         # set C++ standards
         set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -30,9 +30,15 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 
         # test code
         include(CTest)
-        include(CodeCoverage)
 
 endif()
+
+# include standard options for project
+include(cmake/StandardOptions.cmake)
+
+# create "library" interface to accumulate project options
+add_library(project_options INTERFACE)
+target_compile_features(project_options INTERFACE cxx_std_17)
 
 # find threads package used by dependencies
 find_package(Threads REQUIRED)
@@ -41,16 +47,20 @@ find_package(Threads REQUIRED)
 include(cmake/gram.cmake)
 include(cmake/chaiScript.cmake)
 include(cmake/nlohmann_json.cmake)
+
+# add static analyzers
 include(cmake/StaticAnalyzers.cmake)
+generate_static_analysis()
+
+# add doxygen suport
+include(cmake/Doxygen.cmake)
+generate_doxygen()
+
+include(cmake/Sanitizers.cmake)
+use_sanitizers(project_options)
 
 # add source file directory
 add_subdirectory(src)
-
-# build docs using Doxygen
-if (GEHASH_DOCS)
-        add_subdirectory("doc")
-        message(STATUS "GEHash documentation: ${PROJECT_BINARY_DIR}/doc/html/index.html")
-endif ()
 
 # enable testing
 if(BUILD_TESTING)

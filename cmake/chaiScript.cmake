@@ -3,6 +3,7 @@ include(FetchContent)
 # set options before fetching ChaiScript dependency
 set(BUILD_MODULES OFF CACHE INTERNAL "chaiScript modules")
 set(BUILD_TESTING OFF CACHE INTERNAL "chaiScript tests")
+set(BUILD_IN_CPP17_MODE ON CACHE INTERNAL "build chaiScript in c++17 mode")
 
 FetchContent_Declare(
     chaiscript
