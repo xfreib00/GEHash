@@ -184,7 +184,7 @@ class HTable {
 
         /* use xor-folding to return hash value in specified range */
         return (hash >> (sizeof(T) * 8)) ^
-               (hash & ((((T)1 << (sizeof(T) * 8)) - 1)));
+               (hash & (((static_cast<T>(1) << (sizeof(T) * 8)) - 1)));
     };
 
     /**
