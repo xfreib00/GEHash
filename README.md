@@ -11,8 +11,16 @@ Source codes for bachelor's thesis about *Evolutionary Design of Hash Functions 
 
 ## Dependecies
 
-**Gram** library avalible at [GitHub](https://github.com/jansvoboda11/gram).
+**Gram** library available at [GitHub](https://github.com/jansvoboda11/gram).
 
-**ChaiScript** library avalible at [GitHub](https://github.com/ChaiScript/ChaiScript).
+**ChaiScript** library available at [GitHub](https://github.com/ChaiScript/ChaiScript).
 
-**Nlohmann JSON** used lightweight version avalible at [GitHub](https://github.com/ArthurSonzogni/nlohmann_json_cmake_fetchcontent) due to  extensive size of original repository. Full version available [here](https://github.com/nlohmann/json)
+**Nlohmann JSON** used lightweight version available at [GitHub](https://github.com/ArthurSonzogni/nlohmann_json_cmake_fetchcontent) due to  extensive size of original repository. Full version available [here](https://github.com/nlohmann/json)
+
+**Catch2** test library for C++ available at [GitHub](https://github.com/catchorg/Catch2). Currently using v2.13.4.
+
+## Testing
+
+### Unit testing
+
+TODO
