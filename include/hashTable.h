@@ -21,7 +21,8 @@ using namespace chaiscript;
  * @tparam T Data type specifying range of hash table indexes.
  * @tparam V Data type of records.
  */
-template <typename T, typename V> class HTable {
+template <typename T, typename V, typename = enable_if_t<is_integral<T>::value>>
+class HTable {
 
   public:
     /**

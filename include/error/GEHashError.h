@@ -18,7 +18,5 @@
  */
 class GEHashError : public std::exception {
   public:
-    const char *what() const throw() {
-        return "GEHash error.";
-    }
+    const char *what() const throw() { return "GEHash error."; }
 };
