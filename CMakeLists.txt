@@ -43,6 +43,13 @@ target_compile_features(project_options INTERFACE cxx_std_17)
 # find threads package used by dependencies
 find_package(Threads REQUIRED)
 
+# create "library" interface to set standard warnings
+add_library(project_warnings INTERFACE)
+
+# include standard warnings and set them on previously created interface
+include(cmake/StandardWarnings.cmake)
+std_warnings(project_warnings)
+
 # download and set up dependencies
 include(cmake/gram.cmake)
 include(cmake/chaiScript.cmake)
@@ -56,6 +63,7 @@ generate_static_analysis()
 include(cmake/Doxygen.cmake)
 generate_doxygen()
 
+# add sanitizers
 include(cmake/Sanitizers.cmake)
 use_sanitizers(project_options)
 
