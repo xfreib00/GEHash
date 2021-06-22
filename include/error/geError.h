@@ -11,12 +11,12 @@
 
 #pragma once
 
-#include <stdexcept>
+#include "GEHashError.h"
 
 /**
  * @brief Standard exception for GEHash.
  */
-class geError : public std::exception {
+class geError : public GEHashError {
   public:
     const char *what() const throw() {
         return "Error occured while using GEHash class.";
