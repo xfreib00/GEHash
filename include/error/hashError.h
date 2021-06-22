@@ -6,12 +6,12 @@
 
 #pragma once
 
-#include <stdexcept>
+#include "GEHashError.h"
 
 /**
  * @brief Standard exception for HTable.
  */
-class hashTableError : public std::exception {
+class hashTableError : public GEHashError {
   public:
     const char *what() const throw() {
         return "Error occured while using HTable class.";
