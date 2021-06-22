@@ -131,7 +131,7 @@ class HTable {
     array<T, numeric_limits<T>::max()> getDimensions(void) {
         array<T, numeric_limits<T>::max()> arr;
         for (size_t i = 0; i < table.size(); i++) {
-            arr[i] = table[i].size();
+            arr[i] = static_cast<T>(table[i].size());
         }
         return arr;
     };
@@ -183,8 +183,9 @@ class HTable {
         }
 
         /* use xor-folding to return hash value in specified range */
-        return (hash >> (sizeof(T) * 8)) ^
-               (hash & (((static_cast<T>(1) << (sizeof(T) * 8)) - 1)));
+        return static_cast<T>((hash >> (sizeof(T) * 8)) ^
+                              (hash & (((static_cast<T>(1) << (sizeof(T) * 8)) -
+                                        static_cast<T>(1)))));
     };
 
     /**

@@ -32,7 +32,7 @@ target_include_directories(${PROJECT_NAME}
 target_link_directories(${PROJECT_NAME}
     PRIVATE ${gram_BINARY_DIR}/src
     PRIVATE ${json_BINARY_DIR}/src
-    PRIVATE ${chaiscript_BINARY_DIR}/src
+    SYSTEM INTERFACE ${chaiscript_BINARY_DIR}/src
 )
 
 # link dependecies to executable
