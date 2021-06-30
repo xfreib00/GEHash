@@ -6,9 +6,11 @@
 
 #include "evaluator.h"
 
-GEEvaluator::GEEvaluator(uint64_t magic, const std::string &data_path) {
+GEEvaluator::GEEvaluator(uint64_t magic, const std::string &data_path,
+                         const bool &useSum) {
     table.setMagic(magic);
     d_path = data_path;
+    use_sum = useSum;
 }
 
 Fitness GEEvaluator::calculateFitness(std::string program) {
@@ -50,11 +52,10 @@ Fitness GEEvaluator::calculateFitness(std::string program) {
     /* get counts at each index */
     arr = table.getDimensions();
 
-    /* calculate fitness as weighted  */
-    for (auto &a : arr) {
-        if (a > 1) {
-            fit += pow(a, 2);
-        }
+    if (use_sum) {
+        fitnessWithSum(arr, fit);
+    } else {
+        fitnessWithoutSum(arr, fit);
     }
 
     table.clearTab();
@@ -89,4 +90,31 @@ std::vector<std::string> GEEvaluator::split(const std::string &str,
     } while (pos < str.length() && prev < str.length());
 
     return chunks;
+}
+
+void GEEvaluator::fitnessWithSum(
+    const std::array<uint16_t, numeric_limits<uint16_t>::max()> &arr,
+    Fitness &fit) {
+
+    Fitness current_sum = 0.0;
+    /* calculate fitness as sum of current + previous values, greater than 1,
+     * squared */
+    for (auto &a : arr) {
+        if (a > 1) {
+            fit += pow(a + current_sum, 2);
+            current_sum += a;
+        }
+    }
+}
+
+void GEEvaluator::fitnessWithoutSum(
+    const std::array<uint16_t, numeric_limits<uint16_t>::max()> &arr,
+    Fitness &fit) {
+
+    /* calculate fitness as sum of values, greater than 1, squared */
+    for (auto &a : arr) {
+        if (a > 1) {
+            fit += pow(a, 2);
+        }
+    }
 }
