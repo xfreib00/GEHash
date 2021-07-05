@@ -72,8 +72,11 @@ class GEHash {
      * @brief Setter for evaluation driver.
      * @param [in] magic Magic number used in grammar.
      * @param [in] data_path Path to training data file.
+     * @param [in] useSum Flag which fitness function to use, if with or without
+     * sum.
      */
-    void SetEvaluator(unsigned long magic, const std::string &data_path);
+    void SetEvaluator(unsigned long magic, const std::string &data_path,
+                      const bool &useSum);
 
     /**
      * @brief Set the tournament size

@@ -6,9 +6,11 @@
 
 #include "evaluator.h"
 
-GEEvaluator::GEEvaluator(uint64_t magic, const std::string &data_path) {
+GEEvaluator::GEEvaluator(uint64_t magic, const std::string &data_path,
+                         const bool &useSum) {
     table.setMagic(magic);
     d_path = data_path;
+    use_sum = useSum;
 }
 
 Fitness GEEvaluator::calculateFitness(std::string program) {
@@ -41,7 +43,9 @@ Fitness GEEvaluator::calculateFitness(std::string program) {
 
         try {
             table.Insert(keys);
+            std::fill_n(keys.begin(), keys.size(), 0);
         } catch (hashInsertError &e) {
+            // std::cerr << line << '\n';
             table.clearTab();
             throw;
         }
@@ -50,11 +54,10 @@ Fitness GEEvaluator::calculateFitness(std::string program) {
     /* get counts at each index */
     arr = table.getDimensions();
 
-    /* calculate fitness as weighted  */
-    for (auto &a : arr) {
-        if (a > 1) {
-            fit += pow(a, 2);
-        }
+    if (use_sum) {
+        fitnessWithSum(arr, fit);
+    } else {
+        fitnessWithoutSum(arr, fit);
     }
 
     table.clearTab();
@@ -67,7 +70,7 @@ Fitness GEEvaluator::evaluate(const Phenotype &phenotype) noexcept {
         return calculateFitness(phenotype);
     } catch (hashInsertError &e) {
         std::cerr << "Duplicity in training data: " << e.what() << std::endl;
-        return 100000.0;
+        return numeric_limits<Fitness>::max();
     } catch (std::exception &e) {
         std::cerr << e.what() << ": " << phenotype << std::endl;
         return numeric_limits<Fitness>::max();
@@ -89,4 +92,33 @@ std::vector<std::string> GEEvaluator::split(const std::string &str,
     } while (pos < str.length() && prev < str.length());
 
     return chunks;
+}
+
+void GEEvaluator::fitnessWithSum(
+    const std::array<uint16_t, numeric_limits<uint16_t>::max()> &arr,
+    Fitness &fit) {
+
+    /* temporary fitness sum */
+    Fitness temp = 0.0;
+
+    /* calculate fitness as sum of current + previous values, greater than 1,
+     * squared */
+    for (auto &a : arr) {
+        if (a > 1) {
+            temp += std::pow(a, 2);
+            fit += temp;
+        }
+    }
+}
+
+void GEEvaluator::fitnessWithoutSum(
+    const std::array<uint16_t, numeric_limits<uint16_t>::max()> &arr,
+    Fitness &fit) {
+
+    /* calculate fitness as sum of values, greater than 1, squared */
+    for (auto &a : arr) {
+        if (a > 1) {
+            fit += pow(a, 2);
+        }
+    }
 }

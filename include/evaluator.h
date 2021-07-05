@@ -35,8 +35,11 @@ class GEEvaluator : public Evaluator {
      * @brief Constructor of GEEvaluator class.
      * @param [in] magic Magic number used in grammar.
      * @param [in] data_path Path to training data file.
+     * @param [in] useSum Flag which fitness function to use, if with or without
+     * sum.
      */
-    GEEvaluator(uint64_t magic, const std::string &data_path);
+    GEEvaluator(uint64_t magic, const std::string &data_path,
+                const bool &useSum);
 
     /**
      * @brief Calculate fitness for given program.
@@ -71,6 +74,43 @@ class GEEvaluator : public Evaluator {
      * @brief Path to training data file.
      */
     std::string d_path;
+
+    /**
+     * @brief Flag if to use fitness with or without sum.
+     */
+    bool use_sum;
+
+    /**
+     * @brief Calculate fitness for given array.
+     * @details Auxiliary function used in GEEvaluator::calculateFitness.
+     * Function uses formula from research paper by David Grochol and Lukas
+     * Sekanina from Brno University of Technology, Faculty of Information
+     * Technology called Evolutionary Design of Hash Functions for IPv6 Network
+     * Flow Hashing (DOI: 10.1109/CEC48606.2020.9185723). Available
+     * <a href="https://ieeexplore.ieee.org/document/9185723">here.</a>
+     * @param [in] arr Array representing array dimensions (number of keys
+     * mapped to each index).
+     * @param [in out] fit Reference to Fitness variable where will be stored
+     * result.
+     */
+    void fitnessWithSum(
+        const std::array<uint16_t, numeric_limits<uint16_t>::max()> &arr,
+        Fitness &fit);
+
+    /**
+     * @brief Calculate fitness from given array.
+     * @details Auxiliary function used in GEEvaluator::calculateFitness.
+     * Function uses similar formula as GEEvaluator::fitnessWithSum, but fitness
+     * is computed as sum of number of keys at each index squared, given that
+     * number of keys is greater than 1.
+     * @param [in] arr Array representing array dimensions (number of keys
+     * mapped on each index).
+     * @param [in out] fit Reference to Fitness variable where will be stored
+     * result.
+     */
+    void fitnessWithoutSum(
+        const std::array<uint16_t, numeric_limits<uint16_t>::max()> &arr,
+        Fitness &fit);
 
     /**
      * @brief Private function for spliting strings.
