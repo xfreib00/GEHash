@@ -45,7 +45,7 @@ Fitness GEEvaluator::calculateFitness(std::string program) {
             table.Insert(keys);
             std::fill_n(keys.begin(), keys.size(), 0);
         } catch (hashInsertError &e) {
-            //std::cerr << line << '\n';
+            // std::cerr << line << '\n';
             table.clearTab();
             throw;
         }
