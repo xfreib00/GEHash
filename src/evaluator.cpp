@@ -43,6 +43,7 @@ Fitness GEEvaluator::calculateFitness(std::string program) {
 
         try {
             table.Insert(keys);
+            std::fill_n(keys.begin(), keys.size(), 0);
         } catch (hashInsertError &e) {
             table.clearTab();
             throw;
