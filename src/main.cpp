@@ -40,6 +40,7 @@ static void display_help() {
            "Defaults to 5.\n"
         << "\t -a  --probability\t Mutation probability between 0 and 1. "
            "Defaults to 0.1.\n"
+        << "\t -f  --fitWithSum\t Use fitness with sum. Defaults to false.\n"
         << "\t -d  --debug\t\t Use debugging mode in logger class, which "
            "prints additional information. Not used by default.\n\n"
         << "FILE must contain grammar in BNF form. Grammar "
@@ -101,6 +102,8 @@ int main(int argc, char **argv) {
         {"tournament", required_argument, nullptr, 't'},
         {"probability", required_argument, nullptr, 'a'},
         {"debug", no_argument, nullptr, 'd'},
+        {"training", no_argument, nullptr, 's'},
+        {"fitWithSum", no_argument, nullptr, 'f'},
         {"help", no_argument, nullptr, 'h'}};
 
     /* set default values of args */
@@ -115,6 +118,7 @@ int main(int argc, char **argv) {
     bool input_defined = false;
     bool debug = false;
     double prob = 0.1;
+    bool useSum = false;
 
     if (argc < 2) {
         std::cerr << "Not enough arguments. Use -h or --help to display help."
@@ -122,7 +126,7 @@ int main(int argc, char **argv) {
         std::exit(EXIT_FAILURE);
     }
 
-    while ((c = getopt_long(argc, argv, ":p:g:m:w:o:i:t:s:a:dh", longopts,
+    while ((c = getopt_long(argc, argv, ":p:g:m:w:o:i:t:s:a:dfh", longopts,
                             nullptr)) != -1) {
         switch (c) {
         case 'p':
@@ -201,6 +205,9 @@ int main(int argc, char **argv) {
         case 'd':
             debug = true;
             break;
+        case 'f':
+            useSum = true;
+            break;
         case 'h':
             display_help();
             std::exit(EXIT_SUCCESS);
@@ -249,7 +256,7 @@ int main(int argc, char **argv) {
         GEHash hash(generations, population);
         hash.SetGrammar(input, wrap);
         hash.SetLogger(output, debug);
-        hash.SetEvaluator(magic, train_data);
+        hash.SetEvaluator(magic, train_data, useSum);
         hash.SetTournament(t_size);
         hash.SetProbability(prob);
 

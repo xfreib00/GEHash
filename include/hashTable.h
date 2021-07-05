@@ -37,7 +37,7 @@ class HTable {
      * thrown.
      */
     void Insert(V key) {
-        if (T hash = get_hash(key); table[hash].empty()) {
+        /*if (T hash = get_hash(key); table[hash].empty()) {
             table[hash].push_back(key);
         } else {
             auto it = table[hash].begin();
@@ -50,7 +50,12 @@ class HTable {
                 }
             }
             table[hash].push_back(key);
-        }
+        }*/
+
+        /* use simple push_back to find out how many keys will be mapped to
+         * single index */
+        T hash = get_hash(key);
+        table[hash].push_back(key);
     };
 
     /**
