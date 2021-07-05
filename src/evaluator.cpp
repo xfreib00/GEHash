@@ -68,7 +68,7 @@ Fitness GEEvaluator::evaluate(const Phenotype &phenotype) noexcept {
         return calculateFitness(phenotype);
     } catch (hashInsertError &e) {
         std::cerr << "Duplicity in training data: " << e.what() << std::endl;
-        return 100000.0;
+        return numeric_limits<Fitness>::max();
     } catch (std::exception &e) {
         std::cerr << e.what() << ": " << phenotype << std::endl;
         return numeric_limits<Fitness>::max();
@@ -96,13 +96,15 @@ void GEEvaluator::fitnessWithSum(
     const std::array<uint16_t, numeric_limits<uint16_t>::max()> &arr,
     Fitness &fit) {
 
-    Fitness current_sum = 0.0;
+    /* temporary fitness sum */
+    Fitness temp = 0.0;
+
     /* calculate fitness as sum of current + previous values, greater than 1,
      * squared */
     for (auto &a : arr) {
         if (a > 1) {
-            fit += pow(a + current_sum, 2);
-            current_sum += a;
+            temp += std::pow(a, 2);
+            fit += temp;
         }
     }
 }
