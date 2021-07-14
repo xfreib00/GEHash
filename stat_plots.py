@@ -47,11 +47,24 @@ def plot_gen_fitness(df: pd.DataFrame, fig_location: str = None,
     # Create plot object and set data to plot
     sns.set_theme(style="white", context="paper")
     _, ax = plt.subplots(1, 1, figsize=(7, 5))
-    sns.boxplot(data=df, x="gen", y="fitness", ax=ax)
+    data = df
+    if data["gen"].max() > 50:
+        df1 = df[df["gen"] % 5 == 0]
+        data = df1
+
+    sns.boxplot(data=data, x="gen", y="fitness", ax=ax, color="white")
     if show_swarm:
         sns.swarmplot(data=df, x="gen", y="fitness", color=".25")
     ax.set_xlabel("Generation")
     ax.set_ylabel("Fitness")
+
+    if data["gen"].max() > 50:
+        for ind, label in enumerate(ax.get_xticklabels()):
+            if ind % 5 == 0:  # every 10th label is kept
+                label.set_visible(True)
+            else:
+                label.set_visible(False)
+
     # If figure location is specified, try to save plot
     if fig_location is not None:
         try:
