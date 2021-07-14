@@ -88,6 +88,26 @@ def store_data(df: pd.DataFrame, path: str):
     df.to_pickle(path="{}.pkl.gz".format(path), compression="gzip")
 
 
+def load_pkl_data(path: str = None) -> pd.DataFrame:
+    """Load DataFrame from pickle file compressed with gzip.
+
+    Args:
+        path (str, optional): Path to file. Defaults to None.
+
+    Raises:
+        IOError: If path is None, raise.
+
+    Returns:
+        pd.DataFrame: Return loaded DataFrame
+    """
+    if not path:
+        raise IOError("No file given")
+
+    df = pd.read_pickle(filepath_or_buffer=path, compression="gzip")
+
+    return df
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--fig_location", "-f", type=str,
@@ -96,13 +116,18 @@ if __name__ == "__main__":
                         action="store_true", help="Display plot on screen")
     parser.add_argument("--show_swarm", "-s", action="store_true",
                         help="Display swarmplot over boxplot")
-    parser.add_argument("--input_folder", "-i", type=str, help="Input folder")
+    parser.add_argument("--input", "-i", type=str,
+                        help="Data input. Can be folder or "
+                        "pickle file compressed with gzip")
     parser.add_argument("--output_file", "-o", type=str,
                         help="Output file path and name")
     parser.add_argument("--code", "-c", action='store_true',
                         help="Display code of best individual")
     args = parser.parse_args()
-    data = load_data(args.input_folder)
+    if not args.input.endswith(".pkl.gz"):
+        data = load_data(args.input)
+    else:
+        data = load_pkl_data(args.input)
     plot_gen_fitness(data, args.fig_location, args.show_plot, args.show_swarm)
     if (args.output_file):
         store_data(data, args.output_file)
