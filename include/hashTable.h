@@ -200,7 +200,7 @@ class HTable {
                 (hash & (((static_cast<T>(1) << (sizeof(T) * 8)) -
                           static_cast<T>(1)))));
         default:
-            return hash;
+            return static_cast<T>(hash);
             break;
         }
     };
