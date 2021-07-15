@@ -187,10 +187,22 @@ class HTable {
             hash = chai.eval<uint64_t>(func);
         }
 
-        /* use xor-folding to return hash value in specified range */
-        return static_cast<T>((hash >> (sizeof(T) * 8)) ^
-                              (hash & (((static_cast<T>(1) << (sizeof(T) * 8)) -
-                                        static_cast<T>(1)))));
+        /* use xor-folding if needed to return hash value in specified range */
+        switch (sizeof(T)) {
+        case 2:
+            return static_cast<T>((((hash >> (sizeof(T) * 8)) ^ hash) &
+                                   (((static_cast<T>(1) << (sizeof(T) * 8)) -
+                                     static_cast<T>(1)))));
+            break;
+        case 4:
+            return static_cast<T>(
+                (hash >> (sizeof(T) * 8)) ^
+                (hash & (((static_cast<T>(1) << (sizeof(T) * 8)) -
+                          static_cast<T>(1)))));
+        default:
+            return hash;
+            break;
+        }
     };
 
     /**
