@@ -113,10 +113,17 @@ def get_best_code(df: pd.DataFrame) -> str:
     Returns:
         str: Return code of best individual.
     """
-    indi = df[(df["fitness"] == df["fitness"].min())
-              & (df["status"] == "result")]
-    indi = indi.phenotype.apply(pd.Series)
-    return indi["code"]
+    #filter all result records in dataframe
+    indi = df[(df["status"] == "result")]
+
+    #take record with lowest fitness value
+    indi2 = indi[indi["fitness"] == indi["fitness"].min()]
+
+    #make series out of inner json record
+    indi2 = indi2.phenotype.apply(pd.Series)
+
+    #return code
+    return indi2["code"].values[0].replace(';', ';\n')
 
 
 def store_data(df: pd.DataFrame, path: str):
@@ -177,3 +184,5 @@ if __name__ == "__main__":
         plot_gen_fitness(data, args.fig_location, args.show_plot, args.show_swarm)
     if (args.output_file):
         store_data(data, args.output_file)
+    if args.code:
+        print("Code:\n{}".format(get_best_code(data)))
