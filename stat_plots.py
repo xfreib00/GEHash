@@ -76,6 +76,34 @@ def plot_gen_fitness(df: pd.DataFrame, fig_location: str = None,
         plt.show()
 
 
+def plot_mean_fitness(df: pd.DataFrame, fig_location: str = None,
+                    show_plot: bool = False):
+    """Generate basic plot showing mean fitness value for given generations.
+
+    Args:
+        df (pd.DataFrame): DataFrame containing data to be ploted.
+        fig_location (str, optional): Path where to store generated plot. Defaults to None.
+        show_plot (bool, optional): Show plot on display. Defaults to False.
+    """
+    sns.set_theme(style="white", context="paper")
+    _, ax = plt.subplots(1, 1, figsize=(7, 5))
+    df1 = df.groupby("gen").agg("mean").reset_index()
+    df1.rename(columns={"fitness": "mean"}, inplace=True)
+    df1.plot(ax=ax, x="gen", y="mean")
+    ax.set_xlabel("Generation")
+    ax.set_ylabel("Fitness")
+
+    # If figure location is specified, try to save plot
+    if fig_location is not None:
+        try:
+            plt.savefig(fig_location)
+        except FileNotFoundError:
+            print("Could not save figure to {}".format(fig_location))
+
+    if show_plot:
+        plt.show()
+
+
 def get_best_code(df: pd.DataFrame) -> str:
     """Return string containing code of best individual.
 
@@ -136,11 +164,16 @@ if __name__ == "__main__":
                         help="Output file path and name")
     parser.add_argument("--code", "-c", action='store_true',
                         help="Display code of best individual")
+    parser.add_argument("--mean","-m", action="store_true",
+                        help="Show mean instead of boxplot")
     args = parser.parse_args()
     if not args.input.endswith(".pkl.gz"):
         data = load_data(args.input)
     else:
         data = load_pkl_data(args.input)
-    plot_gen_fitness(data, args.fig_location, args.show_plot, args.show_swarm)
+    if args.mean:
+        plot_mean_fitness(data, args.fig_location, args.show_plot)
+    else:
+        plot_gen_fitness(data, args.fig_location, args.show_plot, args.show_swarm)
     if (args.output_file):
         store_data(data, args.output_file)
