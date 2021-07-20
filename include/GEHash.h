@@ -28,10 +28,10 @@
 #include <gram/random/number_generator/StdNumberGenerator.h>
 
 /* standard libraries and user defined dependencies */
-#include "error/geError.h"
 #include "GEEvaluator.h"
 #include "GEEvolution.h"
 #include "GELogger.h"
+#include "error/geError.h"
 #include <functional>
 #include <random>
 #include <stdexcept>
