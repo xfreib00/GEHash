@@ -1,3 +1,8 @@
+# Author: Adam Freiberg (xfreib00@stud.fit.vutbr.cz)
+# Brief: Source code to download ChaiScript library dependency
+# Version: 0.1
+# Copyright (c) 2021
+
 include(FetchContent)
 
 # set options before fetching ChaiScript dependency

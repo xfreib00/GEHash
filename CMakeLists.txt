@@ -1,7 +1,7 @@
 # Author: Adam Freiberg (xfreib00@stud.fit.vutbr.cz)
 # Brief: Top level CMakeLists.txt file
 # Version: 0.1
-# Copyright (c) 2020
+# Copyright (c) 2021
 
 # set minimum version to 3.14 to support FetchContent
 cmake_minimum_required(VERSION 3.14...3.20)

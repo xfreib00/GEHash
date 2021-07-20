@@ -1,7 +1,7 @@
 # Author: Adam Freiberg (xfreib00@stud.fit.vutbr.cz)
 # Brief: Source files CMakeLists.txt file
 # Version: 0.1
-# Copyright (c) 2020
+# Copyright (c) 2021
 
 # include header file directories
 include_directories(${PROJECT_SOURCE_DIR}/include)
@@ -15,9 +15,9 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -pg")
 add_executable(${PROJECT_NAME}
     main.cpp
     GEHash.cpp
-    evolution.cpp
-    logger.cpp
-    evaluator.cpp
+    GEEvolution.cpp
+    GELogger.cpp
+    GEEvaluator.cpp
     ${HEADER_FILES}
 )
 

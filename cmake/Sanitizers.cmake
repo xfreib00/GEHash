@@ -1,3 +1,10 @@
+# Author: Adam Freiberg (xfreib00@stud.fit.vutbr.cz)
+# Brief: Source code of function for setting up and enabling sanitizers
+# Version: 0.1
+# Copyright (c) 2021
+
+
+
 function(use_sanitizers project_name)
 
     # check if copiler is either GCC or Clang, which features sanitizers

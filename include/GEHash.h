@@ -1,7 +1,12 @@
 /**
  * @file GEHash.h
- * @author Adam Freiberg
+ * @author Adam Freiberg (xfreib00@stud.fit.vutbr.cz)
  * @brief Header file for GEHash class
+ * @version 0.1
+ * @date 2021-07-21
+ *
+ * @copyright Copyright (c) 2021
+ *
  */
 
 #pragma once
@@ -24,9 +29,9 @@
 
 /* standard libraries and user defined dependencies */
 #include "error/geError.h"
-#include "evaluator.h"
-#include "evolution.h"
-#include "logger.h"
+#include "GEEvaluator.h"
+#include "GEEvolution.h"
+#include "GELogger.h"
 #include <functional>
 #include <random>
 #include <stdexcept>

@@ -1,3 +1,8 @@
+# Author: Adam Freiberg (xfreib00@stud.fit.vutbr.cz)
+# Brief: Source code of function for setting up and enabling Doxygen documentation
+# Version: 0.1
+# Copyright (c) 2021
+
 function(generate_doxygen)
 
   option(ENABLE_DOCS "Enable generating doxygen documentation" OFF)

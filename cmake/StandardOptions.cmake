@@ -1,3 +1,9 @@
+# Author: Adam Freiberg (xfreib00@stud.fit.vutbr.cz)
+# Brief: Standard project setting to automaticaly set build type
+# Version: 0.1
+# Copyright (c) 2021
+
+
 # Set a default build type if none was specified
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   message(STATUS "Setting build type to 'RelWithDebInfo' as none was specified.")

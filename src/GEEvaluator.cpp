@@ -1,10 +1,15 @@
 /**
- * @file evaluator.cpp
- * @author Adam Freiberg
+ * @file GEEvaluator.cpp
+ * @author Adam Freiberg (xfreib00@stud.fit.vutbr.cz)
  * @brief Source file for GEEvaluator class methods
+ * @version 0.1
+ * @date 2021-07-21
+ *
+ * @copyright Copyright (c) 2021
+ *
  */
 
-#include "evaluator.h"
+#include "GEEvaluator.h"
 
 GEEvaluator::GEEvaluator(uint64_t magic, const std::string &data_path,
                          const bool &useSum) {

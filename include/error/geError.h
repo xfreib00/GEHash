@@ -3,7 +3,7 @@
  * @author Adam Freiberg (xfreib00@stud.fit.vutbr.cz)
  * @brief Exception classes for GEHash class
  * @version 0.1
- * @date 2021-04-30
+ * @date 2021-07-21
  *
  * @copyright Copyright (c) 2021
  *

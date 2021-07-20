@@ -1,3 +1,8 @@
+# Author: Adam Freiberg (xfreib00@stud.fit.vutbr.cz)
+# Brief: Source code of function for setting up and enabling clang-tidy
+# Version: 0.1
+# Copyright (c) 2021
+
 function(generate_static_analysis)
 
     # set option for using static analyzers

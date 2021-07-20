@@ -1,7 +1,12 @@
 /**
- * @file hashTable.h
- * @author Adam Freiberg
+ * @file HTable.h
+ * @author Adam Freiberg (xfreib00@stud.fit.vutbr.cz)
  * @brief Header file for HTable class
+ * @version 0.1
+ * @date 2021-07-21
+ *
+ * @copyright Copyright (c) 2021
+ *
  */
 
 #pragma once

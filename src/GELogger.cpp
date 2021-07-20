@@ -1,10 +1,15 @@
 /**
- * @file logger.cpp
- * @author Adam Freiberg
+ * @file GELogger.cpp
+ * @author Adam Freiberg (xfreib00@stud.fit.vutbr.cz)
  * @brief Source file for GELogger class methods
+ * @version 0.1
+ * @date 2021-07-21
+ *
+ * @copyright Copyright (c) 2021
+ *
  */
 
-#include "logger.h"
+#include "GELogger.h"
 
 GELogger::GELogger(const string &path,
                    unique_ptr<ContextFreeMapper> logMapper) {

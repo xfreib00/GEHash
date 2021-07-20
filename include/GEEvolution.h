@@ -1,7 +1,12 @@
 /**
- * @file evolution.h
- * @author Adam Freiberg
- * @brief Header file for Evolution class
+ * @file GEEvolution.h
+ * @author Adam Freiberg (xfreib00@stud.fit.vutbr.cz)
+ * @brief Header file for GEEvolution class
+ * @version 0.1
+ * @date 2021-07-21
+ *
+ * @copyright Copyright (c) 2021
+ *
  */
 
 #pragma once
