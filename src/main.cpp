@@ -21,7 +21,7 @@
 
 static void display_help() {
     std::cout
-        << std::endl
+        << '\n'
         << "Usage: GEHash [OPTIONS] ... [-i] FILE\n"
         << "Read BNF grammar from FILE and generate hash "
            "function based on that grammar.\n"
@@ -34,9 +34,10 @@ static void display_help() {
            "\"ouput.json\".\n"
         << "\t -s  --set\t\t Training data file\\path. Defaults to "
            "\"data/train_set/train_set.data\".\n"
-        << "\t -g, --generations\t Max number of generations. Defaults to 5.\n"
+        << "\t -g, --generations\t Max number of generations. Defaults to "
+           "100.\n"
         << "\t -p, --population\t Number of individuals in population. "
-           "Defaults to 60.\n"
+           "Defaults to 50.\n"
         << "\t -m  --magic\t\t Constant used in HTable hash function. Defaults "
            "to 0.\n"
         << "\t -w  --wrap\t\t Maximum number of wrapping operations on "
@@ -112,8 +113,8 @@ int main(int argc, char **argv) {
         {"help", no_argument, nullptr, 'h'}};
 
     /* set default values of args */
-    unsigned long population = 60;
-    unsigned long generations = 5;
+    unsigned long population = 50;
+    unsigned long generations = 100;
     uint64_t magic = 0;
     uint64_t wrap = 3;
     uint64_t t_size = 5;
