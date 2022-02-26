@@ -28,7 +28,7 @@ def load_data(folder: str = None) -> pd.DataFrame:
                 df = pd.read_json(path)
                 dfs.append(df)
     except:
-        print("error occured while loading data.")
+        print("error occurred while loading data.")
     temp = pd.concat(dfs, ignore_index=True)
     return temp
 
@@ -39,7 +39,7 @@ def plot_gen_fitness(df: pd.DataFrame, fig_location: str = None,
        for each generation.
 
     Args:
-        df (pd.DataFrame): DataFrame containing data to be ploted.
+        df (pd.DataFrame): DataFrame containing data to be plotted.
         fig_location (str, optional): Path where to store generated plot. Defaults to None.
         show_plot (bool, optional): Show plot on display. Defaults to False.
         show_swarm (bool, optional): Plot swarmplot over boxplot data. Defaults to False.
@@ -81,7 +81,7 @@ def plot_mean_fitness(df: pd.DataFrame, fig_location: str = None,
     """Generate basic plot showing mean fitness value for given generations.
 
     Args:
-        df (pd.DataFrame): DataFrame containing data to be ploted.
+        df (pd.DataFrame): DataFrame containing data to be plotted.
         fig_location (str, optional): Path where to store generated plot. Defaults to None.
         show_plot (bool, optional): Show plot on display. Defaults to False.
     """

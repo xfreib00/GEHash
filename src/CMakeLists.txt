@@ -21,7 +21,7 @@ add_executable(${PROJECT_NAME}
     ${HEADER_FILES}
 )
 
-# include dependecy directories
+# include dependency directories
 target_include_directories(${PROJECT_NAME}
     PUBLIC ${json_INCLUDE_DIR}
     PUBLIC ${chaiscript_INCLUDE_DIR}
@@ -36,7 +36,7 @@ target_link_directories(${PROJECT_NAME}
     SYSTEM INTERFACE ${chaiscript_BINARY_DIR}/src
 )
 
-# link dependecies to executable
+# link dependencies to executable
 target_link_libraries(${PROJECT_NAME} PRIVATE
     gram
     nlohmann_json::nlohmann_json

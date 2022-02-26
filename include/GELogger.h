@@ -41,7 +41,7 @@ class GELogger : public Logger {
     /**
      * @brief Parameterized constructor of Logger class.
      * @param [in] path Reference to path to output file.
-     * @param [in] logMapper Unique pointer to initilized ContextFreeMapper
+     * @param [in] logMapper Unique pointer to initialized ContextFreeMapper
      * object used for mapping genotype to phenotype inside GELogger class.
      */
     GELogger(const string &path, unique_ptr<ContextFreeMapper> logMapper);
@@ -87,7 +87,7 @@ class GELogger : public Logger {
     json j_out;
 
     /**
-     * @brief Unique poiter to ContextFreeMapper used to generate phenotype.
+     * @brief Unique pointer to ContextFreeMapper used to generate phenotype.
      */
     unique_ptr<ContextFreeMapper> mapper;
 
@@ -99,7 +99,7 @@ class GELogger : public Logger {
     bool debug = false;
 
     /**
-     * @brief Path to ouput file.
+     * @brief Path to output file.
      */
     string outpath;
 };

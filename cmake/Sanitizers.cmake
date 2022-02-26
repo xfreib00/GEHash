@@ -7,7 +7,7 @@
 
 function(use_sanitizers project_name)
 
-    # check if copiler is either GCC or Clang, which features sanitizers
+    # check if compiler is either GCC or Clang, which features sanitizers
     if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL ".*Clang")
 
         # flag to enable generating coverage report

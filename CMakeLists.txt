@@ -59,7 +59,7 @@ include(cmake/nlohmann_json.cmake)
 include(cmake/StaticAnalyzers.cmake)
 generate_static_analysis()
 
-# add doxygen suport
+# add doxygen support
 include(cmake/Doxygen.cmake)
 generate_doxygen()
 

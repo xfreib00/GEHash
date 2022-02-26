@@ -11,7 +11,7 @@ FetchContent_Declare(
         GIT_TAG v2.13.4
 )
 
-# make catch dependency avalible
+# make catch dependency available
 FetchContent_MakeAvailable(catch)
 
 # set up include dir variable

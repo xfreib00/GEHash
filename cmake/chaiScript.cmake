@@ -16,7 +16,7 @@ FetchContent_Declare(
     GIT_TAG v6.1.0
 )
 
-# make ChaiScript dependency avalible
+# make ChaiScript dependency available
 FetchContent_MakeAvailable(chaiscript)
 
 # set up include dir variable

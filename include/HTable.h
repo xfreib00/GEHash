@@ -148,7 +148,8 @@ class HTable {
 
     /**
      * @brief Clear table indexes.
-     * @throw Noexcept is quaranteed.
+     *
+     * @throw Noexcept is guaranteed.
      */
     void clearTab(void) noexcept {
         for (auto &i : table) {
@@ -211,7 +212,7 @@ class HTable {
     };
 
     /**
-     * @brief Table alocated using std::array
+     * @brief Table allocated using std::array
      */
     array<vector<V>, numeric_limits<T>::max()> table;
 

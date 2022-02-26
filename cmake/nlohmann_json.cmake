@@ -12,7 +12,7 @@ FetchContent_Declare(
     GIT_TAG v3.9.1
 )
 
-# make Nlohmann's JSON dependency avalible
+# make Nlohmann's JSON dependency available
 FetchContent_MakeAvailable(json)
 
 # set up include dir to be used in project

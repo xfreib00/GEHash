@@ -36,7 +36,7 @@ Or use provided shell script:
 ./eval.sh ... [parameters]
 ```
 
-Second option automaticaly handles multiple runs (to avoid statistical error) and output files.
+Second option automatically handles multiple runs (to avoid statistical error) and output files.
 
 To display all parameters and their usage, run following command:
 ```shell
@@ -46,7 +46,7 @@ To display all parameters and their usage, run following command:
 ***
 ## Output
 
-Output files are in **JSON** format for easier processing. There are two main categories of `status` parameter. First is `progress` and second is `result`, which indicates stage of evoluion run.
+Output files are in **JSON** format for easier processing. There are two main categories of `status` parameter. First is `progress` and second is `result`, which indicates stage of evolution run.
 
 Example of output data:
 ```json
@@ -71,18 +71,18 @@ Example of output data:
 ## CMake options
 
 Documentation
-- `ENABLE_DOCS` - generate documentation wih Doxygen
+- `ENABLE_DOCS` - generate documentation with Doxygen
 
 Dynamic analyzers
 - `ENABLE_SANITIZER_ADDRESS` - use address sanitizer
 - `ENABLE_SANITIZER_LEAK` - use memory leak sanitizer
 - `ENABLE_SANITIZER_UNDEFINED_BEHAVIOR` - use undefined behaviour sanitizer
 
-Staic analyzers
+Static analyzers
 - `ENABLE_CLANG_TIDY` - use Clang-tidy static analyzer tool
 
 ***
-## Dependecies
+## Dependencies
 
 **Gram** library available at [GitHub](https://github.com/jansvoboda11/gram).
 

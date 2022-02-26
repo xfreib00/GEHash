@@ -3,7 +3,7 @@
 # File: eval.sh
 # Author: Adam Freiberg (xfreib00@stud.fit.vutbr.cz)
 # Brief: Script for running Evolution algorithm 100 times
-# Details: Scritp finds name of used grammar(filename),
+# Details: Script finds name of used grammar(filename),
 # 		   uses output/ its name as output folder.
 #		   If output folder does not exist, creates one.
 # Version: 0.1
@@ -31,13 +31,13 @@ for (( i = 0; i < ${arrLength}; i++)); do
 	fi
 done
 
-#set ouput path for given grammar
+#set output path for given grammar
 output="output/$input"
 
 #if parameters are given execute 30 runs of evolution
 if [[ $# -gt 0 ]]; then
 
-	#if output/gramar folder does not exist, create one
+	#if output/grammar folder does not exist, create one
 	if [[ ! -d "$output" ]]; then
 		mkdir -p "$output"
 	fi

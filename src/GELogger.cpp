@@ -45,7 +45,7 @@ void GELogger::logProgress(const Population &population) {
             j["phenotype"]["code"] = e.what();
         }
     }
-    /* store temporary object into ouput JSON object */
+    /* store temporary object into output JSON object */
     j_out.push_back(j);
 }
 
@@ -64,7 +64,7 @@ void GELogger::logResult(const Population &population) {
         j["phenotype"]["code"] = e.what();
     }
 
-    /* store temporary object into ouput JSON object */
+    /* store temporary object into output JSON object */
     j_out.push_back(j);
 
     try {

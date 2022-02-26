@@ -60,8 +60,8 @@ class GEHash {
     /**
      * @brief Setter for GELogger class.
      * @param [in out] outpath Path to output file used by Logger class.
-     * @param [in] debug Use debugging in logger, that additionaly outputs
-     * phenotype. Defaluts to false.
+     * @param [in] debug Use debugging in logger, that additionally outputs
+     * phenotype. Defaults to false.
      */
     void SetLogger(const std::string &outpath, bool debug = false);
 
@@ -86,7 +86,7 @@ class GEHash {
     /**
      * @brief Set the tournament size
      *
-     * @param size Number of individuals in tournament.
+     * @param [in] size Number of individuals in tournament.
      * @exception geTournamentError Number of individuals is out of range.
      */
     void SetTournament(unsigned long size);
@@ -94,7 +94,7 @@ class GEHash {
     /**
      * @brief Set mutation probability.
      *
-     * @param probability Mutation probability.
+     * @param [in] probability Mutation probability.
      * @exception geMutationError Probability is not in range.
      */
     void SetProbability(double probability);

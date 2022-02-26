@@ -41,7 +41,7 @@ class GEEvolution {
     /**
      * @brief Function for executing evolution on given population.
      * @param [in] population Created population to be evaluated.
-     * @param [in] terminatingCondition Std::function returning bool value,
+     * @param [in] terminatingCondition Std::function returning boolean value,
      * which specifies terminating condition.
      * @return Returns final population after terminating condition is met.
      */
@@ -54,7 +54,7 @@ class GEEvolution {
      * @param [in] population Created population to be evaluated.
      * @param [in] gen Parameter used mainly as maximum number of generations.
      * Can be used in different way in terminatingCondion function.
-     * @param [in] terminatingCondition Std::function returning bool value,
+     * @param [in] terminatingCondition Std::function returning boolean value,
      * which specifies terminating condition.
      * @return Returns final population after terminating condition is met.
      */

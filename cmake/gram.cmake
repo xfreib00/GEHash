@@ -13,7 +13,7 @@ FetchContent_Declare(
     GIT_CONFIG  advice.detachedHead=false
 )
 
-# make catch dependency avalible
+# make catch dependency available
 FetchContent_MakeAvailable(gram)
 
 # set up include dir for use in project
