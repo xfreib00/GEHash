@@ -1,10 +1,26 @@
 # GEHash
 
+<p align="left">
+    <a href="https://github.com/xfreib00/GEHash/actions">
+        <img src="https://github.com/xfreib00/GEHash/workflows/CMake/badge.svg" alt="Build and test">
+    </a>
+    <a href="https://github.com/xfreib00/GEHash/actions">
+        <img src="https://github.com/xfreib00/GEHash/workflows/clang-format%20Check/badge.svg" alt="Formatting">
+    </a>
+    <a href="https://github.com/xfreib00/GEHash/releases"><img alt="Release" src="https://img.shields.io/github/v/release/xfreib00/GEHash.svg?logo=github"></a>
+</p>
+
 Author: Adam Freiberg
 
 e-mail: xfreib00@stud.fit.vutbr.cz
 
+Tweet about project:
 
+<a href="https://twitter.com/intent/tweet?text=&url=https%3A%2F%2Fgithub.com%2Fxfreib00%2FGEHash">
+    <img alt="Twitter" src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2FGEHashGit">
+</a>
+
+***
 ## Introduction
 
 GEhash was developed as a part of my bachelor's thesis about *Evolutionary Design of Hash Functions Using Grammatical Evolution*.
@@ -44,6 +60,24 @@ To display all parameters and their usage, run following command:
 ```
 
 ***
+## Input
+
+Input consist of two parts, **grammar** used for mapping genotype to phenotype and **training data** used for phenotype evaluation.
+
+### Grammar
+
+Input grammar must be in BNF (Backus–Naur Form). [Example](examples/exam_grammar.txt) of such grammar can be found in examples directory.
+
+### Training data
+Training data is set of records composed from two IPv6 addresses and ports. Format of the record is source and destination address, separated every 32 bits by semicolon followed by source and source and destination port, each separated by semicolon as well.
+
+Format of single record looks something like this:
+```plain text
+32bit;32bit;32bit;32bit;32bit;32bit;32bit;32bit;16bit;16bit;
+```
+To get a better picture, [example](examples/train_set_example.data) of data set for evaluating phenotypes can be found in examples directory.
+
+***
 ## Output
 
 Output files are in **JSON** format for easier processing. There are two main categories of `status` parameter. First is `progress` and second is `result`, which indicates stage of evolution run.
@@ -67,6 +101,7 @@ Example of output data:
     }
 ]
 ```
+***
 
 ## CMake options
 
