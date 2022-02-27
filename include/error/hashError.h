@@ -19,7 +19,7 @@
 class hashTableError : public GEHashError {
   public:
     const char *what() const throw() {
-        return "Error occured while using HTable class.";
+        return "HTable: Error occurred while using HTable class.";
     }
 };
 
@@ -28,7 +28,9 @@ class hashTableError : public GEHashError {
  */
 class hashInsertError : public hashTableError {
   public:
-    const char *what() const throw() { return "Given index already used."; }
+    const char *what() const throw() {
+        return "HTable: Given index already used.";
+    }
 };
 
 /**
@@ -37,7 +39,7 @@ class hashInsertError : public hashTableError {
 class hashRemoveError : public hashTableError {
   public:
     const char *what() const throw() {
-        return "No such key is stored in given table";
+        return "HTable: No such key is stored in given table";
     }
 };
 
@@ -47,7 +49,7 @@ class hashRemoveError : public hashTableError {
 class hashSearchError : public hashTableError {
   public:
     const char *what() const throw() {
-        return "No such key is stored in given table";
+        return "HTable: No such key is stored in given table";
     }
 };
 
@@ -56,5 +58,7 @@ class hashSearchError : public hashTableError {
  */
 class hashFuncError : public hashTableError {
   public:
-    const char *what() const throw() { return "Hash function not specified"; }
+    const char *what() const throw() {
+        return "HTable: Hash function not specified";
+    }
 };

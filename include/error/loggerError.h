@@ -19,7 +19,7 @@
 class loggerError : public GEHashError {
   public:
     const char *what() const throw() {
-        return "Error occured while using GELogger class.";
+        return "GELogger: Error occurred while using GELogger class.";
     }
 };
 

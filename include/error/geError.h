@@ -19,7 +19,7 @@
 class geError : public GEHashError {
   public:
     const char *what() const throw() {
-        return "Error occured while using GEHash class.";
+        return "GEHash: Error occurred while using GEHash class.";
     }
 };
 
@@ -29,7 +29,7 @@ class geError : public GEHashError {
 class geTournamentError : public geError {
   public:
     const char *what() const throw() {
-        return "Tournament size out of range. Must be more than 1.";
+        return "GEHash: Tournament size out of range. Must be more than 1.";
     }
 };
 
@@ -39,7 +39,8 @@ class geTournamentError : public geError {
 class geMutationError : public geError {
   public:
     const char *what() const throw() {
-        return "Mutation probability is out of range. Must be between 0 and 1.";
+        return "GEHash: Mutation probability is out of range. Must be between "
+               "0 and 1.";
     }
 };
 
@@ -49,17 +50,18 @@ class geMutationError : public geError {
 class gePopulationError : public geError {
   public:
     const char *what() const throw() {
-        return "Population is out of range. Must be more than 10.";
+        return "GEHash: Population is out of range. Must be more than 10.";
     }
 };
 
 /**
- * @brief Generaion number exception.
+ * @brief Generation number exception.
  */
 class geGenerationError : public geError {
   public:
     const char *what() const throw() {
-        return "Number of generations is out of range. Must be more than 2.";
+        return "GEHash: Number of generations is out of range. Must be more "
+               "than 2.";
     }
 };
 
@@ -68,5 +70,7 @@ class geGenerationError : public geError {
  */
 class geGrammarError : public geError {
   public:
-    const char *what() const throw() { return "Gramar string is empty."; }
+    const char *what() const throw() {
+        return "GEHash: Grammar string is empty.";
+    }
 };
