@@ -19,39 +19,40 @@
 #include <stdexcept>
 #include <string>
 
-static void display_help() {
-    std::cout
-        << '\n'
-        << "Usage: GEHash [OPTIONS] ... [-i] FILE\n"
-        << "Read BNF grammar from FILE and generate hash "
-           "function based on that grammar.\n"
-        << "Example: GEHash -i grammar.txt -p 200\n"
-        << "OPTIONS:\n"
-        << "\t -h, --help\t\t Display help.\n"
-        << "\t -i  --input\t\t Input file containing grammar. If not specified "
-           "FILE is used.\n"
-        << "\t -o  --output\t\t Output file for GELogger. Defaults to "
-           "\"ouput.json\".\n"
-        << "\t -s  --set\t\t Training data file\\path. Defaults to "
-           "\"data/train_set/train_set.data\".\n"
-        << "\t -g, --generations\t Max number of generations. Defaults to "
-           "100.\n"
-        << "\t -p, --population\t Number of individuals in population. "
-           "Defaults to 50.\n"
-        << "\t -m  --magic\t\t Constant used in HTable hash function. Defaults "
-           "to 0.\n"
-        << "\t -w  --wrap\t\t Maximum number of wrapping operations on "
-           "genotype to generate phenotype. Defaluts to 3.\n"
-        << "\t -t  --tournament\t Number of individuals in tournament. "
-           "Defaults to 5.\n"
-        << "\t -a  --probability\t Mutation probability between 0 and 1. "
-           "Defaults to 0.1.\n"
-        << "\t -f  --fitWithSum\t Use fitness with sum. Defaults to false.\n"
-        << "\t -d  --debug\t\t Use debugging mode in logger class, which "
-           "prints additional information. Not used by default.\n\n"
-        << "FILE must contain grammar in BNF form. Grammar "
-           "will be parsed and used for GE of hash function.\n\n";
-}
+/**
+ * @brief Program's help message
+ */
+static constexpr const char *const help_string =
+    "\n"
+    "Usage: GEHash [OPTIONS] ... [-i] FILE\n"
+    "Read BNF grammar from FILE and generate hash "
+    "function based on that grammar.\n"
+    "Example: GEHash -i grammar.txt -p 200\n"
+    "OPTIONS:\n"
+    "\t -h, --help\t\t Display help.\n"
+    "\t -i  --input\t\t Input file containing grammar. If not specified "
+    "FILE is used.\n"
+    "\t -o  --output\t\t Output file for GELogger. Defaults to "
+    "\"output.json\".\n"
+    "\t -s  --set\t\t Training data file\\path. Defaults to "
+    "\"data/train_set/train_set.data\".\n"
+    "\t -g, --generations\t Max number of generations. Defaults to "
+    "100.\n"
+    "\t -p, --population\t Number of individuals in population. "
+    "Defaults to 50.\n"
+    "\t -m  --magic\t\t Constant used in HTable hash function. Defaults "
+    "to 0.\n"
+    "\t -w  --wrap\t\t Maximum number of wrapping operations on "
+    "genotype to generate phenotype. Defaults to 3.\n"
+    "\t -t  --tournament\t Number of individuals in tournament. "
+    "Defaults to 5.\n"
+    "\t -a  --probability\t Mutation probability between 0 and 1. "
+    "Defaults to 0.1.\n"
+    "\t -f  --fitWithSum\t Use fitness with sum. Defaults to false.\n"
+    "\t -d  --debug\t\t Use debugging mode in logger class, which "
+    "prints additional information. Not used by default.\n\n"
+    "FILE must contain grammar in BNF form. Grammar "
+    "will be parsed and used for GE of hash function.\n\n";
 
 static std::string load_grammar(const std::string &path) {
 
@@ -215,7 +216,7 @@ int main(int argc, char **argv) {
             useSum = true;
             break;
         case 'h':
-            display_help();
+            std::cout << help_string;
             std::exit(EXIT_SUCCESS);
         case ':':
             std::cout << "Missing argument's value from option: "
