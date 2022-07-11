@@ -13,6 +13,9 @@
 
 #include "GEHashError.h"
 
+namespace GEHash {
+namespace GEHashError {
+
 /**
  * @brief Standard exception for GEHash.
  */
@@ -74,3 +77,6 @@ class geGrammarError : public geError {
         return "GEHash: Grammar string is empty.";
     }
 };
+
+} // namespace GEHashError
+} // namespace GEHash

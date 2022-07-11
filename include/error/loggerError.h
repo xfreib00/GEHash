@@ -13,6 +13,9 @@
 
 #include "GEHashError.h"
 
+namespace GEHash {
+namespace GEHashError {
+
 /**
  * @brief Standard exception for GELogger.
  */
@@ -42,3 +45,6 @@ class loggerOpenError : public loggerError {
         return "GELogger: Could not open/create given file.";
     }
 };
+
+} // namespace GEHashError
+} // namespace GEHash

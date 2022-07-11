@@ -13,6 +13,9 @@
 
 #include "GEHashError.h"
 
+namespace GEHash {
+namespace GEHashError {
+
 /**
  * @brief Standard exception for HTable.
  */
@@ -62,3 +65,6 @@ class hashFuncError : public hashTableError {
         return "HTable: Hash function not specified";
     }
 };
+
+} // namespace GEHashError
+} // namespace GEHash

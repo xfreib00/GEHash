@@ -11,6 +11,7 @@
 
 #include "GEHash.h"
 #include <cstdlib>
+#include <filesystem>
 #include <fstream>
 #include <functional>
 #include <getopt.h>
@@ -18,6 +19,12 @@
 #include <sstream>
 #include <stdexcept>
 #include <string>
+
+/**
+ * @brief Shorten namespace needed for working with std::filesystem header to
+ * fs.
+ */
+namespace fs = std::filesystem;
 
 /**
  * @brief Program's help message
@@ -54,20 +61,28 @@ static constexpr const char *const help_string =
     "FILE must contain grammar in BNF form. Grammar "
     "will be parsed and used for GE of hash function.\n\n";
 
-static std::string load_grammar(const std::string &path) {
+/**
+ * @brief Read grammar from given file.
+ *
+ * @param [in] path Path to file containing grammar
+ * @return std::string Contents read from file
+ */
+static std::string load_grammar(const fs::path &path) {
 
-    if (path.empty()) {
-        throw std::invalid_argument("Given path is empty.");
+    if (!fs::exists(path)) {
+        throw std::invalid_argument("File does not exist.");
     }
-    /* open file and read content */
-    std::fstream f;
-    std::stringstream strS;
 
+    /* open file */
+    std::fstream f{};
     f.open(path);
 
-    if (f.peek() == std::fstream::traits_type::eof()) {
-        throw std::invalid_argument("Given file is empty or does not exist.");
+    if (fs::is_empty(path)) {
+        throw std::invalid_argument("Given file is empty.");
     }
+
+    /* create stringstream to be read to */
+    std::stringstream strS{};
 
     /* read buffer to stringstream and then to string */
     strS << f.rdbuf();
@@ -78,24 +93,50 @@ static std::string load_grammar(const std::string &path) {
     return str;
 }
 
-static std::string &ltrim(std::string &str,
-                          const std::string &chars = "\t\n\v\f\r ") {
+/**
+ * @brief Trim left side of string
+ *
+ * @param [in] str String to be trimmed
+ * @param [in] chars Characters to be trimmed
+ * @return std::string& Reference to resulting string
+ */
+static std::string ltrim(std::string str,
+                         const std::string &chars = "\t\n\v\f\r ") {
     str.erase(0, str.find_first_not_of(chars));
     return str;
 }
 
-static std::string &rtrim(std::string &str,
-                          const std::string &chars = "\t\n\v\f\r ") {
+/**
+ * @brief Trim right side of string
+ *
+ * @param [in] str String to be trimmed
+ * @param [in] chars Characters to be trimmed
+ * @return std::string& Reference to resulting string
+ */
+static std::string rtrim(std::string str,
+                         const std::string &chars = "\t\n\v\f\r ") {
     str.erase(str.find_last_not_of(chars) + 1);
     return str;
 }
 
-static std::string &trim(std::string &str,
-                         const std::string &chars = "\t\n\v\f\r ") {
+/**
+ * @brief Trim both sides of string
+ * @details Function uses functions rtrim and ltrim. At first right side is
+ * trimmed, then left.
+ *
+ * @param [in] str String to be trimmed
+ * @param [in] chars Characters to be trimmed
+ * @return std::string& Reference to resulting string
+ */
+static std::string trim(const std::string &str,
+                        const std::string &chars = "\t\n\v\f\r ") {
     return ltrim(rtrim(str, chars), chars);
 }
 
 int main(int argc, char **argv) {
+
+    /* Do not sync with C streams */
+    std::ios::sync_with_stdio(false);
 
     /* set options for getopt_long */
     int c = 0;
@@ -114,14 +155,14 @@ int main(int argc, char **argv) {
         {"help", no_argument, nullptr, 'h'}};
 
     /* set default values of args */
-    unsigned long population = 50;
-    unsigned long generations = 100;
+    uint64_t population = 50;
+    uint64_t generations = 100;
     uint64_t magic = 0;
     uint64_t wrap = 3;
     uint64_t t_size = 5;
-    std::string input;
-    std::string output = "output.json";
-    std::string train_data = "data/train_set/train_set.data";
+    std::string input{};
+    std::string output{"output.json"};
+    std::string train_data{"data/train_set/train_set.data"};
     bool input_defined = false;
     bool debug = false;
     double prob = 0.1;
@@ -197,7 +238,7 @@ int main(int argc, char **argv) {
             break;
         case 's':
             train_data = optarg;
-            train_data = trim(output);
+            train_data = trim(train_data);
             break;
         case 'a':
             try {
@@ -257,13 +298,13 @@ int main(int argc, char **argv) {
     // Set up and run evolution
     try {
         /* load data from input file to input string */
-        input = load_grammar(input);
+        std::string grammar = load_grammar(fs::path(input));
 
         /* configure run based on given and default parameters */
-        GEHash hash(generations, population);
-        hash.SetGrammar(input, wrap);
-        hash.SetLogger(output, debug);
-        hash.SetEvaluator(magic, train_data, useSum);
+        GEHash::GEHash hash(generations, population);
+        hash.SetGrammar(grammar, wrap);
+        hash.SetLogger(fs::path(output), debug);
+        hash.SetEvaluator(magic, fs::path(train_data), useSum);
         hash.SetTournament(t_size);
         hash.SetProbability(prob);
 

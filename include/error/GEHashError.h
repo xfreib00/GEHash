@@ -13,6 +13,13 @@
 
 #include <stdexcept>
 
+namespace GEHash {
+
+/**
+ * @brief Namespace for all custom GEHash project exceptions
+ */
+namespace GEHashError {
+
 /**
  * @brief Base class for GEHash exception.
  */
@@ -20,3 +27,6 @@ class GEHashError : public std::exception {
   public:
     const char *what() const throw() { return "GEHash error."; }
 };
+
+} // namespace GEHashError
+} // namespace GEHash
