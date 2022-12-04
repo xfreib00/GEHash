@@ -19,7 +19,7 @@ function(generate_doxygen)
     set(DOXYGEN_CALL_GRAPH YES)
     set(DOXYGEN_EXTRACT_ALL YES)
     set(DOXYGEN_EXTRACT_PRIVATE YES)
-    set(DOXYGEN_USE_MDFILE_AS_MAINPAGE ${CMAKE_SOURCE_DIR}/README.md)
+    set(DOXYGEN_USE_MDFILE_AS_MAINPAGE README.md)
 
     if(ENABLE_MAN)
       set(DOXYGEN_GENERATE_MAN YES)
@@ -29,10 +29,10 @@ function(generate_doxygen)
 
     # create target docs
     doxygen_add_docs(docs
-                     ${PROJECT_SOURCE_DIR}/src/ ${PROJECT_SOURCE_DIR}/include/
+                     ${PROJECT_SOURCE_DIR}
                      ALL
                      COMMENT "Generate documentation")
 
   endif(ENABLE_DOCS)
 
-  endfunction()
+endfunction()
