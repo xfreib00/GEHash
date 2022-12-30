@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['out_221',['out',['../classGEHash_1_1GELogger.html#aaff4e1cf46fdb7afd5bdc522beecf173',1,'GEHash::GELogger']]],
-  ['outpath_222',['outpath',['../classGEHash_1_1GELogger.html#a3a87212c737c9b3966d8c1816b0bc25d',1,'GEHash::GELogger']]]
+  ['log_241',['log',['../classGEHash_1_1GEHash.html#a14b588eb826a608ca87a712278c88445',1,'GEHash::GEHash']]],
+  ['logger_242',['logger',['../classGEEvolution.html#a8f7c526d3e8d479ac1887cf9770d3273',1,'GEEvolution']]]
 ];

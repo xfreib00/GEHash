@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['remove_184',['Remove',['../classGEHash_1_1HTable.html#a7f73da09c5451f08216987d91ca9fdb7',1,'GEHash::HTable']]],
-  ['run_185',['run',['../classGEEvolution.html#a5648f8f5692452b9c77f23fce3bf683f',1,'GEEvolution::run(gram::Population population, function&lt; bool(gram::Population &amp;)&gt; terminatingCondition) const'],['../classGEEvolution.html#a2cf7f808d3ea269be34eef3e68e95c6c',1,'GEEvolution::run(gram::Population population, unsigned long gen, function&lt; bool(gram::Population &amp;, unsigned long)&gt; terminatingCondition) const']]],
-  ['run_186',['Run',['../classGEHash_1_1GEHash.html#a77787bb2765161dc8af286b8ba7bd4c2',1,'GEHash::GEHash']]]
+  ['plot_5fgen_5ffitness_205',['plot_gen_fitness',['../namespacestat__plots.html#aa9368aefbc5a226d0c303160240c522a',1,'stat_plots']]],
+  ['plot_5fmean_5ffitness_206',['plot_mean_fitness',['../namespacestat__plots.html#a587cef558eae2a625133d872c75c4aac',1,'stat_plots']]]
 ];
