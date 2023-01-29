@@ -1,0 +1,71 @@
+# Large data files
+data*
+
+# For C++
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# For CMake
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+
+[Bb][Uu][Ii][Ll][Dd]/
+
+# Auxiliary scripts
+*.sh
+# Not eval script
+!eval.sh
+
+# Generated doxygen documentation
+doc/Doxyfile
+
+# VSCode config files
+.vscode
+
+# JSON ouput files
+*.json
+
+# Output files/folder
+[Oo][Uu][Tt][Pp][Uu][Tt]/*
+
+# Jupyter notebook
+*.ipynb*
