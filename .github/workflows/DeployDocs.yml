@@ -1,0 +1,35 @@
+name: Deploy Docs
+
+on:
+  repository_dispatch:
+  push:
+    branches: [ main ]
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout to current branch
+      uses: actions/checkout@v3
+
+    - name: Install Doxygen and graphviz
+      run: sudo apt-get update; sudo apt-get install -y doxygen graphviz
+
+    - name: Configure CMake
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DENABLE_DOCS=ON
+
+    - name: Build docs
+      run: cmake --build ${{github.workspace}}/build --target docs --config ${{env.BUILD_TYPE}}
+
+    - name: Moving files
+      run: mv ${{github.workspace}}/build/html ./docs
+
+    - name: Deploy docs
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{secrets.GITHUB_TOKEN}}
+        publish_dir: ./
