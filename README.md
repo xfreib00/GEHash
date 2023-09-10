@@ -2,8 +2,6 @@
 
 Author: Adam Freiberg
 
-e-mail: xfreib00@stud.fit.vutbr.cz
-
 
 ## Introduction
 
