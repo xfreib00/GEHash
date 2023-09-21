@@ -1,7 +1,27 @@
 ---
-Checks:            '*, -google-*, -llvm*, -fuchsia-*, -zircon-*, -abseil-*, -modernize-use-trailing-return-type'
-WarningsAsErrors:  '*'
+Checks:            "*,
+                    -abseil-*,
+                    -altera-*,
+                    -android-*,
+                    -google-*,
+                    -llvm*,
+                    -fuchsia-*,
+                    -zircon-*,
+                    -abseil-*,
+                    -modernize-use-trailing-return-type,
+                    -readablility-static-accessed-through-instance,
+                    -readablility-avoid-const-paramas-in-decls,
+                    -cppcoreguidelines-non-private-member-varaibles-in-calsses,
+                    -misc-non-private-member-variables-in-classes,
+                    "
+WarningsAsErrors:  ''
 HeaderFilterRegex: ''
 # exclude main because magic numbers as default init values and getopts structures
 LineFilter:        '[{"name":"main.cpp"}]'
 FormatStyle:       none
+
+CheckOptions:
+    - key: readability-identifier-length.IgnoredVariableNames
+      value: 'x|y|z'
+    - key: readability-identifier-length.IgnoredParameterNames
+      value: 'x|y|z'
