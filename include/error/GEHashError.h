@@ -17,6 +17,6 @@
  * @brief Base class for GEHash exception.
  */
 class GEHashError : public std::exception {
-  public:
-    const char *what() const throw() { return "GEHash error."; }
+    public:
+        const char* what() const throw() { return "GEHash error."; }
 };
